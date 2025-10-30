@@ -1,0 +1,480 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\SmartNote_WebAPI.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\SmartNote_BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\SmartNote_BLL.csproj",
+        "projectName": "SmartNote_BLL",
+        "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\SmartNote_BLL.csproj",
+        "packagesPath": "C:\\Users\\wbzdqsml\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\wbzdqsml\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Common\\SmartNote_Common.csproj": {
+                "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Common\\SmartNote_Common.csproj"
+              },
+              "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj": {
+                "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj"
+              },
+              "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\SmartNote_Domain.csproj": {
+                "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\SmartNote_Domain.csproj"
+              },
+              "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj": {
+                "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.14.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.2.25502.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Common\\SmartNote_Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Common\\SmartNote_Common.csproj",
+        "projectName": "SmartNote_Common",
+        "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Common\\SmartNote_Common.csproj",
+        "packagesPath": "C:\\Users\\wbzdqsml\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\wbzdqsml\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.2.25502.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj",
+        "projectName": "SmartNote_DAL",
+        "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj",
+        "packagesPath": "C:\\Users\\wbzdqsml\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\wbzdqsml\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\SmartNote_Domain.csproj": {
+                "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\SmartNote_Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.2.25502.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\SmartNote_Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\SmartNote_Domain.csproj",
+        "projectName": "SmartNote_Domain",
+        "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\SmartNote_Domain.csproj",
+        "packagesPath": "C:\\Users\\wbzdqsml\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\wbzdqsml\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.2.25502.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj",
+        "projectName": "SmartNote_Shared",
+        "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj",
+        "packagesPath": "C:\\Users\\wbzdqsml\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\wbzdqsml\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.2.25502.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\SmartNote_WebAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\SmartNote_WebAPI.csproj",
+        "projectName": "SmartNote_WebAPI",
+        "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\SmartNote_WebAPI.csproj",
+        "packagesPath": "C:\\Users\\wbzdqsml\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\wbzdqsml\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\SmartNote_BLL.csproj": {
+                "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\SmartNote_BLL.csproj"
+              },
+              "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj": {
+                "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj"
+              },
+              "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj": {
+                "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.2.25502.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

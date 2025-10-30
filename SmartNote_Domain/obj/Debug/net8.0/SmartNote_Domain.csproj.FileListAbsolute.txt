@@ -1,0 +1,11 @@
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\bin\Debug\net8.0\SmartNote_Domain.deps.json
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\bin\Debug\net8.0\SmartNote_Domain.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\bin\Debug\net8.0\SmartNote_Domain.pdb
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\obj\Debug\net8.0\SmartNote_Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\obj\Debug\net8.0\SmartNote_Domain.AssemblyInfoInputs.cache
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\obj\Debug\net8.0\SmartNote_Domain.AssemblyInfo.cs
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\obj\Debug\net8.0\SmartNote_Domain.csproj.CoreCompileInputs.cache
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\obj\Debug\net8.0\SmartNote_Domain.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\obj\Debug\net8.0\refint\SmartNote_Domain.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\obj\Debug\net8.0\SmartNote_Domain.pdb
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Domain\obj\Debug\net8.0\ref\SmartNote_Domain.dll
