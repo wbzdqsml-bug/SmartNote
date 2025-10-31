@@ -1,7 +1,6 @@
 ﻿// SmartNote_BLL/IAuthService.cs
 
 // 确保命名空间与你的项目名一致
-using SmartNote.Shared.DTOs.User;
 using SmartNote_Shared.DTOs.User; // (确保 using SmartNote_Shared)
 using System.Threading.Tasks;
 
