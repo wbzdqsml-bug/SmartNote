@@ -19,3 +19,4 @@ C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_BLL\obj\Debug\net8.0\SmartNot
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_BLL\obj\Debug\net8.0\refint\SmartNote_BLL.dll
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_BLL\obj\Debug\net8.0\SmartNote_BLL.pdb
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_BLL\obj\Debug\net8.0\ref\SmartNote_BLL.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_BLL\obj\Debug\net8.0\SmartNote_BLL.sourcelink.json

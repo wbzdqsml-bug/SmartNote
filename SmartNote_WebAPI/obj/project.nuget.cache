@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "8z4Dn/MCWck=",
+  "dgSpecHash": "6pnIuc+93o4=",
   "success": true,
   "projectFilePath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\SmartNote_WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wbzdqsml\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\wbzdqsml\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\wbzdqsml\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\wbzdqsml\\.nuget\\packages\\markdig\\0.43.0\\markdig.0.43.0.nupkg.sha512",
     "C:\\Users\\wbzdqsml\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.0\\microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
     "C:\\Users\\wbzdqsml\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\wbzdqsml\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",

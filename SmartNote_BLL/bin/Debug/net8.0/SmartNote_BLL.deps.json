@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "SmartNote_BLL/1.0.0": {
         "dependencies": {
+          "Markdig": "0.43.0",
           "Microsoft.Extensions.Configuration": "9.0.10",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.10",
           "SmartNote_Common": "1.0.0",
@@ -48,6 +49,14 @@
           "lib/netstandard2.0/Azure.Identity.dll": {
             "assemblyVersion": "1.11.4.0",
             "fileVersion": "1.1100.424.31005"
+          }
+        }
+      },
+      "Markdig/0.43.0": {
+        "runtime": {
+          "lib/net8.0/Markdig.dll": {
+            "assemblyVersion": "0.43.0.0",
+            "fileVersion": "0.43.0.0"
           }
         }
       },
@@ -644,6 +653,13 @@
       "sha512": "sha512-Sf4BoE6Q3jTgFkgBkx7qztYOFELBCo+wQgpYDwal/qJ1unBH73ywPztIJKXBXORRzAeNijsuxhk94h0TIMvfYg==",
       "path": "azure.identity/1.11.4",
       "hashPath": "azure.identity.1.11.4.nupkg.sha512"
+    },
+    "Markdig/0.43.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tbP3Y/GYC5pIUWXw6Iqf+R5CwBGA4VJswnlgS2x3TgcHoH4IlnGVmL7hfA1sXkZoCPm/4mhzS8cJUkWhQthaPg==",
+      "path": "markdig/0.43.0",
+      "hashPath": "markdig.0.43.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",

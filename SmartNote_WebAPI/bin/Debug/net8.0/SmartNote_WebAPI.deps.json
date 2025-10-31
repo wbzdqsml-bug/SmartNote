@@ -58,6 +58,14 @@
           }
         }
       },
+      "Markdig/0.43.0": {
+        "runtime": {
+          "lib/net8.0/Markdig.dll": {
+            "assemblyVersion": "0.43.0.0",
+            "fileVersion": "0.43.0.0"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.0": {
         "dependencies": {
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "7.0.3"
@@ -1042,6 +1050,7 @@
       },
       "SmartNote_BLL/1.0.0": {
         "dependencies": {
+          "Markdig": "0.43.0",
           "Microsoft.Extensions.Configuration": "9.0.10",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.10",
           "SmartNote_Common": "1.0.0",
@@ -1122,6 +1131,13 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "Markdig/0.43.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tbP3Y/GYC5pIUWXw6Iqf+R5CwBGA4VJswnlgS2x3TgcHoH4IlnGVmL7hfA1sXkZoCPm/4mhzS8cJUkWhQthaPg==",
+      "path": "markdig/0.43.0",
+      "hashPath": "markdig.0.43.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.0": {
       "type": "package",

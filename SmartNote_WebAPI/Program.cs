@@ -1,26 +1,22 @@
-// SmartNote.Api/Program.cs
+// SmartNote_WebAPI/Program.cs
 
-// VVVVVV 1. 导入命名空间 VVVVVV
 using Microsoft.EntityFrameworkCore;
 using SmartNote_DAL;
-using SmartNote_BLL; // 1.1 (新增) 引入 BLL 命名空间
-using Microsoft.AspNetCore.Authentication.JwtBearer; // 1.2 (新增) 引入 JWT 认证
-using Microsoft.IdentityModel.Tokens; // 1.3 (新增) 引入 JWT 认证
-using System.Text; // 1.4 (新增) 引入 JWT 认证
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+using SmartNote_BLL;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models; // VVVVVV 1. (新增) 引入 OpenAPI Models VVVVVV
 
 var builder = WebApplication.CreateBuilder(args);
 
-// VVVVVV (新增) 定义 CORS 策略名称 VVVVVV
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 // --- 添加服务到容器 (DI Container) ---
 
 builder.Services.AddControllers();
 
-// VVVVVV 2. 注册 ApplicationDbContext VVVVVV
-// ... (这部分代码来自你的文件，保持不变)
+// 注册 ApplicationDbContext (已存在)
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -29,22 +25,48 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         sqlServerOptions.MigrationsAssembly("SmartNote_DAL");
     });
 });
-// ^^^^^^ DbContext 注册完毕 ^^^^^^
 
-
-// VVVVVV 3. (新增) 注册 BLL 服务 VVVVVV
-// ... (这部分代码来自你的文件，保持不变)
+// 注册 BLL 服务 (已存在)
 builder.Services.AddScoped<IAuthService, AuthService>();
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+builder.Services.AddScoped<INoteService, NoteService>(); // (确保 INoteService 也已注册)
 
-
-// (Swagger/OpenAPI 注册 - 已存在)
+// (Swagger/OpenAPI 注册)
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// VVVVVV 2. (修改) 配置 SwaggerGen 以支持 JWT VVVVVV
+builder.Services.AddSwaggerGen(options =>
+{
+    // 2.1 添加安全定义 (Security Definition)
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization", // 请求头中的 Key
+        Type = SecuritySchemeType.Http, // 类型为 Http
+        Scheme = "Bearer", // 方案名 (小写)
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header, // 位置在 Header
+        Description = "请输入 'Bearer' [空格] 然后输入你的 Token。\r\n\r\n例如: \"Bearer eyJhbGciOiJIUzI1Ni...\""
+    });
+
+    // 2.2 添加安全需求 (Security Requirement)
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer" // 必须与 AddSecurityDefinition 中的 Id ("Bearer") 一致
+                }
+            },
+            new string[] {} // 作用域，对于 JWT 通常为空
+        }
+    });
+});
+// ^^^^^^ Swagger JWT 配置完毕 ^^^^^^
 
 
-// VVVVVV 4. (新增) 配置 JWT 认证服务 VVVVVV
-// ... (这部分代码来自你的文件，保持不变)
+// 配置 JWT 认证服务 (已存在)
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,7 +80,6 @@ builder.Services.AddAuthentication(options =>
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
@@ -66,24 +87,19 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-// (可选但推荐) 添加授权服务 (已存在)
 builder.Services.AddAuthorization();
-// ^^^^^^ JWT 认证服务添加完毕 ^^^^^^
 
-
-// VVVVVV 5. (新增) 添加 CORS 服务 VVVVVV
+// 添加 CORS 服务 (已存在)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          // 允许来自你的 Vue 前端 (http://localhost:5173) 的请求
                           policy.WithOrigins("http://localhost:5173")
-                                .AllowAnyHeader() // 允许所有请求头
-                                .AllowAnyMethod(); // 允许所有 HTTP 方法
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
                       });
 });
-// ^^^^^^ CORS 服务添加完毕 ^^^^^^
 
 
 var app = builder.Build();
@@ -97,15 +113,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// VVVVVV 6. (新增) 启用 CORS 中间件 VVVVVV
-// (必须在 UseRouting 之后[如果显式调用的话]，在 UseAuthentication/UseAuthorization 之前)
-app.UseCors(MyAllowSpecificOrigins);
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.UseCors(MyAllowSpecificOrigins); // 启用 CORS
 
-// VVVVVV 5. (修改) 添加认证和授权中间件 (顺序很重要！) VVVVVV
-app.UseAuthentication(); // (来自你的文件) 启用认证中间件
-app.UseAuthorization();  // (来自你的文件) 启用授权中间件
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.UseAuthentication(); // 启用认证
+app.UseAuthorization();  // 启用授权
 
 app.MapControllers();
 

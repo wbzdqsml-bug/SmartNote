@@ -47,6 +47,19 @@
           }
         }
       },
+      "Markdig/0.43.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Markdig.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Markdig.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
         "type": "package",
         "compile": {
@@ -1052,6 +1065,29 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "Markdig/0.43.0": {
+      "sha512": "tbP3Y/GYC5pIUWXw6Iqf+R5CwBGA4VJswnlgS2x3TgcHoH4IlnGVmL7hfA1sXkZoCPm/4mhzS8cJUkWhQthaPg==",
+      "type": "package",
+      "path": "markdig/0.43.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net462/Markdig.dll",
+        "lib/net462/Markdig.xml",
+        "lib/net8.0/Markdig.dll",
+        "lib/net8.0/Markdig.xml",
+        "lib/net9.0/Markdig.dll",
+        "lib/net9.0/Markdig.xml",
+        "lib/netstandard2.0/Markdig.dll",
+        "lib/netstandard2.0/Markdig.xml",
+        "lib/netstandard2.1/Markdig.dll",
+        "lib/netstandard2.1/Markdig.xml",
+        "markdig.0.43.0.nupkg.sha512",
+        "markdig.nuspec",
+        "markdig.png",
+        "readme.md"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -2596,6 +2632,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Markdig >= 0.43.0",
       "Microsoft.Extensions.Configuration >= 9.0.10",
       "Microsoft.Extensions.Configuration.Abstractions >= 9.0.10",
       "SmartNote_Common >= 1.0.0",
@@ -2669,6 +2706,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Markdig": {
+            "target": "Package",
+            "version": "[0.43.0, )"
+          },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
             "version": "[9.0.10, )"

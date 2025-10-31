@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// SmartNote_Shared/DTOs/Note/NoteDto.cs
+using System;
 
-namespace SmartNote.Shared.DTOs.Note
+namespace SmartNote_Shared.DTOs.Note // (请确保命名空间正确)
 {
-    // 这个 DTO 用于多种场景：创建、更新、返回
+    // 用于获取单篇笔记的完整内容
     public class NoteDto
     {
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "工作区 ID 不能为空")]
-        public int WorkspaceId { get; set; } // 笔记归属的工作区
-
-        [Required(ErrorMessage = "标题不能为空")]
-        [StringLength(200, ErrorMessage = "标题不能超过 200 字符")]
+        public int WorkspaceId { get; set; }
         public string Title { get; set; } = string.Empty;
+        public string? ContentMd { get; set; } // Markdown 原文
 
-        public string? ContentMd { get; set; }
-
-        // (可选) 用于列表预览的摘要
-        public string? Summary { get; set; }
+        // VVVVVV 补全缺失的属性 VVVVVV
+        public string? ContentHtml { get; set; } // 渲染后的 HTML
+        public DateTime CreateTime { get; set; }
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         public DateTime LastUpdateTime { get; set; }
     }

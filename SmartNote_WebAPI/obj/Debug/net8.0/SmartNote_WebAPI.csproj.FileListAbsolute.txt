@@ -182,3 +182,5 @@ C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_WebAPI\bin\Debug\net8.0\runti
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_WebAPI\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_WebAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_WebAPI\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_WebAPI\obj\Debug\net8.0\SmartNote_WebAPI.sourcelink.json
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_WebAPI\bin\Debug\net8.0\Markdig.dll

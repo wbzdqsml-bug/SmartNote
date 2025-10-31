@@ -9,3 +9,4 @@ C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Common\obj\Debug\net8.0\Smart
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Common\obj\Debug\net8.0\refint\SmartNote_Common.dll
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Common\obj\Debug\net8.0\SmartNote_Common.pdb
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Common\obj\Debug\net8.0\ref\SmartNote_Common.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote_Common\obj\Debug\net8.0\SmartNote_Common.sourcelink.json

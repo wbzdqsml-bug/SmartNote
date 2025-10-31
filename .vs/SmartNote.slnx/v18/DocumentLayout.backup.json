@@ -3,8 +3,84 @@
   "WorkspaceRootPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_webapi\\controllers\\notescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|solutionrelative:smartnote_webapi\\controllers\\notescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|solutionrelative:smartnote_webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_bll\\noteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|solutionrelative:smartnote_bll\\noteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_bll\\inoteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|solutionrelative:smartnote_bll\\inoteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_bll\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|solutionrelative:smartnote_bll\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\note\\noteupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\note\\noteupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\note\\notecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\note\\notecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\note\\notepreviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\note\\notepreviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\note\\notedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\note\\notedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FB780FB-3A61-192B-B8D6-F262CACEAA74}|SmartNote_Domain\\SmartNote_Domain.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_domain\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FB780FB-3A61-192B-B8D6-F262CACEAA74}|SmartNote_Domain\\SmartNote_Domain.csproj|solutionrelative:smartnote_domain\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E1E12252-2422-0C41-DC84-0FCD593AC1E6}|SmartNote_Common\\SmartNote_Common.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_common\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1E12252-2422-0C41-DC84-0FCD593AC1E6}|SmartNote_Common\\SmartNote_Common.csproj|solutionrelative:smartnote_common\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_bll\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|solutionrelative:smartnote_bll\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_webapi\\smartnote_webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|solutionrelative:smartnote_webapi\\smartnote_webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|solutionrelative:smartnote_dal\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\configurations\\workspaceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|solutionrelative:smartnote_dal\\configurations\\workspaceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\configurations\\noteconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|solutionrelative:smartnote_dal\\configurations\\noteconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\user\\userloginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\user\\userloginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|solutionrelative:smartnote_webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\user\\userregisterrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\user\\userregisterrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\user\\loginsuccessresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\user\\loginsuccessresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -13,10 +89,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|solutionrelative:smartnote_dal\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\configurations\\noteconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|solutionrelative:smartnote_dal\\configurations\\noteconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\smartnote_dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -31,22 +103,6 @@
       "RelativeMoniker": "D:0:0:{2FB780FB-3A61-192B-B8D6-F262CACEAA74}|SmartNote_Domain\\SmartNote_Domain.csproj|solutionrelative:smartnote_domain\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2FB780FB-3A61-192B-B8D6-F262CACEAA74}|SmartNote_Domain\\SmartNote_Domain.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_domain\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2FB780FB-3A61-192B-B8D6-F262CACEAA74}|SmartNote_Domain\\SmartNote_Domain.csproj|solutionrelative:smartnote_domain\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\user\\userregisterrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\user\\userregisterrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\user\\loginsuccessresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\user\\loginsuccessresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\note\\notedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\note\\notedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\smartnote_shared.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\smartnote_shared.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -55,44 +111,8 @@
       "RelativeMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|solutionrelative:smartnote_webapi\\smartnote_webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|solutionrelative:smartnote_webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_webapi\\smartnote_webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|solutionrelative:smartnote_webapi\\smartnote_webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_bll\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|solutionrelative:smartnote_bll\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_bll\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31548545-7AE9-D3CB-B813-A629494CA761}|SmartNote_BLL\\SmartNote_BLL.csproj|solutionrelative:smartnote_bll\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_shared\\dtos\\user\\userloginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62E300F5-2C8E-00CF-B504-F66FB2782C7C}|SmartNote_Shared\\SmartNote_Shared.csproj|solutionrelative:smartnote_shared\\dtos\\user\\userloginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E1E12252-2422-0C41-DC84-0FCD593AC1E6}|SmartNote_Common\\SmartNote_Common.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_common\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E1E12252-2422-0C41-DC84-0FCD593AC1E6}|SmartNote_Common\\SmartNote_Common.csproj|solutionrelative:smartnote_common\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\configurations\\workspaceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|solutionrelative:smartnote_dal\\configurations\\workspaceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\configurations\\userprofileconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|solutionrelative:smartnote_dal\\configurations\\userprofileconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|solutionrelative:smartnote_dal\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Migrations\\20251030140144_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SmartNote_DAL\\Migrations\\20251030140144_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\configurations\\workspacememberconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -113,6 +133,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_webapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{B8C0BAAD-4806-9722-11B3-DF31E26C213A}|SmartNote_WebAPI\\SmartNote_WebAPI.csproj|solutionrelative:smartnote_webapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|c:\\users\\wbzdqsml\\source\\repos\\smartnote\\smartnote_dal\\migrations\\20251030140144_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D98B05CA-3991-BFD4-EFF7-CA6FC0FD28F6}|SmartNote_DAL\\SmartNote_DAL.csproj|solutionrelative:smartnote_dal\\migrations\\20251030140144_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -122,7 +146,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -158,176 +182,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Note.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\Note.cs",
-              "RelativeDocumentMoniker": "SmartNote_Domain\\Note.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\Note.cs",
-              "RelativeToolTip": "SmartNote_Domain\\Note.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAIwBUAAAABAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "NotesController.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Controllers\\NotesController.cs",
+              "RelativeDocumentMoniker": "SmartNote_WebAPI\\Controllers\\NotesController.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Controllers\\NotesController.cs*",
+              "RelativeToolTip": "SmartNote_WebAPI\\Controllers\\NotesController.cs*",
+              "ViewState": "AgIAACcAAAAAAAAAAAAIwAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T12:56:46.186Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\User.cs",
-              "RelativeDocumentMoniker": "SmartNote_Domain\\User.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\User.cs",
-              "RelativeToolTip": "SmartNote_Domain\\User.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwAgAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T12:52:49.321Z",
+              "WhenOpened": "2025-10-31T06:47:47.022Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "UserProfile.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\UserProfile.cs",
-              "RelativeDocumentMoniker": "SmartNote_Domain\\UserProfile.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\UserProfile.cs",
-              "RelativeToolTip": "SmartNote_Domain\\UserProfile.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAswA4AAAAAAAAAAAAAAA==",
+              "Title": "NoteUpdateDto.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NoteUpdateDto.cs",
+              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\Note\\NoteUpdateDto.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NoteUpdateDto.cs",
+              "RelativeToolTip": "SmartNote_Shared\\DTOs\\Note\\NoteUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T12:54:40.714Z",
+              "WhenOpened": "2025-10-31T06:38:18.785Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SmartNote_DAL",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj",
-              "RelativeDocumentMoniker": "SmartNote_DAL\\SmartNote_DAL.csproj",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj",
-              "RelativeToolTip": "SmartNote_DAL\\SmartNote_DAL.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-30T13:53:25.053Z",
+              "DocumentIndex": 6,
+              "Title": "NoteCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NoteCreateDto.cs",
+              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\Note\\NoteCreateDto.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NoteCreateDto.cs",
+              "RelativeToolTip": "SmartNote_Shared\\DTOs\\Note\\NoteCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T06:38:01.222Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NoteConfiguration.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\NoteConfiguration.cs",
-              "RelativeDocumentMoniker": "SmartNote_DAL\\Configurations\\NoteConfiguration.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\NoteConfiguration.cs",
-              "RelativeToolTip": "SmartNote_DAL\\Configurations\\NoteConfiguration.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAAwAoAAAABAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "NotePreviewDto.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NotePreviewDto.cs",
+              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\Note\\NotePreviewDto.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NotePreviewDto.cs",
+              "RelativeToolTip": "SmartNote_Shared\\DTOs\\Note\\NotePreviewDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:30:02.131Z",
+              "WhenOpened": "2025-10-31T06:37:42.259Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UserConfiguration.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\UserConfiguration.cs",
-              "RelativeDocumentMoniker": "SmartNote_DAL\\Configurations\\UserConfiguration.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\UserConfiguration.cs",
-              "RelativeToolTip": "SmartNote_DAL\\Configurations\\UserConfiguration.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAAwCAAAAABAAAAAAAAAA==",
+              "Title": "NoteService.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\NoteService.cs",
+              "RelativeDocumentMoniker": "SmartNote_BLL\\NoteService.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\NoteService.cs",
+              "RelativeToolTip": "SmartNote_BLL\\NoteService.cs",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAcwFIAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:26:45.296Z",
+              "WhenOpened": "2025-10-31T06:26:49.156Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "SmartNote_WebAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\appsettings.json",
-              "RelativeToolTip": "SmartNote_WebAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-30T14:19:18.782Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Program.cs",
-              "RelativeDocumentMoniker": "SmartNote_WebAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Program.cs",
-              "RelativeToolTip": "SmartNote_WebAPI\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAG8AAAAKAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "INoteService.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\INoteService.cs",
+              "RelativeDocumentMoniker": "SmartNote_BLL\\INoteService.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\INoteService.cs",
+              "RelativeToolTip": "SmartNote_BLL\\INoteService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAYwCoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T10:12:39.397Z",
+              "WhenOpened": "2025-10-31T06:25:11.311Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UserRegisterRequestDto.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\UserRegisterRequestDto.cs",
-              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\User\\UserRegisterRequestDto.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\UserRegisterRequestDto.cs",
-              "RelativeToolTip": "SmartNote_Shared\\DTOs\\User\\UserRegisterRequestDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvw8AAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:05:44.754Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "LoginSuccessResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\LoginSuccessResponseDto.cs",
-              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\User\\LoginSuccessResponseDto.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\LoginSuccessResponseDto.cs",
-              "RelativeToolTip": "SmartNote_Shared\\DTOs\\User\\LoginSuccessResponseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvxEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:06:52.469Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "NoteDto.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NoteDto.cs",
-              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\Note\\NoteDto.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NoteDto.cs",
-              "RelativeToolTip": "SmartNote_Shared\\DTOs\\Note\\NoteDto.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAADwvxIAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:07:23.157Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "SmartNote_Shared",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj",
-              "RelativeDocumentMoniker": "SmartNote_Shared\\SmartNote_Shared.csproj",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj",
-              "RelativeToolTip": "SmartNote_Shared\\SmartNote_Shared.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-30T15:15:25.407Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "SmartNote_WebAPI\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "SmartNote_WebAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T14:30:37.373Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 12,
               "Title": "SmartNote_WebAPI.http",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\SmartNote_WebAPI.http",
               "RelativeDocumentMoniker": "SmartNote_WebAPI\\SmartNote_WebAPI.http",
@@ -340,20 +273,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "UserProfileConfiguration.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\UserProfileConfiguration.cs",
-              "RelativeDocumentMoniker": "SmartNote_DAL\\Configurations\\UserProfileConfiguration.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\UserProfileConfiguration.cs",
-              "RelativeToolTip": "SmartNote_DAL\\Configurations\\UserProfileConfiguration.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAAwBcAAAAnAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\IAuthService.cs",
+              "RelativeDocumentMoniker": "SmartNote_BLL\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\IAuthService.cs",
+              "RelativeToolTip": "SmartNote_BLL\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:27:07.348Z",
+              "WhenOpened": "2025-10-30T14:26:16.875Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "SmartNote_WebAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Program.cs",
+              "RelativeToolTip": "SmartNote_WebAPI\\Program.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T10:12:39.397Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "SmartNote_DAL\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\ApplicationDbContext.cs",
+              "RelativeToolTip": "SmartNote_DAL\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAcwCAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T13:26:13.03Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\AuthService.cs",
+              "RelativeDocumentMoniker": "SmartNote_BLL\\AuthService.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\AuthService.cs",
+              "RelativeToolTip": "SmartNote_BLL\\AuthService.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAIwEUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T14:20:33.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "NoteDto.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NoteDto.cs",
+              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\Note\\NoteDto.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\Note\\NoteDto.cs",
+              "RelativeToolTip": "SmartNote_Shared\\DTOs\\Note\\NoteDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T13:07:23.157Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Note.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\Note.cs",
+              "RelativeDocumentMoniker": "SmartNote_Domain\\Note.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\Note.cs",
+              "RelativeToolTip": "SmartNote_Domain\\Note.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAIwA8AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T12:56:46.186Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "WorkspaceConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\WorkspaceConfiguration.cs",
               "RelativeDocumentMoniker": "SmartNote_DAL\\Configurations\\WorkspaceConfiguration.cs",
@@ -366,20 +364,176 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 15,
+              "Title": "NoteConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\NoteConfiguration.cs",
+              "RelativeDocumentMoniker": "SmartNote_DAL\\Configurations\\NoteConfiguration.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\NoteConfiguration.cs",
+              "RelativeToolTip": "SmartNote_DAL\\Configurations\\NoteConfiguration.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T13:30:02.131Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "PasswordHasher.cs",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Common\\PasswordHasher.cs",
               "RelativeDocumentMoniker": "SmartNote_Common\\PasswordHasher.cs",
               "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Common\\PasswordHasher.cs",
               "RelativeToolTip": "SmartNote_Common\\PasswordHasher.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAA7wEIAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAIwBoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T14:16:33.321Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
+              "Title": "UserLoginRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\UserLoginRequestDto.cs",
+              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\User\\UserLoginRequestDto.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\UserLoginRequestDto.cs",
+              "RelativeToolTip": "SmartNote_Shared\\DTOs\\User\\UserLoginRequestDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvxIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T13:05:56.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "SmartNote_WebAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "SmartNote_WebAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAwA8AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T14:30:37.373Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UserRegisterRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\UserRegisterRequestDto.cs",
+              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\User\\UserRegisterRequestDto.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\UserRegisterRequestDto.cs",
+              "RelativeToolTip": "SmartNote_Shared\\DTOs\\User\\UserRegisterRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwwAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T13:05:44.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "LoginSuccessResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\LoginSuccessResponseDto.cs",
+              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\User\\LoginSuccessResponseDto.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\LoginSuccessResponseDto.cs",
+              "RelativeToolTip": "SmartNote_Shared\\DTOs\\User\\LoginSuccessResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T13:06:52.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "SmartNote_WebAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\appsettings.json",
+              "RelativeToolTip": "SmartNote_WebAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-30T14:19:18.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "UserConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\UserConfiguration.cs",
+              "RelativeDocumentMoniker": "SmartNote_DAL\\Configurations\\UserConfiguration.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\UserConfiguration.cs",
+              "RelativeToolTip": "SmartNote_DAL\\Configurations\\UserConfiguration.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAwCAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T13:26:45.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "SmartNote_DAL.csproj",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj",
+              "RelativeDocumentMoniker": "SmartNote_DAL\\SmartNote_DAL.csproj",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\SmartNote_DAL.csproj",
+              "RelativeToolTip": "SmartNote_DAL\\SmartNote_DAL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-30T13:53:25.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "UserProfile.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\UserProfile.cs",
+              "RelativeDocumentMoniker": "SmartNote_Domain\\UserProfile.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\UserProfile.cs",
+              "RelativeToolTip": "SmartNote_Domain\\UserProfile.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAswA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T12:54:40.714Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\User.cs",
+              "RelativeDocumentMoniker": "SmartNote_Domain\\User.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\User.cs",
+              "RelativeToolTip": "SmartNote_Domain\\User.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwAgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T12:52:49.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "SmartNote_Shared.csproj",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj",
+              "RelativeDocumentMoniker": "SmartNote_Shared\\SmartNote_Shared.csproj",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\SmartNote_Shared.csproj",
+              "RelativeToolTip": "SmartNote_Shared\\SmartNote_Shared.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-30T15:15:25.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "UserProfileConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\UserProfileConfiguration.cs",
+              "RelativeDocumentMoniker": "SmartNote_DAL\\Configurations\\UserProfileConfiguration.cs",
+              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\UserProfileConfiguration.cs",
+              "RelativeToolTip": "SmartNote_DAL\\Configurations\\UserProfileConfiguration.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAwBcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T13:27:07.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
               "Title": "SmartNote_WebAPI.csproj",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\SmartNote_WebAPI.csproj",
               "RelativeDocumentMoniker": "SmartNote_WebAPI\\SmartNote_WebAPI.csproj",
@@ -392,34 +546,8 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\AuthService.cs",
-              "RelativeDocumentMoniker": "SmartNote_BLL\\AuthService.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\AuthService.cs",
-              "RelativeToolTip": "SmartNote_BLL\\AuthService.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAuwBIAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T14:20:33.306Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "IAuthService.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\IAuthService.cs",
-              "RelativeDocumentMoniker": "SmartNote_BLL\\IAuthService.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\IAuthService.cs",
-              "RelativeToolTip": "SmartNote_BLL\\IAuthService.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T14:26:16.875Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "SmartNote_BLL",
+              "DocumentIndex": 31,
+              "Title": "SmartNote_BLL.csproj",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\SmartNote_BLL.csproj",
               "RelativeDocumentMoniker": "SmartNote_BLL\\SmartNote_BLL.csproj",
               "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\SmartNote_BLL.csproj",
@@ -431,33 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "SmartNote_DAL\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\ApplicationDbContext.cs",
-              "RelativeToolTip": "SmartNote_DAL\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAADgvxEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:26:13.03Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "UserLoginRequestDto.cs",
-              "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\UserLoginRequestDto.cs",
-              "RelativeDocumentMoniker": "SmartNote_Shared\\DTOs\\User\\UserLoginRequestDto.cs",
-              "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Shared\\DTOs\\User\\UserLoginRequestDto.cs",
-              "RelativeToolTip": "SmartNote_Shared\\DTOs\\User\\UserLoginRequestDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvw8AAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:05:56.313Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 33,
               "Title": "20251030140144_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Migrations\\20251030140144_InitialCreate.cs",
               "RelativeDocumentMoniker": "SmartNote_DAL\\Migrations\\20251030140144_InitialCreate.cs",
@@ -470,7 +572,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "WorkspaceMemberConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_DAL\\Configurations\\WorkspaceMemberConfiguration.cs",
               "RelativeDocumentMoniker": "SmartNote_DAL\\Configurations\\WorkspaceMemberConfiguration.cs",
@@ -483,7 +585,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 29,
               "Title": "Workspace.cs",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\Workspace.cs",
               "RelativeDocumentMoniker": "SmartNote_Domain\\Workspace.cs",
@@ -496,7 +598,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 30,
               "Title": "WorkspaceMember.cs",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_Domain\\WorkspaceMember.cs",
               "RelativeDocumentMoniker": "SmartNote_Domain\\WorkspaceMember.cs",
@@ -509,7 +611,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 32,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_WebAPI\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "SmartNote_WebAPI\\Properties\\launchSettings.json",

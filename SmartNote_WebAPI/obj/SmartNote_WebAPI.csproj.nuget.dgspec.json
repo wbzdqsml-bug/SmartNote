@@ -64,6 +64,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Markdig": {
+              "target": "Package",
+              "version": "[0.43.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[9.0.10, )"
