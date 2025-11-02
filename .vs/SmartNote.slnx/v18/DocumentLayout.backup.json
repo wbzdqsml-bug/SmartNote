@@ -190,8 +190,7 @@
               "RelativeToolTip": "SmartNote_Shared\\DTOs\\Note\\NotePreviewDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T06:37:42.259Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T06:37:42.259Z"
             },
             {
               "$type": "Document",
@@ -203,8 +202,7 @@
               "RelativeToolTip": "SmartNote_Shared\\DTOs\\Note\\NoteDto.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:07:23.157Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:07:23.157Z"
             },
             {
               "$type": "Document",
@@ -216,8 +214,7 @@
               "RelativeToolTip": "SmartNote_Shared\\DTOs\\Note\\NoteUpdateDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T06:38:18.785Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T06:38:18.785Z"
             },
             {
               "$type": "Document",
@@ -229,8 +226,7 @@
               "RelativeToolTip": "SmartNote_Domain\\Note.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAIwA8AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T12:56:46.186Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T12:56:46.186Z"
             },
             {
               "$type": "Document",
@@ -242,8 +238,7 @@
               "RelativeToolTip": "SmartNote_Domain\\User.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAQwAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T12:52:49.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T12:52:49.321Z"
             },
             {
               "$type": "Document",
@@ -255,8 +250,7 @@
               "RelativeToolTip": "SmartNote_Domain\\UserProfile.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAswA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T12:54:40.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T12:54:40.714Z"
             },
             {
               "$type": "Document",
@@ -268,8 +262,7 @@
               "RelativeToolTip": "SmartNote_BLL\\IAuthService.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T14:26:16.875Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T14:26:16.875Z"
             },
             {
               "$type": "Document",
@@ -279,7 +272,7 @@
               "RelativeDocumentMoniker": "SmartNote_BLL\\AuthService.cs",
               "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote_BLL\\AuthService.cs",
               "RelativeToolTip": "SmartNote_BLL\\AuthService.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAxwAgAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAADwvwgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T14:20:33.306Z",
               "EditorCaption": ""
@@ -294,8 +287,7 @@
               "RelativeToolTip": "SmartNote_BLL\\NoteService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T06:26:49.156Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T06:26:49.156Z"
             },
             {
               "$type": "Document",
@@ -307,8 +299,7 @@
               "RelativeToolTip": "SmartNote_BLL\\INoteService.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAYwCoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T06:25:11.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T06:25:11.311Z"
             },
             {
               "$type": "Document",
@@ -320,8 +311,7 @@
               "RelativeToolTip": "SmartNote_WebAPI\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T14:30:37.373Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T14:30:37.373Z"
             },
             {
               "$type": "Document",
@@ -333,8 +323,7 @@
               "RelativeToolTip": "SmartNote_Shared\\DTOs\\User\\UserRegisterRequestDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwwAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:05:44.754Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:05:44.754Z"
             },
             {
               "$type": "Document",
@@ -346,8 +335,7 @@
               "RelativeToolTip": "SmartNote_Shared\\DTOs\\User\\UserLoginRequestDto.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAADwvxIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:05:56.313Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:05:56.313Z"
             },
             {
               "$type": "Document",
@@ -359,8 +347,7 @@
               "RelativeToolTip": "SmartNote_Shared\\DTOs\\Note\\NoteCreateDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T06:38:01.222Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T06:38:01.222Z"
             },
             {
               "$type": "Document",
@@ -372,8 +359,7 @@
               "RelativeToolTip": "SmartNote_Shared\\DTOs\\User\\LoginSuccessResponseDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:06:52.469Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:06:52.469Z"
             },
             {
               "$type": "Document",
@@ -385,8 +371,7 @@
               "RelativeToolTip": "SmartNote_WebAPI\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T10:12:39.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T10:12:39.397Z"
             },
             {
               "$type": "Document",
@@ -398,8 +383,7 @@
               "RelativeToolTip": "SmartNote_WebAPI\\SmartNote_WebAPI.http",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-10-30T10:12:37.068Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T10:12:37.068Z"
             },
             {
               "$type": "Document",
@@ -411,8 +395,7 @@
               "RelativeToolTip": "SmartNote_WebAPI\\Controllers\\NotesController.cs",
               "ViewState": "AgIAAIYAAAAAAAAAAAAcwAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T06:47:47.022Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T06:47:47.022Z"
             },
             {
               "$type": "Document",
@@ -424,8 +407,7 @@
               "RelativeToolTip": "SmartNote_DAL\\ApplicationDbContext.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAcwCAAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:26:13.03Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:26:13.03Z"
             },
             {
               "$type": "Document",
@@ -437,8 +419,7 @@
               "RelativeToolTip": "SmartNote_DAL\\Configurations\\WorkspaceConfiguration.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAUwB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:27:28.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:27:28.781Z"
             },
             {
               "$type": "Document",
@@ -450,8 +431,7 @@
               "RelativeToolTip": "SmartNote_DAL\\Configurations\\NoteConfiguration.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:30:02.131Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:30:02.131Z"
             },
             {
               "$type": "Document",
@@ -463,8 +443,7 @@
               "RelativeToolTip": "SmartNote_Common\\PasswordHasher.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAIwBoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T14:16:33.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T14:16:33.321Z"
             },
             {
               "$type": "Document",
@@ -476,8 +455,7 @@
               "RelativeToolTip": "SmartNote_WebAPI\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-30T14:19:18.782Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T14:19:18.782Z"
             },
             {
               "$type": "Document",
@@ -489,8 +467,7 @@
               "RelativeToolTip": "SmartNote_DAL\\Configurations\\UserConfiguration.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAAwCAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:26:45.296Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:26:45.296Z"
             },
             {
               "$type": "Document",
@@ -502,8 +479,7 @@
               "RelativeToolTip": "SmartNote_DAL\\SmartNote_DAL.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-30T13:53:25.053Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:53:25.053Z"
             },
             {
               "$type": "Document",
@@ -515,8 +491,7 @@
               "RelativeToolTip": "SmartNote_Shared\\SmartNote_Shared.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-30T15:15:25.407Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T15:15:25.407Z"
             },
             {
               "$type": "Document",
@@ -528,8 +503,7 @@
               "RelativeToolTip": "SmartNote_DAL\\Configurations\\UserProfileConfiguration.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAAwBcAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:27:07.348Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:27:07.348Z"
             },
             {
               "$type": "Document",
@@ -541,8 +515,7 @@
               "RelativeToolTip": "SmartNote_WebAPI\\SmartNote_WebAPI.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-30T10:11:53.579Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T10:11:53.579Z"
             },
             {
               "$type": "Document",
@@ -554,8 +527,7 @@
               "RelativeToolTip": "SmartNote_BLL\\SmartNote_BLL.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-30T13:50:26.967Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:50:26.967Z"
             },
             {
               "$type": "Document",
@@ -567,8 +539,7 @@
               "RelativeToolTip": "SmartNote_DAL\\Migrations\\20251030140144_InitialCreate.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T14:01:44.667Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T14:01:44.667Z"
             },
             {
               "$type": "Document",
@@ -580,8 +551,7 @@
               "RelativeToolTip": "SmartNote_DAL\\Configurations\\WorkspaceMemberConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T13:28:02.625Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T13:28:02.625Z"
             },
             {
               "$type": "Document",
@@ -593,8 +563,7 @@
               "RelativeToolTip": "SmartNote_Domain\\Workspace.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T12:55:04.857Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T12:55:04.857Z"
             },
             {
               "$type": "Document",
@@ -606,8 +575,7 @@
               "RelativeToolTip": "SmartNote_Domain\\WorkspaceMember.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvxMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T12:55:32.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T12:55:32.944Z"
             },
             {
               "$type": "Document",
@@ -619,8 +587,7 @@
               "RelativeToolTip": "SmartNote_WebAPI\\Properties\\launchSettings.json",
               "ViewState": "AgIAAAYAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-30T09:58:09.479Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T09:58:09.479Z"
             }
           ]
         }
