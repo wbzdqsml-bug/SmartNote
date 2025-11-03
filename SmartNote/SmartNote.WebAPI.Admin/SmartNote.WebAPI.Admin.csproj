@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SmartNote.BLL\SmartNote.BLL.csproj" />
+    <ProjectReference Include="..\SmartNote.Common\SmartNote.Common.csproj" />
+    <ProjectReference Include="..\SmartNote.Shared\SmartNote.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

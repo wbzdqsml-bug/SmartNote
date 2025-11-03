@@ -88,6 +88,65 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "SmartNote.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "SmartNote.Common": "1.0.0",
+          "SmartNote.DAL": "1.0.0",
+          "SmartNote.Domain": "1.0.0",
+          "SmartNote.Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SmartNote.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.BLL.dll": {}
+        }
+      },
+      "SmartNote.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/SmartNote.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.Common.dll": {}
+        }
+      },
+      "SmartNote.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "SmartNote.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SmartNote.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.DAL.dll": {}
+        }
+      },
+      "SmartNote.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/SmartNote.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.Domain.dll": {}
+        }
+      },
+      "SmartNote.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/SmartNote.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.Shared.dll": {}
+        }
       }
     }
   },
@@ -439,10 +498,38 @@
         "swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "SmartNote.BLL/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.BLL/SmartNote.BLL.csproj",
+      "msbuildProject": "../SmartNote.BLL/SmartNote.BLL.csproj"
+    },
+    "SmartNote.Common/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.Common/SmartNote.Common.csproj",
+      "msbuildProject": "../SmartNote.Common/SmartNote.Common.csproj"
+    },
+    "SmartNote.DAL/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.DAL/SmartNote.DAL.csproj",
+      "msbuildProject": "../SmartNote.DAL/SmartNote.DAL.csproj"
+    },
+    "SmartNote.Domain/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.Domain/SmartNote.Domain.csproj",
+      "msbuildProject": "../SmartNote.Domain/SmartNote.Domain.csproj"
+    },
+    "SmartNote.Shared/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.Shared/SmartNote.Shared.csproj",
+      "msbuildProject": "../SmartNote.Shared/SmartNote.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "SmartNote.BLL >= 1.0.0",
+      "SmartNote.Common >= 1.0.0",
+      "SmartNote.Shared >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.6.2"
     ]
   },
@@ -478,7 +565,17 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.BLL\\SmartNote.BLL.csproj": {
+              "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.BLL\\SmartNote.BLL.csproj"
+            },
+            "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Common\\SmartNote.Common.csproj": {
+              "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Common\\SmartNote.Common.csproj"
+            },
+            "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Shared\\SmartNote.Shared.csproj": {
+              "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Shared\\SmartNote.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

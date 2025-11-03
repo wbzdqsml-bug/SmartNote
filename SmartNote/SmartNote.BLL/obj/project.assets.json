@@ -1,11 +1,81 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "SmartNote.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/SmartNote.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.Common.dll": {}
+        }
+      },
+      "SmartNote.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "SmartNote.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SmartNote.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.DAL.dll": {}
+        }
+      },
+      "SmartNote.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/SmartNote.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.Domain.dll": {}
+        }
+      },
+      "SmartNote.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/SmartNote.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.Shared.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SmartNote.Common/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.Common/SmartNote.Common.csproj",
+      "msbuildProject": "../SmartNote.Common/SmartNote.Common.csproj"
+    },
+    "SmartNote.DAL/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.DAL/SmartNote.DAL.csproj",
+      "msbuildProject": "../SmartNote.DAL/SmartNote.DAL.csproj"
+    },
+    "SmartNote.Domain/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.Domain/SmartNote.Domain.csproj",
+      "msbuildProject": "../SmartNote.Domain/SmartNote.Domain.csproj"
+    },
+    "SmartNote.Shared/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.Shared/SmartNote.Shared.csproj",
+      "msbuildProject": "../SmartNote.Shared/SmartNote.Shared.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "SmartNote.Common >= 1.0.0",
+      "SmartNote.DAL >= 1.0.0",
+      "SmartNote.Domain >= 1.0.0",
+      "SmartNote.Shared >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\wbzdqsml\\.nuget\\packages\\": {},
@@ -39,7 +109,20 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Common\\SmartNote.Common.csproj": {
+              "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Common\\SmartNote.Common.csproj"
+            },
+            "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.DAL\\SmartNote.DAL.csproj": {
+              "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.DAL\\SmartNote.DAL.csproj"
+            },
+            "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Domain\\SmartNote.Domain.csproj": {
+              "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Domain\\SmartNote.Domain.csproj"
+            },
+            "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Shared\\SmartNote.Shared.csproj": {
+              "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Shared\\SmartNote.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
