@@ -1,12 +1,147 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using SmartNote.BLL.Abstractions;
+using SmartNote.Common.Helpers;
+using SmartNote.DAL;
+using SmartNote.Domain.Entities;
+using SmartNote.Domain.Entities.Enums;
+using SmartNote.Shared.Dtos;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartNote.BLL.Services
 {
-    internal class AuthService
+    public class AuthService : IAuthService
     {
+        private readonly ApplicationDbContext _db;
+        private readonly IConfiguration _config;
+        private readonly IDistributedCache _cache;
+
+        public AuthService(ApplicationDbContext db, IConfiguration config, IDistributedCache cache)
+        {
+            _db = db;
+            _config = config;
+            _cache = cache;
+        }
+
+        public async Task<bool> RegisterAsync(RegisterRequest request)
+        {
+            // 1) 用户名重复校验（唯一性）
+            if (await _db.Users.AnyAsync(u => u.Username == request.Username))
+                return false;
+
+            await using var tx = await _db.Database.BeginTransactionAsync();
+            try
+            {
+                // 2) 创建用户
+                var user = new User
+                {
+                    Username = request.Username.Trim(),
+                    PasswordHash = PasswordHasher.Hash(request.Username, request.Password),
+                    CreateTime = DateTime.UtcNow
+                };
+                _db.Users.Add(user);
+                await _db.SaveChangesAsync();
+
+                // 3) 创建个人工作区
+                var ws = new Workspace
+                {
+                    Name = $"{user.Username}的个人空间",
+                    Type = WorkspaceType.Personal,
+                    OwnerUserId = user.Id,
+                    CreateTime = DateTime.UtcNow
+                };
+                _db.Workspaces.Add(ws);
+                await _db.SaveChangesAsync();
+
+                // 4) 成员关系：Owner
+                _db.WorkspaceMembers.Add(new WorkspaceMember
+                {
+                    WorkspaceId = ws.Id,
+                    UserId = user.Id,
+                    Role = WorkspaceRole.Owner,
+                    JoinTime = DateTime.UtcNow
+                });
+                await _db.SaveChangesAsync();
+
+                await tx.CommitAsync();
+                return true;
+            }
+            catch
+            {
+                await tx.RollbackAsync();
+                throw;
+            }
+        }
+
+        public async Task<LoginResponse?> LoginAsync(LoginRequest request)
+        {
+            // 单次读取（AsNoTracking 减少跟踪开销）
+            var user = await _db.Users.AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Username == request.Username.Trim());
+
+            if (user is null) return null;
+
+            var ok = PasswordHasher.Verify(request.Username, request.Password, user.PasswordHash);
+            if (!ok) return null;
+
+            // 生成 JWT
+            var (token, expiresIn) = GenerateJwtToken(user);
+
+            // 缓存 token（key 可按需扩展到 deviceId 维度）
+            var cacheKey = $"token:{user.Id}";
+            await _cache.SetStringAsync(
+                cacheKey,
+                token,
+                new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(expiresIn)
+                });
+
+            return new LoginResponse
+            {
+                Token = token,
+                Username = user.Username,
+                ExpiresInSeconds = expiresIn
+            };
+        }
+
+        private (string token, int expiresInSeconds) GenerateJwtToken(User user)
+        {
+            var key = _config["Jwt:Key"] ?? throw new InvalidOperationException("Jwt:Key missing");
+            var issuer = _config["Jwt:Issuer"] ?? "SmartNote.UserAPI";
+            var audience = _config["Jwt:Audience"] ?? "SmartNoteClient";
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+            var creds = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            // 这里使用较短的过期时间，后续可加 refresh token
+            var expires = TimeSpan.FromHours(1);
+            var expTime = DateTime.UtcNow.Add(expires);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, "User"),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N"))
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                notBefore: DateTime.UtcNow,
+                expires: expTime,
+                signingCredentials: creds
+            );
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            return (jwt, (int)expires.TotalSeconds);
+        }
     }
 }

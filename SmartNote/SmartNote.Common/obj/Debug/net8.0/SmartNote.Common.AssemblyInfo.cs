@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartNote.Common")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9be578ebee5d2686dbce4d29544cb11767edda4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cca60a01305c7527d81a46b347c1734034d8a8ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartNote.Common")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartNote.Common")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

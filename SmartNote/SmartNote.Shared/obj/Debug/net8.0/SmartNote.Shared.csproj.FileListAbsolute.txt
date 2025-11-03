@@ -1,0 +1,12 @@
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\bin\Debug\net8.0\SmartNote.Shared.deps.json
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\bin\Debug\net8.0\SmartNote.Shared.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\bin\Debug\net8.0\SmartNote.Shared.pdb
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNote.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNote.Shared.AssemblyInfoInputs.cache
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNote.Shared.AssemblyInfo.cs
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNote.Shared.csproj.CoreCompileInputs.cache
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNote.Shared.sourcelink.json
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNote.Shared.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\refint\SmartNote.Shared.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNote.Shared.pdb
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\ref\SmartNote.Shared.dll

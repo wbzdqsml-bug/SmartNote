@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace SmartNote.Domain.Entities.Enums
 {
-    internal class NoteType
-    {
-    }
+    public enum NoteType { Markdown = 0, Drawing = 1 }
 }

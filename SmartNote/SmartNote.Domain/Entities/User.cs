@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SmartNote.Domain.Entities
 {
-    internal class User
+    public class User
     {
+        public int Id { get; set; }
+        public string Username { get; set; } = default!;
+        public string PasswordHash { get; set; } = default!;
+        public DateTime CreateTime { get; set; } = DateTime.UtcNow;
     }
 }

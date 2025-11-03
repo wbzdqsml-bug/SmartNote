@@ -1,0 +1,16 @@
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\bin\Debug\net8.0\SmartNote.DAL.deps.json
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\bin\Debug\net8.0\SmartNote.DAL.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\bin\Debug\net8.0\SmartNote.DAL.pdb
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\bin\Debug\net8.0\SmartNote.Domain.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\bin\Debug\net8.0\SmartNote.Domain.pdb
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\SmartNote.DAL.csproj.AssemblyReference.cache
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\SmartNote.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\SmartNote.DAL.AssemblyInfoInputs.cache
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\SmartNote.DAL.AssemblyInfo.cs
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\SmartNote.DAL.csproj.CoreCompileInputs.cache
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\SmartNote.DAL.sourcelink.json
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\SmartNot.7F06BDAE.Up2Date
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\SmartNote.DAL.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\refint\SmartNote.DAL.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\SmartNote.DAL.pdb
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.DAL\obj\Debug\net8.0\ref\SmartNote.DAL.dll

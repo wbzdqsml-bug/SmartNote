@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace SmartNote.Domain.Entities.Enums
 {
-    internal class WorkspaceType
-    {
-    }
+    public enum WorkspaceType { Personal = 0, Team = 1 }
 }
