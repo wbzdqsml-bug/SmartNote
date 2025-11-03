@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="SmartNote.BLL/SmartNote.BLL.csproj" />
+  <Project Path="SmartNote.Common/SmartNote.Common.csproj" />
+  <Project Path="SmartNote.DAL/SmartNote.DAL.csproj" />
+  <Project Path="SmartNote.Domain/SmartNote.Domain.csproj" />
+  <Project Path="SmartNote.Shared/SmartNote.Shared.csproj" />
+  <Project Path="SmartNote.WebAPI.Admin/SmartNote.WebAPI.Admin.csproj" />
+  <Project Path="SmartNote.WebAPI.User/SmartNote.WebAPI.User.csproj" />
+</Solution>

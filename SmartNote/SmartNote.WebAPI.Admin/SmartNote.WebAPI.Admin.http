@@ -1,0 +1,6 @@
+@SmartNote.WebAPI.Admin_HostAddress = http://localhost:5182
+
+GET {{SmartNote.WebAPI.Admin_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
