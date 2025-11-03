@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartNote.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b2eee9b10441de20447bf932318e626571e04c2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a867458e412cc8aa2d6a749dc169536e5aa6bd4")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartNote.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartNote.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
