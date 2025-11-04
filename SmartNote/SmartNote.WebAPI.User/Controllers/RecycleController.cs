@@ -25,7 +25,7 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(notes);
         }
 
-        [HttpPut("restore")]
+        [HttpPost("restore")]
         public async Task<IActionResult> Restore([FromBody] List<int> noteIds)
         {
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);

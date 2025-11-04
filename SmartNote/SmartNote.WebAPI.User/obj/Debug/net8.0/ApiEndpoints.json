@@ -140,7 +140,7 @@
     "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
     "Method": "SoftDeleteNotes",
     "RelativePath": "api/Notes/soft",
-    "HttpMethod": "DELETE",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -182,7 +182,7 @@
     "ContainingType": "SmartNote.WebAPI.User.Controllers.RecycleController",
     "Method": "Restore",
     "RelativePath": "api/Recycle/restore",
-    "HttpMethod": "PUT",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [

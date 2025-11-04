@@ -65,7 +65,7 @@ namespace SmartNote.WebAPI.User.Controllers
         /// <summary>
         /// 批量软删除笔记（移动到回收站）
         /// </summary>
-        [HttpDelete("soft")]
+        [HttpPost("soft")]
         public async Task<IActionResult> SoftDeleteNotes([FromBody] List<int> noteIds)
         {
             if (noteIds == null || !noteIds.Any())

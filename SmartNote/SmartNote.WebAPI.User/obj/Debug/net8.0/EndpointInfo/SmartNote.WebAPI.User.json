@@ -152,7 +152,7 @@
       }
     },
     "/api/Notes/soft": {
-      "delete": {
+      "post": {
         "tags": [
           "Notes"
         ],
@@ -207,7 +207,7 @@
       }
     },
     "/api/Recycle/restore": {
-      "put": {
+      "post": {
         "tags": [
           "Recycle"
         ],
