@@ -48,13 +48,13 @@ namespace SmartNote.WebAPI.User.Controllers
         /// <summary>
         /// 邀请成员（Owner 或 CanShare 成员）
         /// </summary>
-        [HttpPost("invite")]
-        public async Task<IActionResult> Invite([FromRoute] int workspaceId, [FromBody] InviteMemberRequest req)
-        {
-            var userId = GetUserId();
-            await _service.InviteMemberAsync(workspaceId, userId, req.Username);
-            return Ok(ApiResponse.Success("邀请成功。"));
-        }
+        //[HttpPost("invite")]
+        //public async Task<IActionResult> Invite([FromRoute] int workspaceId, [FromBody] InviteMemberRequest req)
+        //{
+        //    var userId = GetUserId();
+        //    await _service.InviteMemberAsync(workspaceId, userId, req.Username);
+        //    return Ok(ApiResponse.Success("邀请成功。"));
+        //}
 
         /// <summary>
         /// 移除成员（仅 Owner）

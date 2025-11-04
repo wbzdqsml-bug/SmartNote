@@ -450,48 +450,6 @@
         }
       }
     },
-    "/api/workspaces/{workspaceId}/members/invite": {
-      "post": {
-        "tags": [
-          "WorkspaceMembers"
-        ],
-        "parameters": [
-          {
-            "name": "workspaceId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InviteMemberRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InviteMemberRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/InviteMemberRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/workspaces/{workspaceId}/members/{targetUserId}": {
       "delete": {
         "tags": [
@@ -686,19 +644,6 @@
   },
   "components": {
     "schemas": {
-      "InviteMemberRequest": {
-        "required": [
-          "username"
-        ],
-        "type": "object",
-        "properties": {
-          "username": {
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
       "LoginRequest": {
         "required": [
           "password",

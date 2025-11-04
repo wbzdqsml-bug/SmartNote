@@ -338,27 +338,6 @@
   },
   {
     "ContainingType": "SmartNote.WebAPI.User.Controllers.WorkspaceMembersController",
-    "Method": "Invite",
-    "RelativePath": "api/workspaces/{workspaceId}/members/invite",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "workspaceId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "req",
-        "Type": "SmartNote.WebAPI.User.Controllers.WorkspaceMembersController\u002BInviteMemberRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartNote.WebAPI.User.Controllers.WorkspaceMembersController",
     "Method": "Leave",
     "RelativePath": "api/workspaces/{workspaceId}/members/leave",
     "HttpMethod": "POST",
