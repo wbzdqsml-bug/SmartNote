@@ -7,14 +7,30 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "SmartNote.Shared/1.0.0": {
+        "dependencies": {
+          "SmartNote.Domain": "1.0.0"
+        },
         "runtime": {
           "SmartNote.Shared.dll": {}
+        }
+      },
+      "SmartNote.Domain/1.0.0": {
+        "runtime": {
+          "SmartNote.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
   },
   "libraries": {
     "SmartNote.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SmartNote.Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

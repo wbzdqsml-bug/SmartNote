@@ -12,8 +12,8 @@ using SmartNote.DAL;
 namespace SmartNote.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251103135449_Add_Configurations")]
-    partial class Add_Configurations
+    [Migration("20251104112355_Add_WorkspaceInvitation")]
+    partial class Add_WorkspaceInvitation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,9 @@ namespace SmartNote.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -137,6 +140,59 @@ namespace SmartNote.DAL.Migrations
                     b.ToTable("Workspaces", (string)null);
                 });
 
+            modelBuilder.Entity("SmartNote.Domain.Entities.WorkspaceInvitation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("CanEdit")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("CanShare")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<int>("InviteeUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InviterUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("RespondedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkspaceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InviterUserId");
+
+                    b.HasIndex("WorkspaceId");
+
+                    b.HasIndex("InviteeUserId", "Status");
+
+                    b.ToTable("WorkspaceInvitations", (string)null);
+                });
+
             modelBuilder.Entity("SmartNote.Domain.Entities.WorkspaceMember", b =>
                 {
                     b.Property<int>("WorkspaceId")
@@ -144,6 +200,16 @@ namespace SmartNote.DAL.Migrations
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("CanEdit")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("CanShare")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime>("JoinTime")
                         .ValueGeneratedOnAdd()
@@ -162,11 +228,13 @@ namespace SmartNote.DAL.Migrations
 
             modelBuilder.Entity("SmartNote.Domain.Entities.Note", b =>
                 {
-                    b.HasOne("SmartNote.Domain.Entities.Workspace", null)
-                        .WithMany()
+                    b.HasOne("SmartNote.Domain.Entities.Workspace", "Workspace")
+                        .WithMany("Notes")
                         .HasForeignKey("WorkspaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Workspace");
                 });
 
             modelBuilder.Entity("SmartNote.Domain.Entities.Workspace", b =>
@@ -174,23 +242,66 @@ namespace SmartNote.DAL.Migrations
                     b.HasOne("SmartNote.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("OwnerUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.WorkspaceInvitation", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.User", "InviteeUser")
+                        .WithMany()
+                        .HasForeignKey("InviteeUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartNote.Domain.Entities.User", "InviterUser")
+                        .WithMany()
+                        .HasForeignKey("InviterUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartNote.Domain.Entities.Workspace", "Workspace")
+                        .WithMany()
+                        .HasForeignKey("WorkspaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("InviteeUser");
+
+                    b.Navigation("InviterUser");
+
+                    b.Navigation("Workspace");
                 });
 
             modelBuilder.Entity("SmartNote.Domain.Entities.WorkspaceMember", b =>
                 {
-                    b.HasOne("SmartNote.Domain.Entities.User", null)
-                        .WithMany()
+                    b.HasOne("SmartNote.Domain.Entities.User", "User")
+                        .WithMany("WorkspaceMemberships")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SmartNote.Domain.Entities.Workspace", null)
-                        .WithMany()
+                    b.HasOne("SmartNote.Domain.Entities.Workspace", "Workspace")
+                        .WithMany("Members")
                         .HasForeignKey("WorkspaceId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("Workspace");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.User", b =>
+                {
+                    b.Navigation("WorkspaceMemberships");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.Workspace", b =>
+                {
+                    b.Navigation("Members");
+
+                    b.Navigation("Notes");
                 });
 #pragma warning restore 612, 618
         }

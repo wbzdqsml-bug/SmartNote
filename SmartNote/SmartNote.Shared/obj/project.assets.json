@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "SmartNote.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/SmartNote.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SmartNote.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SmartNote.Domain/1.0.0": {
+      "type": "project",
+      "path": "../SmartNote.Domain/SmartNote.Domain.csproj",
+      "msbuildProject": "../SmartNote.Domain/SmartNote.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "SmartNote.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\wbzdqsml\\.nuget\\packages\\": {},
@@ -39,7 +58,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Domain\\SmartNote.Domain.csproj": {
+              "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Domain\\SmartNote.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

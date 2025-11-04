@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmartNote.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Configurations : Migration
+    public partial class Add_WorkspaceInvitation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,7 +45,7 @@ namespace SmartNote.DAL.Migrations
                         column: x => x.OwnerUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,19 +56,59 @@ namespace SmartNote.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WorkspaceId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
                     ContentMd = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContentHtml = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CanvasDataJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeletedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
-                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notes", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Notes_Workspaces_WorkspaceId",
+                        column: x => x.WorkspaceId,
+                        principalTable: "Workspaces",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkspaceInvitations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WorkspaceId = table.Column<int>(type: "int", nullable: false),
+                    InviterUserId = table.Column<int>(type: "int", nullable: false),
+                    InviteeUserId = table.Column<int>(type: "int", nullable: false),
+                    CanEdit = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CanShare = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    RespondedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkspaceInvitations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkspaceInvitations_Users_InviteeUserId",
+                        column: x => x.InviteeUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_WorkspaceInvitations_Users_InviterUserId",
+                        column: x => x.InviterUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_WorkspaceInvitations_Workspaces_WorkspaceId",
                         column: x => x.WorkspaceId,
                         principalTable: "Workspaces",
                         principalColumn: "Id",
@@ -82,7 +122,9 @@ namespace SmartNote.DAL.Migrations
                     WorkspaceId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     Role = table.Column<int>(type: "int", nullable: false),
-                    JoinTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
+                    JoinTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    CanEdit = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CanShare = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -98,7 +140,7 @@ namespace SmartNote.DAL.Migrations
                         column: x => x.WorkspaceId,
                         principalTable: "Workspaces",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -111,6 +153,21 @@ namespace SmartNote.DAL.Migrations
                 table: "Users",
                 column: "Username",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkspaceInvitations_InviteeUserId_Status",
+                table: "WorkspaceInvitations",
+                columns: new[] { "InviteeUserId", "Status" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkspaceInvitations_InviterUserId",
+                table: "WorkspaceInvitations",
+                column: "InviterUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkspaceInvitations_WorkspaceId",
+                table: "WorkspaceInvitations",
+                column: "WorkspaceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkspaceMembers_UserId",
@@ -128,6 +185,9 @@ namespace SmartNote.DAL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Notes");
+
+            migrationBuilder.DropTable(
+                name: "WorkspaceInvitations");
 
             migrationBuilder.DropTable(
                 name: "WorkspaceMembers");

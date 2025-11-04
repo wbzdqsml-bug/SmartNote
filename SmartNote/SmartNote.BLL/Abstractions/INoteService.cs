@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SmartNote.Shared.Dtos;
+using SmartNote.Shared.Dtos.SmartNote.Shared.Dtos;
 
 namespace SmartNote.BLL.Abstractions
 {
-    internal class INoteService
+    public interface INoteService
     {
+        Task<IEnumerable<NoteViewDto>> GetUserNotesAsync(int userId);
+        Task<int> CreateNoteAsync(int userId, NoteCreateDto dto);
+        Task<int> UpdateNoteAsync(int noteId, int userId, NoteUpdateDto dto);
+        Task<int> SoftDeleteAsync(IEnumerable<int> noteIds, int userId);
     }
 }

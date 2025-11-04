@@ -29,7 +29,8 @@ namespace SmartNote.DAL.Configurations
             builder.HasOne<User>()
                    .WithMany()
                    .HasForeignKey(w => w.OwnerUserId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

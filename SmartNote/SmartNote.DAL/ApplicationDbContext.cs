@@ -12,6 +12,7 @@ namespace SmartNote.DAL
         public DbSet<Workspace> Workspaces => Set<Workspace>();
         public DbSet<WorkspaceMember> WorkspaceMembers => Set<WorkspaceMember>();
         public DbSet<Note> Notes => Set<Note>();
+        public DbSet<WorkspaceInvitation> WorkspaceInvitations => Set<WorkspaceInvitation>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,6 +21,7 @@ namespace SmartNote.DAL
             modelBuilder.ApplyConfiguration(new WorkspaceConfiguration());
             modelBuilder.ApplyConfiguration(new WorkspaceMemberConfiguration());
             modelBuilder.ApplyConfiguration(new NoteConfiguration());
+            modelBuilder.ApplyConfiguration(new WorkspaceInvitationConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

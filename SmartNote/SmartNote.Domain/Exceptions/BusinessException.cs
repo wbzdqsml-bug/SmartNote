@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartNote.Domain.Exceptions
+﻿namespace SmartNote.Domain.Exceptions
 {
-    internal class BusinessException
+    public class BusinessException : Exception
     {
+        public BusinessException(string message) : base(message) { }
     }
 }

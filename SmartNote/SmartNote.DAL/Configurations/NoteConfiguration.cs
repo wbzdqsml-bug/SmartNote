@@ -39,11 +39,12 @@ namespace SmartNote.DAL.Configurations
 
             builder.HasIndex(n => new { n.WorkspaceId, n.LastUpdateTime });
 
+            builder.HasQueryFilter(n => !n.IsDeleted);
             // 外键：Note → Workspace
-            builder.HasOne<Workspace>()
-                   .WithMany()
+            builder.HasOne((n => n.Workspace))
+                   .WithMany(w => w.Notes)
                    .HasForeignKey(n => n.WorkspaceId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.Restrict);// ✅ 禁止级联删除，防止循环路径
         }
     }
 }

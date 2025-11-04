@@ -1110,6 +1110,9 @@
         }
       },
       "SmartNote.Shared/1.0.0": {
+        "dependencies": {
+          "SmartNote.Domain": "1.0.0"
+        },
         "runtime": {
           "SmartNote.Shared.dll": {
             "assemblyVersion": "1.0.0.0",

@@ -12,5 +12,6 @@ namespace SmartNote.Domain.Entities
         public string Username { get; set; } = default!;
         public string PasswordHash { get; set; } = default!;
         public DateTime CreateTime { get; set; } = DateTime.UtcNow;
+        public ICollection<WorkspaceMember> WorkspaceMemberships { get; set; } = new List<WorkspaceMember>();
     }
 }

@@ -10,3 +10,7 @@ C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\ne
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\refint\SmartNote.Shared.dll
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNote.Shared.pdb
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\ref\SmartNote.Shared.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\bin\Debug\net8.0\SmartNote.Domain.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\bin\Debug\net8.0\SmartNote.Domain.pdb
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNote.Shared.csproj.AssemblyReference.cache
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Shared\obj\Debug\net8.0\SmartNot.19AEAECA.Up2Date

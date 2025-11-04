@@ -1750,6 +1750,9 @@
       "SmartNote.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "SmartNote.Domain": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/SmartNote.Shared.dll": {}
         },
