@@ -8,7 +8,7 @@ namespace SmartNote.Shared.Dtos
         public string? ContentMd { get; set; }
         public string? ContentHtml { get; set; }
         public string? CanvasDataJson { get; set; }  // 手写笔记数据
-        public NoteType Type { get; set; } // 0 = Markdown, 1 = Canvas
+        public NoteType Type { get; set; } 
     }
 
     public class NoteUpdateDto

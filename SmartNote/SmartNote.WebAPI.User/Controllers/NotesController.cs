@@ -73,7 +73,6 @@ namespace SmartNote.WebAPI.User.Controllers
 
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
             var count = await _noteService.SoftDeleteAsync(noteIds, userId);
-
             return Ok(new { message = $"已成功删除 {count} 条笔记（已移动到回收站）" });
         }
     }
