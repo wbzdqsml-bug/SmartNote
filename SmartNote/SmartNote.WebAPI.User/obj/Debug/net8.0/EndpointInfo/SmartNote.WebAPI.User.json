@@ -110,6 +110,27 @@
       }
     },
     "/api/Notes/{id}": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Notes"
@@ -675,18 +696,6 @@
             "type": "string",
             "nullable": true
           },
-          "contentMd": {
-            "type": "string",
-            "nullable": true
-          },
-          "contentHtml": {
-            "type": "string",
-            "nullable": true
-          },
-          "canvasDataJson": {
-            "type": "string",
-            "nullable": true
-          },
           "type": {
             "$ref": "#/components/schemas/NoteType"
           }
@@ -696,7 +705,9 @@
       "NoteType": {
         "enum": [
           0,
-          1
+          1,
+          2,
+          3
         ],
         "type": "integer",
         "format": "int32"
@@ -712,15 +723,7 @@
             "type": "string",
             "nullable": true
           },
-          "contentMd": {
-            "type": "string",
-            "nullable": true
-          },
-          "contentHtml": {
-            "type": "string",
-            "nullable": true
-          },
-          "canvasDataJson": {
+          "contentJson": {
             "type": "string",
             "nullable": true
           }

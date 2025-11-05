@@ -2,8 +2,8 @@
 using SmartNote.BLL.Abstractions;
 using SmartNote.DAL;
 using SmartNote.Domain.Entities;
+using SmartNote.Domain.Entities.Enums;
 using SmartNote.Shared.Dtos;
-using SmartNote.Shared.Dtos.SmartNote.Shared.Dtos;
 
 namespace SmartNote.BLL.Services
 {
@@ -17,11 +17,26 @@ namespace SmartNote.BLL.Services
         }
 
         /// <summary>
-        /// 获取当前用户可访问的所有笔记（包含协作工作区）
+        /// 根据笔记类型生成默认内容模板
+        /// </summary>
+        private string GetDefaultContentJson(NoteType type)
+        {
+            return type switch
+            {
+                NoteType.Markdown => "{\"md\": \"\", \"html\": \"\"}",
+                NoteType.Canvas => "{\"elements\": []}",
+                NoteType.MindMap => "{\"nodes\": [], \"edges\": []}",
+                NoteType.RichText => "{\"content\": \"\"}",
+                _ => "{}"
+            };
+        }
+
+        /// <summary>
+        /// 获取当前用户可访问的所有笔记（包括协作工作区）
         /// </summary>
         public async Task<IEnumerable<NoteViewDto>> GetUserNotesAsync(int userId)
         {
-            // 找出用户可访问的所有工作区（自己 + 成员身份）
+            // 获取用户可访问的工作区 ID（包括自己创建的和作为成员的）
             var accessibleWorkspaceIds = await _db.WorkspaceMembers
                 .Where(m => m.UserId == userId)
                 .Select(m => m.WorkspaceId)
@@ -31,7 +46,7 @@ namespace SmartNote.BLL.Services
                 .Distinct()
                 .ToListAsync();
 
-            // 获取这些工作区下的笔记
+            // 查询这些工作区下的笔记
             var notes = await _db.Notes
                 .Where(n => accessibleWorkspaceIds.Contains(n.WorkspaceId) && !n.IsDeleted)
                 .OrderByDescending(n => n.LastUpdateTime)
@@ -39,9 +54,8 @@ namespace SmartNote.BLL.Services
                 {
                     Id = n.Id,
                     Title = n.Title,
-                    ContentMd = n.ContentMd,
-                    ContentHtml = n.ContentHtml,
-                    CanvasDataJson = n.CanvasDataJson,
+                    Type = n.Type,
+                    ContentJson = n.ContentJson,
                     CreateTime = n.CreateTime,
                     LastUpdateTime = n.LastUpdateTime,
                     WorkspaceId = n.WorkspaceId,
@@ -58,20 +72,20 @@ namespace SmartNote.BLL.Services
         /// </summary>
         public async Task<int> CreateNoteAsync(int userId, NoteCreateDto dto)
         {
-            var hasAccess = await _db.Workspaces.AnyAsync(w => w.Id == dto.WorkspaceId && w.OwnerUserId == userId)
+            // 验证访问权限
+            bool hasAccess = await _db.Workspaces.AnyAsync(w => w.Id == dto.WorkspaceId && w.OwnerUserId == userId)
                 || await _db.WorkspaceMembers.AnyAsync(m => m.WorkspaceId == dto.WorkspaceId && m.UserId == userId && m.CanEdit);
 
             if (!hasAccess)
                 throw new UnauthorizedAccessException("无权在该工作区创建笔记。");
 
+            // 创建新笔记
             var note = new Note
             {
                 WorkspaceId = dto.WorkspaceId,
                 Title = dto.Title,
-                ContentMd = dto.ContentMd,
-                ContentHtml = dto.ContentHtml,
-                CanvasDataJson = dto.CanvasDataJson,
                 Type = dto.Type,
+                ContentJson = GetDefaultContentJson(dto.Type),
                 CreateTime = DateTime.UtcNow,
                 LastUpdateTime = DateTime.UtcNow,
                 IsDeleted = false
@@ -104,9 +118,9 @@ namespace SmartNote.BLL.Services
             if (!string.IsNullOrWhiteSpace(dto.Title))
                 note.Title = dto.Title;
 
-            note.ContentMd = dto.ContentMd ?? note.ContentMd;
-            note.ContentHtml = dto.ContentHtml ?? note.ContentHtml;
-            note.CanvasDataJson = dto.CanvasDataJson ?? note.CanvasDataJson;
+            if (!string.IsNullOrWhiteSpace(dto.ContentJson))
+                note.ContentJson = dto.ContentJson;
+
             note.LastUpdateTime = DateTime.UtcNow;
 
             return await _db.SaveChangesAsync();

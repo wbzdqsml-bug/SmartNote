@@ -1,41 +1,58 @@
 ﻿using SmartNote.Domain.Entities.Enums;
+
 namespace SmartNote.Shared.Dtos
 {
+    /// <summary>
+    /// 创建笔记 DTO
+    /// </summary>
     public class NoteCreateDto
     {
         public int WorkspaceId { get; set; }
+
         public string Title { get; set; } = string.Empty;
-        public string? ContentMd { get; set; }
-        public string? ContentHtml { get; set; }
-        public string? CanvasDataJson { get; set; }  // 手写笔记数据
-        public NoteType Type { get; set; } 
+
+        /// <summary>
+        /// 笔记类型（Markdown / Canvas / MindMap / RichText）
+        /// </summary>
+        public NoteType Type { get; set; } = NoteType.Markdown;
     }
 
+    /// <summary>
+    /// 更新笔记 DTO
+    /// </summary>
     public class NoteUpdateDto
     {
         public int Id { get; set; }
+
         public string? Title { get; set; }
-        public string? ContentMd { get; set; }
-        public string? ContentHtml { get; set; }
-        public string? CanvasDataJson { get; set; }
+
+        /// <summary>
+        /// 内容 JSON（由前端直接传完整内容结构）
+        /// </summary>
+        public string? ContentJson { get; set; }
     }
 
-    namespace SmartNote.Shared.Dtos
+    /// <summary>
+    /// 笔记视图 DTO（输出到前端）
+    /// </summary>
+    public class NoteViewDto
     {
-        public class NoteViewDto
-        {
-            public int Id { get; set; }
-            public string Title { get; set; } = string.Empty;
-            public string? ContentHtml { get; set; }
-            public string? ContentMd { get; set; }
-            public string? CanvasDataJson { get; set; }
-            public int WorkspaceId { get; set; }   // 所属工作区
-            public bool IsDeleted { get; set; }    // 是否被软删除
-            public DateTime? DeletedTime { get; set; } // 删除时间
+        public int Id { get; set; }
 
-            public DateTime CreateTime { get; set; }
-            public DateTime LastUpdateTime { get; set; }
-        }
+        public string Title { get; set; } = string.Empty;
+
+        public NoteType Type { get; set; } = NoteType.Markdown;
+
+        public string ContentJson { get; set; } = "{}";
+
+        public int WorkspaceId { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedTime { get; set; }
+
+        public DateTime CreateTime { get; set; }
+
+        public DateTime LastUpdateTime { get; set; }
     }
-
 }

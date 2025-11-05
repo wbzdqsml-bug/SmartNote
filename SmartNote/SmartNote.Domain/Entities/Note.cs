@@ -1,4 +1,6 @@
-﻿namespace SmartNote.Domain.Entities
+﻿using SmartNote.Domain.Entities.Enums;
+
+namespace SmartNote.Domain.Entities
 {
     public class Note
     {
@@ -10,12 +12,10 @@
 
         // 内容
         public string Title { get; set; } = string.Empty;
-        public string? ContentMd { get; set; }
-        public string? ContentHtml { get; set; }
-        public string? CanvasDataJson { get; set; }
 
+        public string ContentJson { get; set; } = "{}"; // 统一笔记内容
         // 类型
-        public Enums.NoteType Type { get; set; }
+        public NoteType Type { get; set; }
 
         // 删除标记与时间（软删除用）
         public bool IsDeleted { get; set; } = false;

@@ -19,14 +19,9 @@ namespace SmartNote.DAL.Configurations
             builder.Property(n => n.Type)
                    .HasConversion<int>();
 
-            builder.Property(n => n.ContentMd)
-                   .HasColumnType("nvarchar(max)");
-
-            builder.Property(n => n.ContentHtml)
-                   .HasColumnType("nvarchar(max)");
-
-            builder.Property(n => n.CanvasDataJson)
-                   .HasColumnType("nvarchar(max)");
+            builder.Property(n => n.ContentJson)
+           .HasColumnType("nvarchar(max)")
+           .IsRequired();
 
             builder.Property(n => n.CreateTime)
                    .HasDefaultValueSql("GETUTCDATE()");

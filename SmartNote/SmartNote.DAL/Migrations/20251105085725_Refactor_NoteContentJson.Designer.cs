@@ -12,8 +12,8 @@ using SmartNote.DAL;
 namespace SmartNote.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251104112355_Add_WorkspaceInvitation")]
-    partial class Add_WorkspaceInvitation
+    [Migration("20251105085725_Refactor_NoteContentJson")]
+    partial class Refactor_NoteContentJson
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,13 +33,8 @@ namespace SmartNote.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CanvasDataJson")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentHtml")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentMd")
+                    b.Property<string>("ContentJson")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateTime")

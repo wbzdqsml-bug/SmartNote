@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmartNote.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_WorkspaceInvitation : Migration
+    public partial class Refactor_NoteContentJson : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,9 +56,7 @@ namespace SmartNote.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WorkspaceId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    ContentMd = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContentHtml = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CanvasDataJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentJson = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     DeletedTime = table.Column<DateTime>(type: "datetime2", nullable: true),

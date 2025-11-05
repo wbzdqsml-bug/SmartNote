@@ -1,5 +1,5 @@
 ﻿using SmartNote.Shared.Dtos;
-using SmartNote.Shared.Dtos.SmartNote.Shared.Dtos;
+
 
 namespace SmartNote.BLL.Abstractions
 {

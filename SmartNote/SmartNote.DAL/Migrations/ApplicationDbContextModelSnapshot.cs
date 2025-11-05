@@ -30,13 +30,8 @@ namespace SmartNote.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CanvasDataJson")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentHtml")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentMd")
+                    b.Property<string>("ContentJson")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateTime")

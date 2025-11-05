@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartNote.BLL.Abstractions;
 using SmartNote.DAL;
-using SmartNote.Shared.Dtos.SmartNote.Shared.Dtos;
+using SmartNote.Shared.Dtos;
+
 
 namespace SmartNote.BLL.Services
 {
