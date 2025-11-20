@@ -88,8 +88,20 @@ namespace SmartNote.BLL.Services
             var ok = PasswordHasher.Verify(request.Username, request.Password, user.PasswordHash);
             if (!ok) return null;
 
-            // 生成 JWT
-            var (token, expiresIn) = GenerateJwtToken(user);
+            // 读取 JWT 配置
+            var key = _config["Jwt:Key"] ?? throw new InvalidOperationException("Jwt:Key missing");
+            var issuer = _config["Jwt:Issuer"] ?? "SmartNote.UserAPI";
+            var audience = _config["Jwt:Audience"] ?? "SmartNoteClient";
+
+            // 使用 JwtHelper 生成 Token
+            var (token, expiresIn) = JwtHelper.GenerateToken(
+                userId: user.Id,
+                username: user.Username,
+                role: "User",
+                key: key,
+                issuer: issuer,
+                audience: audience,
+                lifetime: TimeSpan.FromHours(1));
 
             // 缓存 token（key 可按需扩展到 deviceId 维度）
             var cacheKey = $"token:{user.Id}";
@@ -107,41 +119,6 @@ namespace SmartNote.BLL.Services
                 Username = user.Username,
                 ExpiresInSeconds = expiresIn
             };
-        }
-
-        private (string token, int expiresInSeconds) GenerateJwtToken(User user)
-        {
-            var key = _config["Jwt:Key"] ?? throw new InvalidOperationException("Jwt:Key missing");
-            var issuer = _config["Jwt:Issuer"] ?? "SmartNote.UserAPI";
-            var audience = _config["Jwt:Audience"] ?? "SmartNoteClient";
-
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
-            var creds = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            // 这里使用较短的过期时间，后续可加 refresh token
-            var expires = TimeSpan.FromHours(1);
-            var expTime = DateTime.UtcNow.Add(expires);
-
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, "User"),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N"))
-            };
-
-            var token = new JwtSecurityToken(
-                issuer: issuer,
-                audience: audience,
-                claims: claims,
-                notBefore: DateTime.UtcNow,
-                expires: expTime,
-                signingCredentials: creds
-            );
-
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-            return (jwt, (int)expires.TotalSeconds);
         }
     }
 }

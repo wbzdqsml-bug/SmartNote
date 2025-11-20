@@ -27,32 +27,34 @@ namespace SmartNote.WebAPI.User.Filters
 
             switch (exception)
             {
-                // 自定义业务异常
+                // 业务异常（400）
                 case BusinessException bex:
                     statusCode = (int)HttpStatusCode.BadRequest;
                     response = ApiResponse.Fail(bex.Message, code: 4001);
-                    _logger.LogWarning("[业务异常] {Message}", bex.Message);
                     break;
 
-                // 未授权异常
+                // ⭐ 权限不足（403）
+                case PermissionDeniedException pex:
+                    statusCode = (int)HttpStatusCode.Forbidden;
+                    response = ApiResponse.Fail(pex.Message, code: 4030);
+                    break;
+
+                // 登录失效/凭证无效（401）
                 case UnauthorizedAccessException uex:
                     statusCode = (int)HttpStatusCode.Unauthorized;
                     response = ApiResponse.Fail("未授权访问，请重新登录。", code: 4010);
-                    _logger.LogWarning("[未授权访问] {Message}", uex.Message);
                     break;
 
-                // 资源不存在异常（可选）
+                // 资源未找到（404）
                 case KeyNotFoundException kex:
                     statusCode = (int)HttpStatusCode.NotFound;
                     response = ApiResponse.Fail(kex.Message, code: 4040);
-                    _logger.LogWarning("[资源未找到] {Message}", kex.Message);
                     break;
 
-                // 其他系统异常
+                // 其他系统异常（500）
                 default:
                     statusCode = (int)HttpStatusCode.InternalServerError;
                     response = ApiResponse.Fail("服务器发生内部错误，请稍后再试。", code: 5000);
-                    _logger.LogError(exception, "[系统异常] {Message}", exception.Message);
                     break;
             }
 

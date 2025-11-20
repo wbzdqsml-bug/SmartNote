@@ -5,7 +5,6 @@ using SmartNote.Domain.Entities;
 using SmartNote.Shared.Dtos;
 using SmartNote.Domain.Exceptions;
 
-
 namespace SmartNote.BLL.Services
 {
     public class WorkspaceService : IWorkspaceService
@@ -17,7 +16,6 @@ namespace SmartNote.BLL.Services
             _db = db;
         }
 
-        // 创建工作区
         public async Task<WorkspaceViewDto> CreateWorkspaceAsync(int userId, WorkspaceCreateDto dto)
         {
             var workspace = new Workspace
@@ -31,14 +29,12 @@ namespace SmartNote.BLL.Services
             await _db.Workspaces.AddAsync(workspace);
             await _db.SaveChangesAsync();
 
-            // 创建者自动加入成员表
-            var member = new WorkspaceMember
+            _db.WorkspaceMembers.Add(new WorkspaceMember
             {
                 WorkspaceId = workspace.Id,
                 UserId = userId,
                 Role = Domain.Entities.Enums.WorkspaceRole.Owner
-            };
-            await _db.WorkspaceMembers.AddAsync(member);
+            });
             await _db.SaveChangesAsync();
 
             return new WorkspaceViewDto
@@ -53,7 +49,6 @@ namespace SmartNote.BLL.Services
             };
         }
 
-        // 获取用户参与的所有工作区
         public async Task<IEnumerable<WorkspaceViewDto>> GetUserWorkspacesAsync(int userId)
         {
             var query =
@@ -74,16 +69,17 @@ namespace SmartNote.BLL.Services
             return await query.ToListAsync();
         }
 
-        // 获取工作区详细信息
         public async Task<WorkspaceViewDto?> GetWorkspaceDetailAsync(int workspaceId, int userId)
         {
             var isMember = await _db.WorkspaceMembers
                 .AnyAsync(m => m.WorkspaceId == workspaceId && m.UserId == userId);
 
-            if (!isMember) return null;
+            if (!isMember)
+                return null;
 
             var workspace = await _db.Workspaces.FirstOrDefaultAsync(w => w.Id == workspaceId);
-            if (workspace == null) return null;
+            if (workspace == null)
+                return null;
 
             return new WorkspaceViewDto
             {
@@ -97,33 +93,24 @@ namespace SmartNote.BLL.Services
             };
         }
 
-        // 删除工作区
         public async Task<bool> DeleteWorkspaceAsync(int workspaceId, int userId, bool forceDelete = false)
         {
-            var workspace = await _db.Workspaces
-                .FirstOrDefaultAsync(w => w.Id == workspaceId);
-
+            var workspace = await _db.Workspaces.FirstOrDefaultAsync(w => w.Id == workspaceId);
             if (workspace == null)
                 throw new BusinessException("工作区不存在。");
 
-            // ✅ 权限检查：只有创建者或管理员可以删除
             if (workspace.OwnerUserId != userId)
-                throw new BusinessException("无权删除该工作区。");
+                throw new PermissionDeniedException("无权删除该工作区。");
 
-            // ✅ 检查该工作区下是否仍有笔记
             var hasNotes = await _db.Notes
                 .IgnoreQueryFilters()
                 .AnyAsync(n => n.WorkspaceId == workspaceId && !n.IsDeleted);
 
             if (hasNotes && !forceDelete)
-            {
-                // 普通删除（安全模式）
                 throw new BusinessException("该工作区下仍有笔记，无法删除。");
-            }
 
             if (hasNotes && forceDelete)
             {
-                // 管理员彻底删除模式 → 先软删除所有笔记
                 var notes = await _db.Notes
                     .IgnoreQueryFilters()
                     .Where(n => n.WorkspaceId == workspaceId)
@@ -137,19 +124,17 @@ namespace SmartNote.BLL.Services
                 await _db.SaveChangesAsync();
             }
 
-            // ✅ 删除成员记录（防止外键冲突）
             var members = await _db.WorkspaceMembers
                 .Where(m => m.WorkspaceId == workspaceId)
                 .ToListAsync();
 
             _db.WorkspaceMembers.RemoveRange(members);
 
-            // ✅ 删除工作区
             _db.Workspaces.Remove(workspace);
 
             await _db.SaveChangesAsync();
+
             return true;
         }
-
     }
 }

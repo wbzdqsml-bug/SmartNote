@@ -10,3 +10,4 @@ C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Common\obj\Debug\ne
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Common\obj\Debug\net8.0\refint\SmartNote.Common.dll
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Common\obj\Debug\net8.0\SmartNote.Common.pdb
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Common\obj\Debug\net8.0\ref\SmartNote.Common.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.Common\obj\Debug\net8.0\SmartNote.Common.csproj.AssemblyReference.cache

@@ -4,6 +4,7 @@ using SmartNote.DAL;
 using SmartNote.Domain.Entities;
 using SmartNote.Domain.Entities.Enums;
 using SmartNote.Shared.Dtos;
+using SmartNote.Domain.Exceptions;
 
 namespace SmartNote.BLL.Services
 {
@@ -16,9 +17,6 @@ namespace SmartNote.BLL.Services
             _db = db;
         }
 
-        /// <summary>
-        /// 根据笔记类型生成默认内容模板
-        /// </summary>
         private string GetDefaultContentJson(NoteType type)
         {
             return type switch
@@ -31,12 +29,8 @@ namespace SmartNote.BLL.Services
             };
         }
 
-        /// <summary>
-        /// 获取当前用户可访问的所有笔记（包括协作工作区）
-        /// </summary>
         public async Task<IEnumerable<NoteViewDto>> GetUserNotesAsync(int userId)
         {
-            // 获取用户可访问的工作区 ID（包括自己创建的和作为成员的）
             var accessibleWorkspaceIds = await _db.WorkspaceMembers
                 .Where(m => m.UserId == userId)
                 .Select(m => m.WorkspaceId)
@@ -46,7 +40,6 @@ namespace SmartNote.BLL.Services
                 .Distinct()
                 .ToListAsync();
 
-            // 查询这些工作区下的笔记
             var notes = await _db.Notes
                 .Where(n => accessibleWorkspaceIds.Contains(n.WorkspaceId) && !n.IsDeleted)
                 .OrderByDescending(n => n.LastUpdateTime)
@@ -67,19 +60,14 @@ namespace SmartNote.BLL.Services
             return notes;
         }
 
-        /// <summary>
-        /// 创建笔记（用户必须是该工作区成员或创建者）
-        /// </summary>
         public async Task<int> CreateNoteAsync(int userId, NoteCreateDto dto)
         {
-            // 验证访问权限
             bool hasAccess = await _db.Workspaces.AnyAsync(w => w.Id == dto.WorkspaceId && w.OwnerUserId == userId)
                 || await _db.WorkspaceMembers.AnyAsync(m => m.WorkspaceId == dto.WorkspaceId && m.UserId == userId && m.CanEdit);
 
             if (!hasAccess)
-                throw new UnauthorizedAccessException("无权在该工作区创建笔记。");
+                throw new PermissionDeniedException("无权在该工作区创建笔记。");
 
-            // 创建新笔记
             var note = new Note
             {
                 WorkspaceId = dto.WorkspaceId,
@@ -97,15 +85,9 @@ namespace SmartNote.BLL.Services
             return note.Id;
         }
 
-        /// <summary>
-        /// 更新笔记（仅 Owner 或具有编辑权限的成员可修改）
-        /// </summary>
         public async Task<int> UpdateNoteAsync(int noteId, int userId, NoteUpdateDto dto)
         {
-            var note = await _db.Notes
-                .Include(n => n.Workspace)
-                .FirstOrDefaultAsync(n => n.Id == noteId);
-
+            var note = await _db.Notes.Include(n => n.Workspace).FirstOrDefaultAsync(n => n.Id == noteId);
             if (note == null)
                 throw new KeyNotFoundException("未找到笔记。");
 
@@ -113,7 +95,7 @@ namespace SmartNote.BLL.Services
                            await _db.WorkspaceMembers.AnyAsync(m => m.WorkspaceId == note.WorkspaceId && m.UserId == userId && m.CanEdit);
 
             if (!canEdit)
-                throw new UnauthorizedAccessException("无权编辑该笔记。");
+                throw new PermissionDeniedException("无权编辑该笔记。");
 
             if (!string.IsNullOrWhiteSpace(dto.Title))
                 note.Title = dto.Title;
@@ -126,9 +108,6 @@ namespace SmartNote.BLL.Services
             return await _db.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// 软删除笔记（仅 Owner 或具有编辑权限的成员）
-        /// </summary>
         public async Task<int> SoftDeleteAsync(IEnumerable<int> noteIds, int userId)
         {
             var notes = await _db.Notes
@@ -148,6 +127,7 @@ namespace SmartNote.BLL.Services
                     note.IsDeleted = true;
                     note.DeletedTime = DateTime.UtcNow;
                     note.LastUpdateTime = DateTime.UtcNow;
+
                     deletableNotes.Add(note);
                 }
             }

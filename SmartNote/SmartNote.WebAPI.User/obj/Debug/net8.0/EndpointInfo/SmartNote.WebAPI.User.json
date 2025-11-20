@@ -2,7 +2,6 @@
   "openapi": "3.0.1",
   "info": {
     "title": "SmartNote 用户 API",
-    "description": "基于 .NET 8 的智能学习笔记系统接口文档",
     "version": "v1"
   },
   "paths": {
@@ -30,6 +29,18 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -807,7 +818,7 @@
     "securitySchemes": {
       "Bearer": {
         "type": "http",
-        "description": "在下方输入：Bearer {your JWT token}",
+        "description": "输入：Bearer {token}",
         "scheme": "bearer",
         "bearerFormat": "JWT"
       }
