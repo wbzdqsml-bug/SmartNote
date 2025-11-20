@@ -101,6 +101,40 @@ namespace SmartNote.DAL.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("SmartNote.Domain.Entities.UserProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Bio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserProfiles", (string)null);
+                });
+
             modelBuilder.Entity("SmartNote.Domain.Entities.Workspace", b =>
                 {
                     b.Property<int>("Id")
@@ -229,6 +263,17 @@ namespace SmartNote.DAL.Migrations
                     b.Navigation("Workspace");
                 });
 
+            modelBuilder.Entity("SmartNote.Domain.Entities.UserProfile", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.User", "User")
+                        .WithOne("Profile")
+                        .HasForeignKey("SmartNote.Domain.Entities.UserProfile", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SmartNote.Domain.Entities.Workspace", b =>
                 {
                     b.HasOne("SmartNote.Domain.Entities.User", null)
@@ -286,6 +331,8 @@ namespace SmartNote.DAL.Migrations
 
             modelBuilder.Entity("SmartNote.Domain.Entities.User", b =>
                 {
+                    b.Navigation("Profile");
+
                     b.Navigation("WorkspaceMemberships");
                 });
 

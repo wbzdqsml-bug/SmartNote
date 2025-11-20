@@ -221,6 +221,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.ProfileController",
+    "Method": "GetProfile",
+    "RelativePath": "api/user/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.ProfileController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/user/profile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "SmartNote.Shared.Dtos.UpdateUserProfileRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SmartNote.WebAPI.User.Controllers.WorkspacesController",
     "Method": "CreateWorkspace",
     "RelativePath": "api/Workspaces",

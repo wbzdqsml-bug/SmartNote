@@ -178,7 +178,6 @@ C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\De
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\swae.build.ex.cache
-C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\SmartNot.9444471F.Up2Date
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\SmartNote.WebAPI.Admin.dll
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\refint\SmartNote.WebAPI.Admin.dll

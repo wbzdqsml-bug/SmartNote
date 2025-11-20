@@ -14,7 +14,6 @@ namespace SmartNote.WebAPI.User.Controllers
     public class NotesController : ControllerBase
     {
         private readonly INoteService _noteService;
-
         public NotesController(INoteService noteService)
         {
             _noteService = noteService;
@@ -50,7 +49,6 @@ namespace SmartNote.WebAPI.User.Controllers
             var note = notes.FirstOrDefault(n => n.Id == id);
             if (note == null)
                 return NotFound(ApiResponse.Fail("未找到笔记或无权访问"));
-
             return Ok(ApiResponse.Success(note));
         }
 
@@ -64,10 +62,8 @@ namespace SmartNote.WebAPI.User.Controllers
 
             if (dto == null || string.IsNullOrWhiteSpace(dto.Title))
                 return BadRequest(ApiResponse.Fail("笔记标题不能为空"));
-
             if (!Enum.IsDefined(typeof(NoteType), dto.Type))
                 return BadRequest(ApiResponse.Fail("无效的笔记类型"));
-
             var id = await _noteService.CreateNoteAsync(userId, dto);
             return Ok(ApiResponse.Success(new { noteId = id }, "创建成功"));
         }
@@ -82,7 +78,6 @@ namespace SmartNote.WebAPI.User.Controllers
 
             if (dto == null)
                 return BadRequest(ApiResponse.Fail("请求数据无效"));
-
             var result = await _noteService.UpdateNoteAsync(id, userId, dto);
             return result > 0
                 ? Ok(ApiResponse.Success("更新成功"))
@@ -97,7 +92,6 @@ namespace SmartNote.WebAPI.User.Controllers
         {
             if (noteIds == null || !noteIds.Any())
                 return BadRequest(ApiResponse.Fail("请选择要删除的笔记"));
-
             var userId = GetUserId();
             var count = await _noteService.SoftDeleteAsync(noteIds, userId);
             return Ok(ApiResponse.Success(new { deleted = count }, $"已成功删除 {count} 条笔记（已移动到回收站）"));

@@ -24,6 +24,8 @@ namespace SmartNote.BLL
             // services.AddScoped<IAnalysisService, AnalysisService>();
             services.AddScoped<IWorkspaceInvitationService, WorkspaceInvitationService>();
 
+            services.AddScoped<IProfileService, ProfileService>();
+
             return services;
         }
     }
