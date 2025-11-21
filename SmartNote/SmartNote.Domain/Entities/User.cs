@@ -14,5 +14,8 @@ namespace SmartNote.Domain.Entities
         public DateTime CreateTime { get; set; } = DateTime.UtcNow;
         public ICollection<WorkspaceMember> WorkspaceMemberships { get; set; } = new List<WorkspaceMember>();
         public UserProfile? Profile { get; set; }
+        public ICollection<Category> Categories { get; set; } = new List<Category>();
+        public ICollection<Tag> Tags { get; set; } = new List<Tag>();
+
     }
 }

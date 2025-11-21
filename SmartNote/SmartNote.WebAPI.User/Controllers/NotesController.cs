@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
-using SmartNote.Domain.Entities.Enums;
 using SmartNote.Shared.Dtos;
 using SmartNote.Shared.Results;
 using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+    [Route("api/notes")]
     public class NotesController : ControllerBase
     {
-        private readonly INoteService _noteService;
-        public NotesController(INoteService noteService)
+        private readonly INoteService _service;
+
+        public NotesController(INoteService service)
         {
-            _noteService = noteService;
+            _service = service;
         }
 
         private int GetUserId()
@@ -27,74 +27,82 @@ namespace SmartNote.WebAPI.User.Controllers
             return id;
         }
 
-        /// <summary>
-        /// 获取当前用户可访问的所有笔记（自动过滤已删除）
-        /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> GetAllNotes()
+        // ================================  
+        // 获取所有笔记（完整：分类 + 标签）
+        // ================================
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAll()
         {
-            var userId = GetUserId();
-            var notes = await _noteService.GetUserNotesAsync(userId);
-            return Ok(ApiResponse.Success(notes));
+            var list = await _service.GetUserNotesAsync(GetUserId());
+            return Ok(ApiResponse.Success(list));
         }
 
-        /// <summary>
-        /// 根据 ID 获取笔记详情（包括内容与类型）
-        /// </summary>
+        // ================================  
+        // 获取单条笔记（含分类、标签）
+        // ================================
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetNoteById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var userId = GetUserId();
-            var notes = await _noteService.GetUserNotesAsync(userId);
-            var note = notes.FirstOrDefault(n => n.Id == id);
-            if (note == null)
-                return NotFound(ApiResponse.Fail("未找到笔记或无权访问"));
-            return Ok(ApiResponse.Success(note));
+            var note = await _service.GetNoteByIdAsync(GetUserId(), id);
+            return note == null
+                ? NotFound(ApiResponse.Fail("未找到笔记或无权限"))
+                : Ok(ApiResponse.Success(note));
         }
 
-        /// <summary>
-        /// 创建新笔记
-        /// </summary>
+        // ================================  
+        // 筛选（分类 + 标签）
+        // ================================
+        [HttpGet("filter")]
+        public async Task<IActionResult> Filter(
+            [FromQuery] int? categoryId,
+            [FromQuery] string? tagIds)
+        {
+            List<int>? tagIdList = null;
+            if (!string.IsNullOrWhiteSpace(tagIds))
+                tagIdList = tagIds.Split(',').Select(int.Parse).ToList();
+
+            var list = await _service.FilterNotesAsync(GetUserId(), categoryId, tagIdList);
+            return Ok(ApiResponse.Success(list));
+        }
+
+        // ================================  
+        // 创建
+        // ================================
         [HttpPost]
-        public async Task<IActionResult> CreateNote([FromBody] NoteCreateDto dto)
+        public async Task<IActionResult> Create([FromBody] NoteCreateDto dto)
         {
-            var userId = GetUserId();
-
-            if (dto == null || string.IsNullOrWhiteSpace(dto.Title))
-                return BadRequest(ApiResponse.Fail("笔记标题不能为空"));
-            if (!Enum.IsDefined(typeof(NoteType), dto.Type))
-                return BadRequest(ApiResponse.Fail("无效的笔记类型"));
-            var id = await _noteService.CreateNoteAsync(userId, dto);
-            return Ok(ApiResponse.Success(new { noteId = id }, "创建成功"));
+            var id = await _service.CreateNoteAsync(GetUserId(), dto);
+            return Ok(ApiResponse.Success(new { id }, "创建成功"));
         }
 
-        /// <summary>
-        /// 更新笔记内容
-        /// </summary>
+        // ================================  
+        // 更新内容 / 分类
+        // ================================
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateNote(int id, [FromBody] NoteUpdateDto dto)
+        public async Task<IActionResult> Update(int id, [FromBody] NoteUpdateDto dto)
         {
-            var userId = GetUserId();
-
-            if (dto == null)
-                return BadRequest(ApiResponse.Fail("请求数据无效"));
-            var result = await _noteService.UpdateNoteAsync(id, userId, dto);
-            return result > 0
-                ? Ok(ApiResponse.Success("更新成功"))
-                : NotFound(ApiResponse.Fail("笔记不存在或无权访问"));
+            await _service.UpdateNoteAsync(id, GetUserId(), dto);
+            return Ok(ApiResponse.Success("更新成功"));
         }
 
-        /// <summary>
-        /// 批量软删除笔记（移动到回收站）
-        /// </summary>
-        [HttpPost("soft")]
-        public async Task<IActionResult> SoftDeleteNotes([FromBody] List<int> noteIds)
+        // ================================  
+        // 更新标签（多对多）
+        // ================================
+        [HttpPut("{id:int}/tags")]
+        public async Task<IActionResult> UpdateTags(int id, [FromBody] NoteTagUpdateRequest req)
         {
-            if (noteIds == null || !noteIds.Any())
-                return BadRequest(ApiResponse.Fail("请选择要删除的笔记"));
-            var userId = GetUserId();
-            var count = await _noteService.SoftDeleteAsync(noteIds, userId);
-            return Ok(ApiResponse.Success(new { deleted = count }, $"已成功删除 {count} 条笔记（已移动到回收站）"));
+            await _service.UpdateNoteTagsAsync(GetUserId(), id, req.TagIds);
+            return Ok(ApiResponse.Success("标签更新成功"));
+        }
+
+        // ================================  
+        // 软删除
+        // ================================
+        [HttpPost("soft-delete")]
+        public async Task<IActionResult> SoftDelete([FromBody] List<int> ids)
+        {
+            var count = await _service.SoftDeleteAsync(ids, GetUserId());
+            return Ok(ApiResponse.Success($"{count} 条笔记已移动到回收站"));
         }
     }
 }

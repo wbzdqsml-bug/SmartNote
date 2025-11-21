@@ -24,5 +24,16 @@ namespace SmartNote.Domain.Entities
         // 通用时间戳
         public DateTime CreateTime { get; set; } = DateTime.UtcNow;
         public DateTime LastUpdateTime { get; set; } = DateTime.UtcNow;
+
+        /// <summary>
+        /// 所属分类（可为空）
+        /// </summary>
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+
+        /// <summary>
+        /// 标签多对多关系
+        /// </summary>
+        public ICollection<NoteTag> NoteTags { get; set; } = new List<NoteTag>();
     }
 }

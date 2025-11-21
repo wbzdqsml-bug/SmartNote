@@ -26,6 +26,11 @@ namespace SmartNote.BLL
 
             services.AddScoped<IProfileService, ProfileService>();
 
+            services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddScoped<ITagService, TagService>();
+
+
             return services;
         }
     }

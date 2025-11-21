@@ -184,3 +184,4 @@ C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\De
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\SmartNote.WebAPI.Admin.pdb
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\SmartNote.WebAPI.Admin.genruntimeconfig.cache
 C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\ref\SmartNote.WebAPI.Admin.dll
+C:\Users\wbzdqsml\source\repos\SmartNote\SmartNote\SmartNote.WebAPI.Admin\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

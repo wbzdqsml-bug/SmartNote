@@ -42,6 +42,69 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.CategoriesController",
+    "Method": "GetMyCategories",
+    "RelativePath": "api/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.CategoriesController",
+    "Method": "Create",
+    "RelativePath": "api/categories",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "SmartNote.Shared.Dtos.CategoryCreateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.CategoriesController",
+    "Method": "Update",
+    "RelativePath": "api/categories/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "SmartNote.Shared.Dtos.CategoryUpdateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.CategoriesController",
+    "Method": "Delete",
+    "RelativePath": "api/categories/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SmartNote.WebAPI.User.Controllers.WorkspaceInvitationsController",
     "Method": "MyInvitations",
     "RelativePath": "api/invitations",
@@ -101,18 +164,8 @@
   },
   {
     "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
-    "Method": "GetAllNotes",
-    "RelativePath": "api/Notes",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
-    "Method": "CreateNote",
-    "RelativePath": "api/Notes",
+    "Method": "Create",
+    "RelativePath": "api/notes",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -127,8 +180,8 @@
   },
   {
     "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
-    "Method": "GetNoteById",
-    "RelativePath": "api/Notes/{id}",
+    "Method": "GetById",
+    "RelativePath": "api/notes/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -143,8 +196,8 @@
   },
   {
     "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
-    "Method": "UpdateNote",
-    "RelativePath": "api/Notes/{id}",
+    "Method": "Update",
+    "RelativePath": "api/notes/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -164,14 +217,103 @@
   },
   {
     "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
-    "Method": "SoftDeleteNotes",
-    "RelativePath": "api/Notes/soft",
+    "Method": "UpdateTags",
+    "RelativePath": "api/notes/{id}/tags",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "SmartNote.Shared.Dtos.NoteTagUpdateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.TagsController",
+    "Method": "GetNoteTags",
+    "RelativePath": "api/notes/{noteId}/tags",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "noteId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.TagsController",
+    "Method": "UpdateNoteTags",
+    "RelativePath": "api/notes/{noteId}/tags",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "noteId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "SmartNote.Shared.Dtos.NoteTagUpdateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
+    "Method": "GetAll",
+    "RelativePath": "api/notes/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
+    "Method": "Filter",
+    "RelativePath": "api/notes/filter",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "tagIds",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/notes/soft-delete",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "noteIds",
+        "Name": "ids",
         "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
@@ -215,6 +357,69 @@
       {
         "Name": "noteIds",
         "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.TagsController",
+    "Method": "GetMyTags",
+    "RelativePath": "api/tags",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.TagsController",
+    "Method": "Create",
+    "RelativePath": "api/tags",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "SmartNote.Shared.Dtos.TagCreateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.TagsController",
+    "Method": "Update",
+    "RelativePath": "api/tags/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "SmartNote.Shared.Dtos.TagUpdateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.TagsController",
+    "Method": "Delete",
+    "RelativePath": "api/tags/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

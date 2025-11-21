@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmartNote.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddUserProfileFields : Migration
+    public partial class AddCategoryAndTag : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,6 +24,51 @@ namespace SmartNote.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tags_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,11 +130,17 @@ namespace SmartNote.DAL.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     DeletedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
-                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notes_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Notes_Workspaces_WorkspaceId",
                         column: x => x.WorkspaceId,
@@ -165,10 +216,56 @@ namespace SmartNote.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "NoteTags",
+                columns: table => new
+                {
+                    NoteId = table.Column<int>(type: "int", nullable: false),
+                    TagId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NoteTags", x => new { x.NoteId, x.TagId });
+                    table.ForeignKey(
+                        name: "FK_NoteTags_Notes_NoteId",
+                        column: x => x.NoteId,
+                        principalTable: "Notes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NoteTags_Tags_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_UserId_Name",
+                table: "Categories",
+                columns: new[] { "UserId", "Name" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notes_CategoryId",
+                table: "Notes",
+                column: "CategoryId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Notes_WorkspaceId_LastUpdateTime",
                 table: "Notes",
                 columns: new[] { "WorkspaceId", "LastUpdateTime" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NoteTags_TagId",
+                table: "NoteTags",
+                column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tags_UserId_Name",
+                table: "Tags",
+                columns: new[] { "UserId", "Name" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_UserId",
@@ -212,7 +309,7 @@ namespace SmartNote.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Notes");
+                name: "NoteTags");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles");
@@ -222,6 +319,15 @@ namespace SmartNote.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "WorkspaceMembers");
+
+            migrationBuilder.DropTable(
+                name: "Notes");
+
+            migrationBuilder.DropTable(
+                name: "Tags");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Workspaces");

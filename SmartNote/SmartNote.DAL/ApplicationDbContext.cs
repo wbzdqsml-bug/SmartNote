@@ -14,6 +14,10 @@ namespace SmartNote.DAL
         public DbSet<Note> Notes => Set<Note>();
         public DbSet<WorkspaceInvitation> WorkspaceInvitations => Set<WorkspaceInvitation>();
         public DbSet<UserProfile> UserProfiles => Set<UserProfile>();
+        public DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<Tag> Tags { get; set; } = null!;
+        public DbSet<NoteTag> NoteTags { get; set; } = null!;
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +28,9 @@ namespace SmartNote.DAL
             modelBuilder.ApplyConfiguration(new NoteConfiguration());
             modelBuilder.ApplyConfiguration(new WorkspaceInvitationConfiguration());
             modelBuilder.ApplyConfiguration(new UserProfileConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new NoteTagConfiguration());
+            modelBuilder.ApplyConfiguration(new TagConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
