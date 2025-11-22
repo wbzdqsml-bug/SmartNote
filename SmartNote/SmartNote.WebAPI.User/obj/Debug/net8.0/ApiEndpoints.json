@@ -237,43 +237,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartNote.WebAPI.User.Controllers.TagsController",
-    "Method": "GetNoteTags",
-    "RelativePath": "api/notes/{noteId}/tags",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "noteId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartNote.WebAPI.User.Controllers.TagsController",
-    "Method": "UpdateNoteTags",
-    "RelativePath": "api/notes/{noteId}/tags",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "noteId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "req",
-        "Type": "SmartNote.Shared.Dtos.NoteTagUpdateRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "SmartNote.WebAPI.User.Controllers.NotesController",
     "Method": "GetAll",
     "RelativePath": "api/notes/all",

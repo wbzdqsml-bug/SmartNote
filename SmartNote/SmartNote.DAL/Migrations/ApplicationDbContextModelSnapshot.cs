@@ -352,7 +352,8 @@ namespace SmartNote.DAL.Migrations
                 {
                     b.HasOne("SmartNote.Domain.Entities.Category", "Category")
                         .WithMany("Notes")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("SmartNote.Domain.Entities.Workspace", "Workspace")
                         .WithMany("Notes")

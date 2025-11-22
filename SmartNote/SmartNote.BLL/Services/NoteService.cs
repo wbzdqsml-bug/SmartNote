@@ -17,6 +17,9 @@ namespace SmartNote.BLL.Services
             _db = db;
         }
 
+        /// <summary>
+        /// 根据笔记类型生成默认内容模板
+        /// </summary>
         private string GetDefaultContentJson(NoteType type)
         {
             return type switch
@@ -29,10 +32,27 @@ namespace SmartNote.BLL.Services
             };
         }
 
-        // =========================================
-        // ★ ToDto：所有笔记统一转为 NoteViewDto
-        // =========================================
-        private static NoteViewDto ToDto(Note n)
+        /// <summary>
+        /// 获取用户可访问的工作区 Id 列表（自己创建 + 成员）
+        /// </summary>
+        private async Task<List<int>> GetAccessibleWorkspaceIdsAsync(int userId)
+        {
+            return await _db.WorkspaceMembers
+                .Where(m => m.UserId == userId)
+                .Select(m => m.WorkspaceId)
+                .Union(
+                    _db.Workspaces
+                        .Where(w => w.OwnerUserId == userId)
+                        .Select(w => w.Id)
+                )
+                .Distinct()
+                .ToListAsync();
+        }
+
+        /// <summary>
+        /// 将 Note 实体映射为 NoteViewDto（带分类 + 标签）
+        /// </summary>
+        private static NoteViewDto MapToDto(Note n)
         {
             return new NoteViewDto
             {
@@ -41,37 +61,30 @@ namespace SmartNote.BLL.Services
                 Type = n.Type,
                 ContentJson = n.ContentJson,
                 WorkspaceId = n.WorkspaceId,
-                CategoryId = n.CategoryId,
-                CategoryName = n.Category?.Name,
-                CategoryColor = n.Category?.Color,
                 CreateTime = n.CreateTime,
                 LastUpdateTime = n.LastUpdateTime,
                 IsDeleted = n.IsDeleted,
                 DeletedTime = n.DeletedTime,
-                Tags = n.NoteTags
-                    .Select(nt => new TagDto
-                    {
-                        Id = nt.Tag.Id,
-                        Name = nt.Tag.Name,
-                        Color = nt.Tag.Color
-                    })
-                    .ToList()
+
+                CategoryId = n.CategoryId,
+                CategoryName = n.Category?.Name,
+                CategoryColor = n.Category?.Color,
+
+                Tags = n.NoteTags?.Select(nt => new TagDto
+                {
+                    Id = nt.Tag.Id,
+                    Name = nt.Tag.Name,
+                    Color = nt.Tag.Color
+                }).ToList() ?? new List<TagDto>()
             };
         }
 
-        // =========================================
-        // 获取用户可访问的所有笔记
-        // =========================================
+        /// <summary>
+        /// 获取当前用户所有可访问笔记（完整加载 分类 + 标签）
+        /// </summary>
         public async Task<IEnumerable<NoteViewDto>> GetUserNotesAsync(int userId)
         {
-            var workspaceIds = await _db.WorkspaceMembers
-                .Where(m => m.UserId == userId)
-                .Select(m => m.WorkspaceId)
-                .Union(
-                    _db.Workspaces.Where(w => w.OwnerUserId == userId).Select(w => w.Id)
-                )
-                .Distinct()
-                .ToListAsync();
+            var workspaceIds = await GetAccessibleWorkspaceIdsAsync(userId);
 
             var notes = await _db.Notes
                 .Include(n => n.Category)
@@ -80,47 +93,36 @@ namespace SmartNote.BLL.Services
                 .OrderByDescending(n => n.LastUpdateTime)
                 .ToListAsync();
 
-            return notes.Select(ToDto);
+            return notes.Select(MapToDto);
         }
 
-        // =========================================
-        // 获取单条笔记（完整信息）
-        // =========================================
+        /// <summary>
+        /// 获取单条笔记详情（含分类 + 标签）
+        /// </summary>
         public async Task<NoteViewDto?> GetNoteByIdAsync(int userId, int noteId)
         {
+            var workspaceIds = await GetAccessibleWorkspaceIdsAsync(userId);
+
             var note = await _db.Notes
                 .Include(n => n.Category)
                 .Include(n => n.NoteTags).ThenInclude(nt => nt.Tag)
-                .Include(n => n.Workspace)
-                .FirstOrDefaultAsync(n => n.Id == noteId);
+                .Where(n => !n.IsDeleted &&
+                            n.Id == noteId &&
+                            workspaceIds.Contains(n.WorkspaceId))
+                .FirstOrDefaultAsync();
 
-            if (note == null)
-                return null;
-
-            bool canView =
-                   note.Workspace.OwnerUserId == userId ||
-                   await _db.WorkspaceMembers.AnyAsync(m => m.WorkspaceId == note.WorkspaceId && m.UserId == userId);
-
-            if (!canView)
-                return null;
-
-            return ToDto(note);
+            return note == null ? null : MapToDto(note);
         }
 
-        // =========================================
-        // 分类 + 标签筛选
-        // =========================================
+        /// <summary>
+        /// 按分类 / 标签筛选笔记
+        /// </summary>
         public async Task<IEnumerable<NoteViewDto>> FilterNotesAsync(
             int userId,
             int? categoryId,
             IReadOnlyList<int>? tagIds)
         {
-            var workspaceIds = await _db.WorkspaceMembers
-                .Where(m => m.UserId == userId)
-                .Select(m => m.WorkspaceId)
-                .Union(_db.Workspaces.Where(w => w.OwnerUserId == userId).Select(w => w.Id))
-                .Distinct()
-                .ToListAsync();
+            var workspaceIds = await GetAccessibleWorkspaceIdsAsync(userId);
 
             var query = _db.Notes
                 .Include(n => n.Category)
@@ -128,30 +130,42 @@ namespace SmartNote.BLL.Services
                 .Where(n => workspaceIds.Contains(n.WorkspaceId) && !n.IsDeleted)
                 .AsQueryable();
 
-            if (categoryId != null)
-                query = query.Where(n => n.CategoryId == categoryId);
+            // 按分类
+            if (categoryId.HasValue && categoryId.Value > 0)
+            {
+                query = query.Where(n => n.CategoryId == categoryId.Value);
+            }
 
+            // 按标签（AND：必须同时包含 tagIds 中所有标签）
             if (tagIds != null && tagIds.Count > 0)
             {
                 foreach (var tagId in tagIds)
-                    query = query.Where(n => n.NoteTags.Any(nt => nt.TagId == tagId));
+                {
+                    var tid = tagId;
+                    query = query.Where(n => n.NoteTags.Any(nt => nt.TagId == tid));
+                }
             }
 
-            var list = await query.OrderByDescending(n => n.LastUpdateTime).ToListAsync();
-            return list.Select(ToDto);
+            var list = await query
+                .OrderByDescending(n => n.LastUpdateTime)
+                .ToListAsync();
+
+            return list.Select(MapToDto);
         }
 
-        // =========================================
-        // 创建笔记
-        // =========================================
+        /// <summary>
+        /// 创建笔记（可带初始分类和标签）
+        /// </summary>
         public async Task<int> CreateNoteAsync(int userId, NoteCreateDto dto)
         {
-            bool canCreate =
-                   await _db.Workspaces.AnyAsync(w => w.Id == dto.WorkspaceId && w.OwnerUserId == userId) ||
-                   await _db.WorkspaceMembers.AnyAsync(m => m.WorkspaceId == dto.WorkspaceId && m.UserId == userId && m.CanEdit);
+            // 权限：工作区拥有者或具有编辑权限的成员
+            bool canCreate = await _db.Workspaces.AnyAsync(w => w.Id == dto.WorkspaceId && w.OwnerUserId == userId)
+                || await _db.WorkspaceMembers.AnyAsync(m => m.WorkspaceId == dto.WorkspaceId &&
+                                                            m.UserId == userId &&
+                                                            m.CanEdit);
 
             if (!canCreate)
-                throw new UnauthorizedAccessException("无权在该工作区创建笔记。");
+                throw new BusinessException("无权在该工作区创建笔记。");
 
             var note = new Note
             {
@@ -161,15 +175,17 @@ namespace SmartNote.BLL.Services
                 ContentJson = GetDefaultContentJson(dto.Type),
                 CategoryId = dto.CategoryId,
                 CreateTime = DateTime.UtcNow,
-                LastUpdateTime = DateTime.UtcNow
+                LastUpdateTime = DateTime.UtcNow,
+                IsDeleted = false
             };
 
             _db.Notes.Add(note);
             await _db.SaveChangesAsync();
 
-            if (dto.TagIds != null && dto.TagIds.Any())
+            // 初始标签
+            if (dto.TagIds != null && dto.TagIds.Count > 0)
             {
-                foreach (var tagId in dto.TagIds)
+                foreach (var tagId in dto.TagIds.Distinct())
                 {
                     _db.NoteTags.Add(new NoteTag
                     {
@@ -177,15 +193,16 @@ namespace SmartNote.BLL.Services
                         TagId = tagId
                     });
                 }
+
                 await _db.SaveChangesAsync();
             }
 
             return note.Id;
         }
 
-        // =========================================
-        // 更新笔记（标题/内容/分类）
-        // =========================================
+        /// <summary>
+        /// 更新笔记内容 / 标题 / 分类（不负责标签）
+        /// </summary>
         public async Task<int> UpdateNoteAsync(int noteId, int userId, NoteUpdateDto dto)
         {
             var note = await _db.Notes
@@ -196,10 +213,10 @@ namespace SmartNote.BLL.Services
                 throw new KeyNotFoundException("未找到笔记。");
 
             bool canEdit = note.Workspace.OwnerUserId == userId ||
-                           await _db.WorkspaceMembers.AnyAsync(m =>
-                                m.WorkspaceId == note.WorkspaceId &&
-                                m.UserId == userId &&
-                                m.CanEdit);
+                await _db.WorkspaceMembers.AnyAsync(m =>
+                    m.WorkspaceId == note.WorkspaceId &&
+                    m.UserId == userId &&
+                    m.CanEdit);
 
             if (!canEdit)
                 throw new UnauthorizedAccessException("无权编辑该笔记。");
@@ -210,7 +227,8 @@ namespace SmartNote.BLL.Services
             if (!string.IsNullOrWhiteSpace(dto.ContentJson))
                 note.ContentJson = dto.ContentJson;
 
-            if (dto.CategoryId.HasValue)
+            // ⭐⭐⭐ 允许清空分类（null）
+            if (dto.CategoryId != null || dto.CategoryId == null)
                 note.CategoryId = dto.CategoryId;
 
             note.LastUpdateTime = DateTime.UtcNow;
@@ -219,9 +237,9 @@ namespace SmartNote.BLL.Services
         }
 
 
-        // =========================================
-        // 更新笔记标签（多对多）
-        // =========================================
+        /// <summary>
+        /// 覆盖式更新某笔记的标签（编辑页用）
+        /// </summary>
         public async Task UpdateNoteTagsAsync(int userId, int noteId, List<int> tagIds)
         {
             var note = await _db.Notes
@@ -232,17 +250,25 @@ namespace SmartNote.BLL.Services
                 throw new KeyNotFoundException("笔记不存在。");
 
             bool canEdit = note.Workspace.OwnerUserId == userId ||
-                           await _db.WorkspaceMembers.AnyAsync(m =>
-                                m.WorkspaceId == note.WorkspaceId &&
-                                m.UserId == userId &&
-                                m.CanEdit);
+                await _db.WorkspaceMembers.AnyAsync(m =>
+                    m.WorkspaceId == note.WorkspaceId &&
+                    m.UserId == userId &&
+                    m.CanEdit);
+
             if (!canEdit)
-                throw new UnauthorizedAccessException("无权修改标签。");
+                throw new BusinessException("无权修改该笔记的标签。");
 
-            var old = _db.NoteTags.Where(nt => nt.NoteId == noteId);
-            _db.NoteTags.RemoveRange(old);
+            tagIds ??= new List<int>();
 
-            foreach (var tagId in tagIds)
+            // 清空旧关系
+            var oldRelations = await _db.NoteTags
+                .Where(nt => nt.NoteId == noteId)
+                .ToListAsync();
+
+            _db.NoteTags.RemoveRange(oldRelations);
+
+            // 新建关系
+            foreach (var tagId in tagIds.Distinct())
             {
                 _db.NoteTags.Add(new NoteTag
                 {
@@ -254,32 +280,45 @@ namespace SmartNote.BLL.Services
             await _db.SaveChangesAsync();
         }
 
-
-        // =========================================
-        // 软删除
-        // =========================================
+        /// <summary>
+        /// 批量软删除笔记
+        /// </summary>
         public async Task<int> SoftDeleteAsync(IEnumerable<int> noteIds, int userId)
         {
+            var ids = noteIds?.Distinct().ToList() ?? new List<int>();
+            if (ids.Count == 0)
+                return 0;
+
             var notes = await _db.Notes
                 .Include(n => n.Workspace)
-                .Where(n => noteIds.Contains(n.Id))
+                .Where(n => ids.Contains(n.Id))
                 .ToListAsync();
+
+            var now = DateTime.UtcNow;
+            int affected = 0;
 
             foreach (var note in notes)
             {
-                bool canEdit =
-                      note.Workspace.OwnerUserId == userId ||
-                      await _db.WorkspaceMembers.AnyAsync(m => m.WorkspaceId == note.WorkspaceId && m.UserId == userId && m.CanEdit);
+                bool canEdit = note.Workspace.OwnerUserId == userId ||
+                    await _db.WorkspaceMembers.AnyAsync(m =>
+                        m.WorkspaceId == note.WorkspaceId &&
+                        m.UserId == userId &&
+                        m.CanEdit);
 
                 if (!canEdit || note.IsDeleted)
                     continue;
 
                 note.IsDeleted = true;
-                note.DeletedTime = DateTime.UtcNow;
-                note.LastUpdateTime = DateTime.UtcNow;
+                note.DeletedTime = now;
+                note.LastUpdateTime = now;
+                affected++;
             }
 
-            return await _db.SaveChangesAsync();
+            if (affected == 0)
+                return 0;
+
+            await _db.SaveChangesAsync();
+            return affected;
         }
     }
 }

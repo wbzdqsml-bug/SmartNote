@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartNote.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8eef4b9c4529bc2527e34803ca7e21fb2a70a2e5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37fb93c440214e2190ae23b7d4e2309aa582fb0f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartNote.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartNote.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
