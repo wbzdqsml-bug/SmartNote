@@ -583,8 +583,7 @@
               "RelativeToolTip": "SmartNote.WebAPI.User\\Controllers\\NotesController.cs",
               "ViewState": "AgIAAFEAAAAAAAAAAAAywGwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T13:31:33.441Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T13:31:33.441Z"
             },
             {
               "$type": "Document",
@@ -596,8 +595,7 @@
               "RelativeToolTip": "SmartNote.WebAPI.User\\Controllers\\TagsController.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAUwDUAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T05:31:22.86Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T05:31:22.86Z"
             },
             {
               "$type": "Document",
@@ -609,8 +607,7 @@
               "RelativeToolTip": "SmartNote.BLL\\Services\\NoteService.cs",
               "ViewState": "AgIAAIQAAAAAAAAAAAAIwOcAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:52:28.384Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T11:52:28.384Z"
             },
             {
               "$type": "Document",
@@ -622,8 +619,7 @@
               "RelativeToolTip": "SmartNote.DAL\\Configurations\\NoteConfiguration.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAAwDoAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:48:46.817Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T11:48:46.817Z"
             },
             {
               "$type": "Document",
@@ -633,7 +629,7 @@
               "RelativeDocumentMoniker": "SmartNote.WebAPI.User\\Controllers\\RecycleController.cs",
               "ToolTip": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.WebAPI.User\\Controllers\\RecycleController.cs",
               "RelativeToolTip": "SmartNote.WebAPI.User\\Controllers\\RecycleController.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA5wBkAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-03T13:31:59.21Z",
               "EditorCaption": ""
@@ -648,8 +644,7 @@
               "RelativeToolTip": "SmartNote.WebAPI.User\\Controllers\\CategoriesController.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAAwDQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T05:30:37.835Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T05:30:37.835Z"
             },
             {
               "$type": "Document",
@@ -661,8 +656,7 @@
               "RelativeToolTip": "SmartNote.DAL\\Configurations\\UserConfiguration.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAwwBwAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:48:33.985Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T11:48:33.985Z"
             },
             {
               "$type": "Document",
@@ -674,8 +668,7 @@
               "RelativeToolTip": "SmartNote.DAL\\Configurations\\NoteTagConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T05:24:56.239Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T05:24:56.239Z"
             },
             {
               "$type": "Document",
@@ -687,8 +680,7 @@
               "RelativeToolTip": "SmartNote.DAL\\Configurations\\TagConfiguration.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAQwBoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T05:24:28.588Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T05:24:28.588Z"
             },
             {
               "$type": "Document",
@@ -700,8 +692,7 @@
               "RelativeToolTip": "SmartNote.DAL\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAIwAYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:48:00.365Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T11:48:00.365Z"
             },
             {
               "$type": "Document",
@@ -713,8 +704,7 @@
               "RelativeToolTip": "SmartNote.DAL\\Configurations\\CategoryConfiguration.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAIwBoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T05:23:21.69Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T05:23:21.69Z"
             },
             {
               "$type": "Document",
@@ -726,8 +716,7 @@
               "RelativeToolTip": "SmartNote.BLL\\Abstractions\\INoteService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvw4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:51:01.513Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T11:51:01.513Z"
             },
             {
               "$type": "Document",
@@ -760,8 +749,7 @@
               "RelativeToolTip": "SmartNote.Domain\\Entities\\Note.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAYwB4AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:40:11.96Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T11:40:11.96Z"
             },
             {
               "$type": "Document",
