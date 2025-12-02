@@ -17,6 +17,8 @@ namespace SmartNote.BLL.Services
             _db = db;
         }
 
+        #region 私有工具方法
+
         /// <summary>
         /// 根据笔记类型生成默认内容模板
         /// </summary>
@@ -78,6 +80,28 @@ namespace SmartNote.BLL.Services
                 }).ToList() ?? new List<TagDto>()
             };
         }
+
+        /// <summary>
+        /// 记录一条笔记活动日志（给热力图 / 统计用）
+        /// </summary>
+        private async Task LogActivityAsync(int userId, Note note, NoteActivityType type)
+        {
+            var log = new NoteActivityLog
+            {
+                UserId = userId,
+                NoteId = note.Id,
+                Action = type.ToString(),  // ⭐ 使用 string 写入
+                Time = DateTime.UtcNow
+            };
+
+            _db.NoteActivityLogs.Add(log);
+            await _db.SaveChangesAsync();
+        }
+
+
+        #endregion
+
+        #region 查询相关
 
         /// <summary>
         /// 获取当前用户所有可访问笔记（完整加载 分类 + 标签）
@@ -153,6 +177,10 @@ namespace SmartNote.BLL.Services
             return list.Select(MapToDto);
         }
 
+        #endregion
+
+        #region 写操作（创建 / 更新 / 标签 / 软删除）
+
         /// <summary>
         /// 创建笔记（可带初始分类和标签）
         /// </summary>
@@ -197,6 +225,9 @@ namespace SmartNote.BLL.Services
                 await _db.SaveChangesAsync();
             }
 
+            // 记录日志：创建
+            await LogActivityAsync(userId, note, NoteActivityType.Created);
+
             return note.Id;
         }
 
@@ -227,15 +258,19 @@ namespace SmartNote.BLL.Services
             if (!string.IsNullOrWhiteSpace(dto.ContentJson))
                 note.ContentJson = dto.ContentJson;
 
-            // ⭐⭐⭐ 允许清空分类（null）
-            if (dto.CategoryId != null || dto.CategoryId == null)
-                note.CategoryId = dto.CategoryId;
+            // ✅ 简化处理：前端传什么就按什么更新（可清空分类）
+            //   若你以后想区分“未传”和“传 null”，可以专门加一个布尔开关字段
+            note.CategoryId = dto.CategoryId;
 
             note.LastUpdateTime = DateTime.UtcNow;
 
-            return await _db.SaveChangesAsync();
-        }
+            var rows = await _db.SaveChangesAsync();
 
+            // 记录日志：更新
+            await LogActivityAsync(userId, note, NoteActivityType.Updated);
+
+            return rows;
+        }
 
         /// <summary>
         /// 覆盖式更新某笔记的标签（编辑页用）
@@ -278,6 +313,9 @@ namespace SmartNote.BLL.Services
             }
 
             await _db.SaveChangesAsync();
+
+            // 记录日志：标签更新（你也可以算作 Updated，看你枚举怎么设计）
+            await LogActivityAsync(userId, note, NoteActivityType.TagUpdated);
         }
 
         /// <summary>
@@ -296,6 +334,7 @@ namespace SmartNote.BLL.Services
 
             var now = DateTime.UtcNow;
             int affected = 0;
+            var deletedNotesForLog = new List<Note>();
 
             foreach (var note in notes)
             {
@@ -312,13 +351,23 @@ namespace SmartNote.BLL.Services
                 note.DeletedTime = now;
                 note.LastUpdateTime = now;
                 affected++;
+                deletedNotesForLog.Add(note);
             }
 
             if (affected == 0)
                 return 0;
 
             await _db.SaveChangesAsync();
+
+            // 为每条被删除的笔记记录一条日志
+            foreach (var note in deletedNotesForLog)
+            {
+                await LogActivityAsync(userId, note, NoteActivityType.SoftDeleted);
+            }
+
             return affected;
         }
+
+        #endregion
     }
 }

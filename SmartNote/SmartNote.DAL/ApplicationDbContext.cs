@@ -18,6 +18,8 @@ namespace SmartNote.DAL
         public DbSet<Tag> Tags { get; set; } = null!;
         public DbSet<NoteTag> NoteTags { get; set; } = null!;
 
+        public DbSet<NoteActivityLog> NoteActivityLogs => Set<NoteActivityLog>();
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +33,7 @@ namespace SmartNote.DAL
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new NoteTagConfiguration());
             modelBuilder.ApplyConfiguration(new TagConfiguration());
+            modelBuilder.ApplyConfiguration(new NoteActivityLogConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

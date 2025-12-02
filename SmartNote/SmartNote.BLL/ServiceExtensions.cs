@@ -30,6 +30,9 @@ namespace SmartNote.BLL
 
             services.AddScoped<ITagService, TagService>();
 
+           services.AddScoped<IAnalysisService, AnalysisService>();
+
+
 
             return services;
         }

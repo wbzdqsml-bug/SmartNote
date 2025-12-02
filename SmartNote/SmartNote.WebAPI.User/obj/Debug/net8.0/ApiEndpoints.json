@@ -1,5 +1,55 @@
 [
   {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.AnalysisController",
+    "Method": "CategoryStats",
+    "RelativePath": "api/analysis/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.AnalysisController",
+    "Method": "Heatmap",
+    "RelativePath": "api/analysis/heatmap",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.AnalysisController",
+    "Method": "TagStats",
+    "RelativePath": "api/analysis/tags",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.AnalysisController",
+    "Method": "Trend",
+    "RelativePath": "api/analysis/trend",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartNote.WebAPI.User.Controllers.AnalysisController",
+    "Method": "WorkspaceStats",
+    "RelativePath": "api/analysis/workspaces",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SmartNote.WebAPI.User.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",

@@ -16,6 +16,7 @@ namespace SmartNote.Domain.Entities
         public UserProfile? Profile { get; set; }
         public ICollection<Category> Categories { get; set; } = new List<Category>();
         public ICollection<Tag> Tags { get; set; } = new List<Tag>();
+        public ICollection<NoteActivityLog> NoteActivityLogs { get; set; } = new List<NoteActivityLog>();
 
     }
 }

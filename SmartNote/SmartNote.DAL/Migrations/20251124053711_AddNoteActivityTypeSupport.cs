@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmartNote.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddNoteTagAndCategory : Migration
+    public partial class AddNoteActivityTypeSupport : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -218,6 +218,34 @@ namespace SmartNote.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NoteActivityLogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    NoteId = table.Column<int>(type: "int", nullable: false),
+                    Action = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Time = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NoteActivityLogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NoteActivityLogs_Notes_NoteId",
+                        column: x => x.NoteId,
+                        principalTable: "Notes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NoteActivityLogs_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NoteTags",
                 columns: table => new
                 {
@@ -246,6 +274,16 @@ namespace SmartNote.DAL.Migrations
                 table: "Categories",
                 columns: new[] { "UserId", "Name" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NoteActivityLogs_NoteId",
+                table: "NoteActivityLogs",
+                column: "NoteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NoteActivityLogs_UserId",
+                table: "NoteActivityLogs",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notes_CategoryId",
@@ -309,6 +347,9 @@ namespace SmartNote.DAL.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "NoteActivityLogs");
+
             migrationBuilder.DropTable(
                 name: "NoteTags");
 
