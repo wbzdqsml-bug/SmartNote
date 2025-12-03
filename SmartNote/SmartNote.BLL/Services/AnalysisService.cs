@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// SmartNote.BLL/Services/AnalysisService.cs
+using Microsoft.EntityFrameworkCore;
 using SmartNote.BLL.Abstractions;
 using SmartNote.DAL;
 using SmartNote.Shared.Dtos.AnalysisDTO;
@@ -18,6 +19,7 @@ namespace SmartNote.BLL.Services
         private IQueryable<Domain.Entities.Note> GetUserNotes(int userId)
         {
             return _db.Notes
+                .AsNoTracking() // 统计只读，使用 AsNoTracking 提升性能
                 .Where(n =>
                     n.Workspace.OwnerUserId == userId ||
                     n.Workspace.Members.Any(m => m.UserId == userId)
@@ -58,6 +60,7 @@ namespace SmartNote.BLL.Services
                 .ToListAsync();
 
             return await _db.NoteTags
+                .AsNoTracking()
                 .Where(nt => nt.Tag.UserId == userId &&
                              nt.Note.WorkspaceId != 0 &&
                              workspaceIds.Contains(nt.Note.WorkspaceId) &&
@@ -78,16 +81,18 @@ namespace SmartNote.BLL.Services
         public async Task<IEnumerable<DailyTrendDto>> GetDailyTrendAsync(int userId)
         {
             var logs = await _db.NoteActivityLogs
+                .AsNoTracking()
                 .Where(l => l.UserId == userId)
                 .ToListAsync();
 
+            // ⚠️ 修复：匹配字符串必须与 NoteActivityType 枚举 ToString() 保持一致 ("Created", "Updated")
             return logs
                 .GroupBy(l => l.Time.Date)
                 .Select(g => new DailyTrendDto
                 {
                     Date = g.Key,
-                    Created = g.Count(l => l.Action == "Create"),
-                    Updated = g.Count(l => l.Action == "Update")
+                    Created = g.Count(l => l.Action == "Created"),
+                    Updated = g.Count(l => l.Action == "Updated" || l.Action == "TagUpdated") // 可选：把标签更新也算作活跃
                 })
                 .OrderBy(x => x.Date)
                 .ToList();
@@ -98,6 +103,7 @@ namespace SmartNote.BLL.Services
         {
             // ✅ 先在数据库里按日期 group by，拿到 DateTime + Count
             var raw = await _db.NoteActivityLogs
+                .AsNoTracking()
                 .Where(l => l.UserId == userId)
                 .GroupBy(l => l.Time.Date)
                 .Select(g => new
@@ -122,6 +128,7 @@ namespace SmartNote.BLL.Services
         public async Task<IEnumerable<WorkspaceStatDto>> GetWorkspaceStatsAsync(int userId)
         {
             var workspaces = await _db.Workspaces
+                .AsNoTracking()
                 .Where(w =>
                     w.OwnerUserId == userId ||
                     w.Members.Any(m => m.UserId == userId)
