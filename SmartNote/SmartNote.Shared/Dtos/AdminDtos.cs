@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartNote.Shared.Dtos
+﻿namespace SmartNote.Shared.Dtos
 {
-    internal class AdminDtos
-    {
-    }
+    /// <summary>
+    /// 管理端简单健康检查/占位响应。
+    /// </summary>
+    public record AdminPingResult(string Area, string Message, DateTime Time);
 }

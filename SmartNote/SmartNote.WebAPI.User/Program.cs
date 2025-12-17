@@ -7,6 +7,7 @@ using SmartNote.BLL;
 using SmartNote.DAL;
 using SmartNote.WebAPI.User.Filters;
 using SmartNote.WebAPI.User.Middlewares;
+using SmartNote.WebAPI.User.Hubs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -197,6 +198,9 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+// SignalR（实时协作）
+builder.Services.AddSignalR();
+
 /* -----------------------------------------------
  * 7️⃣ App 中间件
  * ---------------------------------------------*/
@@ -212,6 +216,7 @@ app.UseRequestLogging();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHub<NoteHub>("/hubs/note");
 app.MapControllers();
 
 app.MapGet("/health", () => Results.Ok(new

@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SmartNote.BLL.Abstractions;
+using SmartNote.Shared.Dtos;
 
 namespace SmartNote.WebAPI.Admin.Controllers
 {
@@ -7,5 +8,18 @@ namespace SmartNote.WebAPI.Admin.Controllers
     [ApiController]
     public class NoteManageController : ControllerBase
     {
+        private readonly IAdminService _adminService;
+
+        public NoteManageController(IAdminService adminService)
+        {
+            _adminService = adminService;
+        }
+
+        [HttpGet("ping")]
+        public async Task<ActionResult<AdminPingResult>> Ping()
+        {
+            var res = await _adminService.PingAsync();
+            return Ok(res with { Area = "notes" });
+        }
     }
 }

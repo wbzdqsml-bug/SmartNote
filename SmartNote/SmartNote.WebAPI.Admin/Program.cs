@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SmartNote.DAL;
+using SmartNote.BLL;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,7 @@ builder.Services.AddCors(opt =>
         .AllowCredentials());
 });
 
-// Auth - JWT£¨Óë User Çø·Ö Issuer/Audience£©
+// Auth - JWTï¼ˆä¸Ž User åŒºåˆ† Issuer/Audienceï¼‰
 var jwtKey = builder.Configuration["Jwt:Key"]!;
 var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
 var jwtAudience = builder.Configuration["Jwt:Audience"]!;
@@ -38,13 +39,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// BLL
+builder.Services.AddBusinessServices();
+
 // Redis
 builder.Services.AddStackExchangeRedisCache(o =>
 {
     o.Configuration = builder.Configuration["Redis:Configuration"];
 });
 
-// »ù´¡
+// åŸºç¡€
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SmartNote.BLL.Abstractions;
+using SmartNote.Shared.Dtos;
 
 namespace SmartNote.BLL.Services
 {
-    internal class AdminService
+    public class AdminService : IAdminService
     {
+        public Task<AdminPingResult> PingAsync()
+        {
+            var result = new AdminPingResult(
+                "admin",
+                "管理端服务占位，后续可扩展实际业务。",
+                DateTime.UtcNow);
+
+            return Task.FromResult(result);
+        }
     }
 }
