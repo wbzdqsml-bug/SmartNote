@@ -1,4 +1,4 @@
-﻿namespace SmartNote.BLL.SignalR
+namespace SmartNote.Shared.SignalR
 {
     /// <summary>
     /// 与 NoteHub 交互的消息契约，便于前后端统一。

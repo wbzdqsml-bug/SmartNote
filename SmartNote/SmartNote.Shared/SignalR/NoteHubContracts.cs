@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace SmartNote.BLL.SignalR
+namespace SmartNote.Shared.SignalR
 {
     /// <summary>
     /// Hub 客户端契约，Server 端调用这些方法通知前端。

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using SmartNote.BLL.SignalR;
 using SmartNote.Common.Extensions;
+using SmartNote.Shared.SignalR;
 
 namespace SmartNote.WebAPI.User.Hubs
 {

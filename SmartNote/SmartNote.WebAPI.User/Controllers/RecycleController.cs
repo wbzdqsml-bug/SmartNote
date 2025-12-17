@@ -25,6 +25,17 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(notes);
         }
 
+        /// <summary>
+        /// 获取回收站中单条笔记详情（只读）
+        /// </summary>
+        [HttpGet("{noteId:int}")]
+        public async Task<IActionResult> GetDeletedNoteDetail([FromRoute] int noteId)
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            var note = await _recycleService.GetDeletedNoteByIdAsync(userId, noteId);
+            return note == null ? NotFound(new { message = "未找到笔记或无权限" }) : Ok(note);
+        }
+
         [HttpPost("restore")]
         public async Task<IActionResult> Restore([FromBody] List<int> noteIds)
         {

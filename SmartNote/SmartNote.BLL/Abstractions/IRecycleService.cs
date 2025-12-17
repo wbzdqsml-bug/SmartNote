@@ -11,6 +11,11 @@ namespace SmartNote.BLL.Abstractions
         Task<IEnumerable<NoteViewDto>> GetDeletedNotesAsync(int userId);
 
         /// <summary>
+        /// 获取回收站中单条笔记详情（只读）
+        /// </summary>
+        Task<NoteViewDto?> GetDeletedNoteByIdAsync(int userId, int noteId);
+
+        /// <summary>
         /// 恢复已删除笔记
         /// </summary>
         Task<int> RestoreNotesAsync(IEnumerable<int> noteIds, int userId);

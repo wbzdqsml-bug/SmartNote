@@ -30,12 +30,10 @@ namespace SmartNote.BLL
 
             services.AddScoped<ITagService, TagService>();
 
-           services.AddScoped<IAnalysisService, AnalysisService>();
+            services.AddScoped<IAnalysisService, AnalysisService>();
 
-           // 管理端占位服务（Admin API 后续实现时可复用）
-           services.AddScoped<IAdminService, AdminService>();
-
-
+            // 管理端占位服务（Admin API 后续实现时可复用）
+            services.AddScoped<IAdminService, AdminService>();
 
             return services;
         }

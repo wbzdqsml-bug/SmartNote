@@ -4,7 +4,9 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartNote.BLL;
+using SmartNote.Common.Configs;
 using SmartNote.DAL;
+using SmartNote.WebAPI.User.Config;
 using SmartNote.WebAPI.User.Filters;
 using SmartNote.WebAPI.User.Middlewares;
 using SmartNote.WebAPI.User.Hubs;
@@ -13,6 +15,22 @@ using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// 强类型配置（对应 SmartNote.WebAPI.User/Config 下的类）
+var jwtConfig = builder.Configuration.GetSection(Settings.JwtSection).Get<JwtConfig>() ?? new JwtConfig();
+jwtConfig.Validate();
+
+var redisConfig = builder.Configuration.GetSection(Settings.RedisSection).Get<RedisConfig>() ?? new RedisConfig();
+if (!redisConfig.IsValid)
+    throw new InvalidOperationException("Redis:Configuration 未配置。");
+
+var corsConfig = builder.Configuration.GetSection(Settings.CorsSection).Get<CorsConfig>() ?? new CorsConfig();
+if (corsConfig.Origins.Length == 0)
+{
+    corsConfig.Origins = new[] { "http://localhost:5173" };
+}
+
+var swaggerConfig = builder.Configuration.GetSection(Settings.SwaggerSection).Get<SwaggerConfig>() ?? new SwaggerConfig();
 
 /* -----------------------------------------------
  * 正确的 401 JSON 输出（修复 HTTP/2 无 body 的 BUG）
@@ -40,15 +58,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
  * ---------------------------------------------*/
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = builder.Configuration["Redis:Configuration"];
+    options.Configuration = redisConfig.Configuration;
 });
 
 /* -----------------------------------------------
  * 3️⃣ JWT + Redis Token 校验
  * ---------------------------------------------*/
-var jwtKey = builder.Configuration["Jwt:Key"] ?? throw new Exception("Jwt Key missing");
-var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "SmartNote.UserAPI";
-var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "SmartNoteClient";
+var jwtKey = jwtConfig.Key;
+var jwtIssuer = jwtConfig.Issuer;
+var jwtAudience = jwtConfig.Audience;
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -146,10 +164,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("default", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins(corsConfig.Origins)
               .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
+              .AllowAnyMethod();
+
+        if (corsConfig.AllowCredentials)
+            policy.AllowCredentials();
     });
 });
 
@@ -162,41 +182,45 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<ValidationFilter>();
 });
 
-builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen(options =>
+if (swaggerConfig.Enabled)
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "SmartNote 用户 API",
-        Version = "v1"
-    });
+    builder.Services.AddEndpointsApiExplorer();
 
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    builder.Services.AddSwaggerGen(options =>
     {
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "输入：Bearer {token}"
-    });
-
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
+        options.SwaggerDoc(swaggerConfig.Version, new OpenApiInfo
         {
-            new OpenApiSecurityScheme
+            Title = swaggerConfig.Title,
+            Version = swaggerConfig.Version,
+            Description = swaggerConfig.Description
+        });
+
+        options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            In = ParameterLocation.Header,
+            Description = "输入：Bearer {token}"
+        });
+
+        options.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
             {
-                Reference = new OpenApiReference
+                new OpenApiSecurityScheme
                 {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[]{}
-        }
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                new string[]{}
+            }
+        });
     });
-});
+}
 
 // SignalR（实时协作）
 builder.Services.AddSignalR();
@@ -206,8 +230,11 @@ builder.Services.AddSignalR();
  * ---------------------------------------------*/
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (swaggerConfig.Enabled)
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseCors("default");
 app.UseHttpsRedirection();
