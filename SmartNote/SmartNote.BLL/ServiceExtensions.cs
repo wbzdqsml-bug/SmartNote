@@ -35,6 +35,9 @@ namespace SmartNote.BLL
             // 管理端占位服务（Admin API 后续实现时可复用）
             services.AddScoped<IAdminService, AdminService>();
 
+            // AI
+            services.AddScoped<IAiNoteService, AiNoteService>();
+
             return services;
         }
     }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartNote.BLL;
+using SmartNote.BLL.Ai;
 using SmartNote.Common.Configs;
 using SmartNote.DAL;
 using SmartNote.WebAPI.User.Config;
@@ -31,6 +32,17 @@ if (corsConfig.Origins.Length == 0)
 }
 
 var swaggerConfig = builder.Configuration.GetSection(Settings.SwaggerSection).Get<SwaggerConfig>() ?? new SwaggerConfig();
+
+var aiOptions = builder.Configuration.GetSection(Settings.AiSection).Get<AiOptions>() ?? new AiOptions();
+builder.Services.AddSingleton(aiOptions);
+
+// OpenAI 客户端（仅在需要时调用，Enabled=false 时也可注册但会在调用时拦截）
+builder.Services.AddHttpClient<OpenAiClient>(client =>
+{
+    var baseUrl = (aiOptions.BaseUrl ?? "https://api.openai.com/v1").TrimEnd('/') + "/";
+    client.BaseAddress = new Uri(baseUrl);
+    client.Timeout = TimeSpan.FromSeconds(Math.Max(5, aiOptions.TimeoutSeconds));
+});
 
 /* -----------------------------------------------
  * 正确的 401 JSON 输出（修复 HTTP/2 无 body 的 BUG）

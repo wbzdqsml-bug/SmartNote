@@ -70,6 +70,11 @@ namespace SmartNote.Shared.Dtos
 
         public string Title { get; set; } = string.Empty;
 
+        /// <summary>
+        /// 列表卡片摘要（<=100 字，便于快速浏览）
+        /// </summary>
+        public string? Summary { get; set; }
+
         public NoteType Type { get; set; } = NoteType.Markdown;
 
         /// <summary>

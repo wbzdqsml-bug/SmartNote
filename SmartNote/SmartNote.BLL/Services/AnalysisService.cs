@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SmartNote.BLL.Abstractions;
 using SmartNote.DAL;
+using SmartNote.Domain.Entities.Enums;
 using SmartNote.Shared.Dtos.AnalysisDTO;
 
 namespace SmartNote.BLL.Services
@@ -32,10 +33,10 @@ namespace SmartNote.BLL.Services
         {
             return await GetUserNotes(userId)
                 .Where(n => n.CategoryId != null)
-                .GroupBy(n => n.Category!)
+                .GroupBy(n => new { n.CategoryId, n.Category!.Name, n.Category!.Color })
                 .Select(g => new CategoryStatDto
                 {
-                    CategoryId = g.Key.Id,
+                    CategoryId = g.Key.CategoryId!.Value,
                     Name = g.Key.Name,
                     Color = g.Key.Color,
                     Count = g.Count()
@@ -65,10 +66,10 @@ namespace SmartNote.BLL.Services
                              nt.Note.WorkspaceId != 0 &&
                              workspaceIds.Contains(nt.Note.WorkspaceId) &&
                              !nt.Note.IsDeleted)
-                .GroupBy(nt => nt.Tag)
+                .GroupBy(nt => new { nt.TagId, nt.Tag.Name, nt.Tag.Color })
                 .Select(g => new TagStatDto
                 {
-                    TagId = g.Key.Id,
+                    TagId = g.Key.TagId,
                     Name = g.Key.Name,
                     Color = g.Key.Color,
                     Count = g.Count()
@@ -80,22 +81,23 @@ namespace SmartNote.BLL.Services
         // 3. 学习趋势（按日志统计：Create / Update）
         public async Task<IEnumerable<DailyTrendDto>> GetDailyTrendAsync(int userId)
         {
-            var logs = await _db.NoteActivityLogs
+            var created = NoteActivityType.Created.ToString();
+            var updated = NoteActivityType.Updated.ToString();
+            var tagUpdated = NoteActivityType.TagUpdated.ToString();
+
+            // ✅ 在数据库侧按日期聚合，避免把全量日志拉到内存（数据量大时会拖慢热力图/趋势页）
+            return await _db.NoteActivityLogs
                 .AsNoTracking()
                 .Where(l => l.UserId == userId)
-                .ToListAsync();
-
-            // ⚠️ 修复：匹配字符串必须与 NoteActivityType 枚举 ToString() 保持一致 ("Created", "Updated")
-            return logs
                 .GroupBy(l => l.Time.Date)
                 .Select(g => new DailyTrendDto
                 {
                     Date = g.Key,
-                    Created = g.Count(l => l.Action == "Created"),
-                    Updated = g.Count(l => l.Action == "Updated" || l.Action == "TagUpdated") // 可选：把标签更新也算作活跃
+                    Created = g.Count(l => l.Action == created),
+                    Updated = g.Count(l => l.Action == updated) + g.Count(l => l.Action == tagUpdated)
                 })
                 .OrderBy(x => x.Date)
-                .ToList();
+                .ToListAsync();
         }
 
         // 4. 学习活动热力图（按日志次数）

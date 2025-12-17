@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using SmartNote.BLL.Abstractions;
+using SmartNote.Common.Helpers;
 using SmartNote.DAL;
 using SmartNote.Domain.Entities;
 using SmartNote.Domain.Entities.Enums;
@@ -56,10 +58,16 @@ namespace SmartNote.BLL.Services
         /// </summary>
         private static NoteViewDto MapToDto(Note n)
         {
+            var summarySource = ExtractSummarySource(n);
+            var summary = string.IsNullOrWhiteSpace(summarySource)
+                ? null
+                : MarkdownHelper.BuildSummary(summarySource, 100);
+
             return new NoteViewDto
             {
                 Id = n.Id,
                 Title = n.Title,
+                Summary = summary,
                 Type = n.Type,
                 ContentJson = n.ContentJson,
                 WorkspaceId = n.WorkspaceId,
@@ -79,6 +87,52 @@ namespace SmartNote.BLL.Services
                     Color = nt.Tag.Color
                 }).ToList() ?? new List<TagDto>()
             };
+        }
+
+        private static string ExtractSummarySource(Note n)
+        {
+            if (string.IsNullOrWhiteSpace(n.ContentJson))
+                return string.Empty;
+
+            // 常见结构：Markdown -> {"md":"","html":""}；RichText -> {"content":""}
+            if (n.Type == NoteType.Markdown)
+            {
+                var md = TryGetJsonString(n.ContentJson, "md");
+                if (!string.IsNullOrWhiteSpace(md)) return md;
+                var html = TryGetJsonString(n.ContentJson, "html");
+                if (!string.IsNullOrWhiteSpace(html)) return html;
+            }
+
+            if (n.Type == NoteType.RichText)
+            {
+                var content = TryGetJsonString(n.ContentJson, "content");
+                if (!string.IsNullOrWhiteSpace(content)) return content;
+            }
+
+            // Canvas / MindMap 等结构化内容不适合做文本摘要（避免把 JSON 显示到卡片上）
+            if (n.Type == NoteType.Canvas || n.Type == NoteType.MindMap)
+                return string.Empty;
+
+            return n.ContentJson;
+        }
+
+        private static string TryGetJsonString(string json, string propertyName)
+        {
+            try
+            {
+                using var doc = JsonDocument.Parse(json);
+                if (doc.RootElement.ValueKind != JsonValueKind.Object)
+                    return string.Empty;
+
+                if (!doc.RootElement.TryGetProperty(propertyName, out var el))
+                    return string.Empty;
+
+                return el.ValueKind == JsonValueKind.String ? (el.GetString() ?? string.Empty) : string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         /// <summary>
@@ -243,6 +297,10 @@ namespace SmartNote.BLL.Services
             if (note == null)
                 throw new KeyNotFoundException("未找到笔记。");
 
+            // 回收站笔记只允许查看/恢复，不允许编辑
+            if (note.IsDeleted)
+                throw new BusinessException("该笔记已在回收站中，无法修改，请先恢复。");
+
             bool canEdit = note.Workspace.OwnerUserId == userId ||
                 await _db.WorkspaceMembers.AnyAsync(m =>
                     m.WorkspaceId == note.WorkspaceId &&
@@ -283,6 +341,10 @@ namespace SmartNote.BLL.Services
 
             if (note == null)
                 throw new KeyNotFoundException("笔记不存在。");
+
+            // 回收站笔记只允许查看/恢复，不允许编辑
+            if (note.IsDeleted)
+                throw new BusinessException("该笔记已在回收站中，无法修改，请先恢复。");
 
             bool canEdit = note.Workspace.OwnerUserId == userId ||
                 await _db.WorkspaceMembers.AnyAsync(m =>

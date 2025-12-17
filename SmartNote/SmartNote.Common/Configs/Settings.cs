@@ -9,5 +9,6 @@
         public const string RedisSection = "Redis";
         public const string CorsSection = "Cors";
         public const string SwaggerSection = "Swagger";
+        public const string AiSection = "Ai";
     }
 }
