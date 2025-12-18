@@ -19,12 +19,22 @@ namespace SmartNote.BLL.Ai
         private readonly HttpClient _http;
         private readonly AiOptions _options;
 
+        /// <summary>
+        /// 构造函数，注入 HttpClient 和配置选项。
+        /// </summary>
         public OpenAiClient(HttpClient http, AiOptions options)
         {
             _http = http;
             _options = options;
         }
 
+        /// <summary>
+        /// 发送聊天请求并期望返回 JSON 格式的数据。
+        /// </summary>
+        /// <param name="systemPrompt">系统提示词</param>
+        /// <param name="userPrompt">用户提示词</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns>解析后的 JSON 字符串</returns>
         public async Task<string> ChatJsonAsync(string systemPrompt, string userPrompt, CancellationToken cancellationToken = default)
         {
             if (!_options.Enabled)
@@ -55,8 +65,11 @@ namespace SmartNote.BLL.Ai
 
             // 解析 OpenAI 响应并提取 message.content
             using var doc = JsonDocument.Parse(body.Content);
-            var content = doc.RootElement
-                .GetProperty("choices")[0]
+            var choices = doc.RootElement.GetProperty("choices");
+            if (choices.GetArrayLength() == 0)
+                throw new BusinessException("AI 未返回任何候选项 (choices is empty)。");
+
+            var content = choices[0]
                 .GetProperty("message")
                 .GetProperty("content")
                 .GetString();
@@ -68,6 +81,9 @@ namespace SmartNote.BLL.Ai
             return ExtractJsonObject(content);
         }
 
+        /// <summary>
+        /// 底层发送 HTTP 请求的方法。
+        /// </summary>
         private async Task<ChatResult> SendChatAsync(
             string apiKey,
             string systemPrompt,
@@ -75,7 +91,12 @@ namespace SmartNote.BLL.Ai
             bool useJsonMode,
             CancellationToken cancellationToken)
         {
-            using var req = new HttpRequestMessage(HttpMethod.Post, "chat/completions");
+            // 如果 HttpClient 未配置 BaseAddress，则默认使用 OpenAI 官方地址，防止报错
+            var url = _http.BaseAddress == null 
+                ? "https://api.openai.com/v1/chat/completions" 
+                : "chat/completions";
+
+            using var req = new HttpRequestMessage(HttpMethod.Post, url);
             req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
             object payload = useJsonMode
@@ -110,12 +131,18 @@ namespace SmartNote.BLL.Ai
                 : ChatResult.Error((int)resp.StatusCode, content);
         }
 
+        /// <summary>
+        /// 内部结果封装结构体。
+        /// </summary>
         private readonly record struct ChatResult(bool IsError, int StatusCode, string Content)
         {
             public static ChatResult Success(string content) => new(false, 200, content);
             public static ChatResult Error(int statusCode, string content) => new(true, statusCode, content);
         }
 
+        /// <summary>
+        /// 从返回文本中提取 JSON 对象字符串（去除 Markdown 代码块标记）。
+        /// </summary>
         private static string ExtractJsonObject(string text)
         {
             var trimmed = text.Trim();

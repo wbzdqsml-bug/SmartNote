@@ -6,6 +6,9 @@ using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 数据分析与统计控制器。
+    /// </summary>
     [ApiController]
     [Route("api/analysis")]
     [Authorize]
@@ -18,11 +21,17 @@ namespace SmartNote.WebAPI.User.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// 获取当前登录用户的 ID。
+        /// </summary>
         private int GetUserId()
         {
             return int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
         }
 
+        /// <summary>
+        /// 获取分类统计数据。
+        /// </summary>
         [HttpGet("categories")]
         public async Task<IActionResult> CategoryStats()
         {
@@ -30,6 +39,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(data));
         }
 
+        /// <summary>
+        /// 获取标签统计数据。
+        /// </summary>
         [HttpGet("tags")]
         public async Task<IActionResult> TagStats()
         {
@@ -37,6 +49,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(data));
         }
 
+        /// <summary>
+        /// 获取每日趋势统计。
+        /// </summary>
         [HttpGet("trend")]
         public async Task<IActionResult> Trend()
         {
@@ -44,6 +59,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(data));
         }
 
+        /// <summary>
+        /// 获取热力图数据。
+        /// </summary>
         [HttpGet("heatmap")]
         public async Task<IActionResult> Heatmap()
         {
@@ -51,6 +69,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(data));
         }
 
+        /// <summary>
+        /// 获取工作区统计数据。
+        /// </summary>
         [HttpGet("workspaces")]
         public async Task<IActionResult> WorkspaceStats()
         {

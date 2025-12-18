@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
 using SmartNote.Shared.Dtos;
@@ -7,6 +7,9 @@ using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 标签管理控制器。
+    /// </summary>
     [ApiController]
     [Authorize]
     [Route("api/tags")]
@@ -19,6 +22,9 @@ namespace SmartNote.WebAPI.User.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// 获取当前登录用户的 ID。
+        /// </summary>
         private int GetUserId()
         {
             var idStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -38,6 +44,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(list));
         }
 
+        /// <summary>
+        /// 创建新标签。
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TagCreateRequest req)
         {
@@ -46,6 +55,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(id, "创建标签成功。"));
         }
 
+        /// <summary>
+        /// 更新标签信息。
+        /// </summary>
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] TagUpdateRequest req)
         {
@@ -54,6 +66,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success("标签更新成功。"));
         }
 
+        /// <summary>
+        /// 删除标签。
+        /// </summary>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

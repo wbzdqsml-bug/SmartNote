@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
 using SmartNote.Shared.Dtos;
@@ -8,6 +8,9 @@ using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 工作区成员管理控制器。
+    /// </summary>
     [ApiController]
     [Authorize]
     [Route("api/workspaces/{workspaceId:int}/members")]
@@ -20,6 +23,9 @@ namespace SmartNote.WebAPI.User.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// 获取当前登录用户的 ID。
+        /// </summary>
         private int GetUserId()
         {
             var idStr = User.FindFirstValue(ClaimTypes.NameIdentifier);

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
 using SmartNote.Shared.Dtos;
@@ -7,6 +7,9 @@ using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 用户个人资料管理控制器。
+    /// </summary>
     [ApiController]
     [Authorize]
     [Route("api/user/profile")]
@@ -19,6 +22,9 @@ namespace SmartNote.WebAPI.User.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// 获取当前登录用户的 ID。
+        /// </summary>
         private int GetUserId()
         {
             var idStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -27,6 +33,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return id;
         }
 
+        /// <summary>
+        /// 获取当前用户的个人资料。
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetProfile()
         {
@@ -35,6 +44,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(data));
         }
 
+        /// <summary>
+        /// 更新当前用户的个人资料。
+        /// </summary>
         [HttpPut]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateUserProfileRequest req)
         {

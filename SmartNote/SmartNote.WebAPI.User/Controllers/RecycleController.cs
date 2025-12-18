@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
 using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 回收站管理控制器。
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -17,6 +20,9 @@ namespace SmartNote.WebAPI.User.Controllers
             _recycleService = recycleService;
         }
 
+        /// <summary>
+        /// 获取回收站中的笔记列表。
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetDeletedNotes()
         {
@@ -36,6 +42,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return note == null ? NotFound(new { message = "未找到笔记或无权限" }) : Ok(note);
         }
 
+        /// <summary>
+        /// 恢复回收站中的笔记。
+        /// </summary>
         [HttpPost("restore")]
         public async Task<IActionResult> Restore([FromBody] List<int> noteIds)
         {
@@ -44,6 +53,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(new { message = $"成功恢复 {count} 条笔记" });
         }
 
+        /// <summary>
+        /// 永久删除笔记。
+        /// </summary>
         [HttpDelete("permanent")]
         public async Task<IActionResult> DeletePermanently([FromBody] List<int> noteIds)
         {

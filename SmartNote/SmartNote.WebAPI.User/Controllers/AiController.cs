@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
 using SmartNote.Common.Extensions;
@@ -7,6 +7,9 @@ using SmartNote.Shared.Results;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// AI 辅助功能控制器。
+    /// </summary>
     [ApiController]
     [Authorize]
     [Route("api/ai")]
@@ -19,6 +22,9 @@ namespace SmartNote.WebAPI.User.Controllers
             _ai = ai;
         }
 
+        /// <summary>
+        /// 生成内容摘要。
+        /// </summary>
         [HttpPost("summary")]
         public async Task<IActionResult> Summary([FromBody] AiSummaryRequest request)
         {
@@ -27,6 +33,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(res));
         }
 
+        /// <summary>
+        /// 生成知识扩展。
+        /// </summary>
         [HttpPost("knowledge-extension")]
         public async Task<IActionResult> KnowledgeExtension([FromBody] AiKnowledgeExtensionRequest request)
         {
@@ -35,6 +44,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(res));
         }
 
+        /// <summary>
+        /// 将文本转换为思维导图结构。
+        /// </summary>
         [HttpPost("text-to-mindmap")]
         public async Task<IActionResult> TextToMindMap([FromBody] AiTextToMindMapRequest request)
         {
@@ -43,6 +55,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(res));
         }
 
+        /// <summary>
+        /// 生成测验题。
+        /// </summary>
         [HttpPost("quiz")]
         public async Task<IActionResult> Quiz([FromBody] AiQuizRequest request)
         {
@@ -52,4 +67,3 @@ namespace SmartNote.WebAPI.User.Controllers
         }
     }
 }
-

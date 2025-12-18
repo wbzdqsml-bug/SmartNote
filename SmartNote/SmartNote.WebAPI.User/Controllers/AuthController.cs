@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using SmartNote.BLL.Abstractions;
@@ -7,6 +7,9 @@ using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 用户认证控制器（注册、登录、注销）。
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
@@ -18,6 +21,9 @@ namespace SmartNote.WebAPI.User.Controllers
             _auth = auth;
         }
 
+        /// <summary>
+        /// 用户注册。
+        /// </summary>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -30,7 +36,10 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(new { message = "注册成功" });
         }
 
-[Authorize]
+        /// <summary>
+        /// 用户注销（退出登录）。
+        /// </summary>
+        [Authorize]
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
@@ -46,7 +55,10 @@ namespace SmartNote.WebAPI.User.Controllers
         return Ok(new { code = "LOGOUT_SUCCESS", message = "退出成功" });
     }
 
-    [HttpPost("login")]
+        /// <summary>
+        /// 用户登录。
+        /// </summary>
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             if (!ModelState.IsValid) return ValidationProblem(ModelState);

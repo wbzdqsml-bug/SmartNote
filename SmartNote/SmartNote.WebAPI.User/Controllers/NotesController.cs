@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
 using SmartNote.Shared.Dtos;
@@ -7,6 +7,9 @@ using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 笔记管理控制器。
+    /// </summary>
     [ApiController]
     [Authorize]
     [Route("api/notes")]
@@ -19,6 +22,9 @@ namespace SmartNote.WebAPI.User.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// 获取当前登录用户的 ID。
+        /// </summary>
         private int GetUserId()
         {
             var idStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -27,9 +33,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return id;
         }
 
-        // ================================  
-        // 获取所有笔记（完整：分类 + 标签）
-        // ================================
+        /// <summary>
+        /// 获取所有笔记（包含分类和标签信息）。
+        /// </summary>
         [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
@@ -37,9 +43,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(list));
         }
 
-        // ================================  
-        // 获取单条笔记（含分类、标签）
-        // ================================
+        /// <summary>
+        /// 根据 ID 获取单条笔记详情（含分类、标签）。
+        /// </summary>
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -49,9 +55,9 @@ namespace SmartNote.WebAPI.User.Controllers
                 : Ok(ApiResponse.Success(note));
         }
 
-        // ================================  
-        // 筛选（分类 + 标签）
-        // ================================
+        /// <summary>
+        /// 根据分类或标签筛选笔记。
+        /// </summary>
         [HttpGet("filter")]
         public async Task<IActionResult> Filter(
             [FromQuery] int? categoryId,
@@ -65,9 +71,27 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(list));
         }
 
-        // ================================  
-        // 创建
-        // ================================
+        /// <summary>
+        /// 获取指定日期修改的笔记列表（用于热力图点击交互）。
+        /// </summary>
+        /// <param name="date">查询日期</param>
+        [HttpGet("by-date")]
+        public async Task<IActionResult> GetByDate([FromQuery] DateTime date)
+        {
+            // 获取当前用户所有笔记
+            var allNotes = await _service.GetUserNotesAsync(GetUserId());
+            
+            // 筛选出指定日期修改的笔记
+            var list = allNotes.Where(n => n.LastUpdateTime.Date == date.Date)
+                               .OrderByDescending(n => n.LastUpdateTime) // 按最后修改时间倒序排列
+                               .ToList();
+            
+            return Ok(ApiResponse.Success(list));
+        }
+
+        /// <summary>
+        /// 创建新笔记。
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] NoteCreateDto dto)
         {
@@ -75,9 +99,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(new { id }, "创建成功"));
         }
 
-        // ================================  
-        // 更新内容 / 分类
-        // ================================
+        /// <summary>
+        /// 更新笔记内容或分类。
+        /// </summary>
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] NoteUpdateDto dto)
         {
@@ -85,9 +109,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success("更新成功"));
         }
 
-        // ================================  
-        // 更新标签（多对多）
-        // ================================
+        /// <summary>
+        /// 更新笔记的标签关联。
+        /// </summary>
         [HttpPut("{id:int}/tags")]
         public async Task<IActionResult> UpdateTags(int id, [FromBody] NoteTagUpdateRequest req)
         {
@@ -95,9 +119,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success("标签更新成功"));
         }
 
-        // ================================  
-        // 软删除
-        // ================================
+        /// <summary>
+        /// 软删除笔记（移动到回收站）。
+        /// </summary>
         [HttpPost("soft-delete")]
         public async Task<IActionResult> SoftDelete([FromBody] List<int> ids)
         {

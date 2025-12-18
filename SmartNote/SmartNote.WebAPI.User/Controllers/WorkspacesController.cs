@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
 using SmartNote.Shared.Dtos;
@@ -6,6 +6,9 @@ using SmartNote.Common.Extensions;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 工作区管理控制器。
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
