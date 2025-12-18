@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmartNote.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddNoteActivityTypeSupport : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,6 +47,35 @@ namespace SmartNote.DAL.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Friendships",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RequesterId = table.Column<int>(type: "int", nullable: false),
+                    AddresseeId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    RequestTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ResponseTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friendships", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Friendships_Users_AddresseeId",
+                        column: x => x.AddresseeId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Friendships_Users_RequesterId",
+                        column: x => x.RequesterId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -115,6 +144,43 @@ namespace SmartNote.DAL.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChatMessages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SenderId = table.Column<int>(type: "int", nullable: false),
+                    ReceiverId = table.Column<int>(type: "int", nullable: true),
+                    WorkspaceId = table.Column<int>(type: "int", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatMessages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChatMessages_Users_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ChatMessages_Users_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ChatMessages_Workspaces_WorkspaceId",
+                        column: x => x.WorkspaceId,
+                        principalTable: "Workspaces",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -276,6 +342,31 @@ namespace SmartNote.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ChatMessages_ReceiverId",
+                table: "ChatMessages",
+                column: "ReceiverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChatMessages_SenderId",
+                table: "ChatMessages",
+                column: "SenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChatMessages_WorkspaceId",
+                table: "ChatMessages",
+                column: "WorkspaceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friendships_AddresseeId",
+                table: "Friendships",
+                column: "AddresseeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friendships_RequesterId",
+                table: "Friendships",
+                column: "RequesterId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_NoteActivityLogs_NoteId",
                 table: "NoteActivityLogs",
                 column: "NoteId");
@@ -347,6 +438,12 @@ namespace SmartNote.DAL.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ChatMessages");
+
+            migrationBuilder.DropTable(
+                name: "Friendships");
+
             migrationBuilder.DropTable(
                 name: "NoteActivityLogs");
 

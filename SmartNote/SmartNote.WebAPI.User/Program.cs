@@ -5,6 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartNote.BLL;
 using SmartNote.BLL.Ai;
+using SmartNote.BLL.Abstractions;
+using SmartNote.BLL.Services;
 using SmartNote.Common.Configs;
 using SmartNote.DAL;
 using SmartNote.WebAPI.User.Config;
@@ -98,6 +100,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         // ⭐ 中间变量：用于传递 Redis 错误原因
         options.Events = new JwtBearerEvents
         {
+            // SignalR（浏览器 WebSocket 握手）无法自定义 Header，需要允许从 QueryString 读取 access_token
+            OnMessageReceived = context =>
+            {
+                // Header 优先：只有当没有 Authorization header 时才从 QueryString 取
+                var authHeader = context.Request.Headers.Authorization.ToString();
+                if (!string.IsNullOrWhiteSpace(authHeader))
+                    return Task.CompletedTask;
+
+                var accessToken = context.Request.Query["access_token"].ToString();
+                var path = context.HttpContext.Request.Path;
+
+                if (!string.IsNullOrWhiteSpace(accessToken) && path.StartsWithSegments("/hubs"))
+                    context.Token = accessToken;
+
+                return Task.CompletedTask;
+            },
             OnTokenValidated = async context =>
             {
                 var cache = context.HttpContext.RequestServices.GetRequiredService<IDistributedCache>();
@@ -109,14 +127,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     return;
                 }
 
-                var authHeader = context.Request.Headers["Authorization"].ToString();
-                if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Bearer "))
+                var incomingToken =
+                    (context.SecurityToken as JwtSecurityToken)?.RawData
+                    ?? context.Request.Query["access_token"].ToString();
+
+                if (string.IsNullOrWhiteSpace(incomingToken))
+                {
+                    var authHeader = context.Request.Headers.Authorization.ToString();
+                    if (!string.IsNullOrWhiteSpace(authHeader) &&
+                        authHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+                    {
+                        incomingToken = authHeader["Bearer ".Length..].Trim();
+                    }
+                }
+
+                if (string.IsNullOrWhiteSpace(incomingToken))
                 {
                     context.Fail("INVALID_HEADER");
                     return;
                 }
-
-                var incomingToken = authHeader.Substring("Bearer ".Length).Trim();
                 var cachedToken = await cache.GetStringAsync($"token:{userId}");
 
                 if (string.IsNullOrEmpty(cachedToken))
@@ -168,6 +197,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  * 4️⃣ 注入业务层
  * ---------------------------------------------*/
 builder.Services.AddBusinessServices();
+builder.Services.AddScoped<IFriendService, FriendService>();
+builder.Services.AddScoped<IChatService, ChatService>();
 
 /* -----------------------------------------------
  * 5️⃣ CORS
@@ -256,6 +287,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapHub<NoteHub>("/hubs/note");
+app.MapHub<ChatHub>("/hubs/chat");
 app.MapControllers();
 
 app.MapGet("/health", () => Results.Ok(new

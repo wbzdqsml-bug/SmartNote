@@ -12,8 +12,8 @@ using SmartNote.DAL;
 namespace SmartNote.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251124053711_AddNoteActivityTypeSupport")]
-    partial class AddNoteActivityTypeSupport
+    [Migration("20251218112355_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,79 @@ namespace SmartNote.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Categories", (string)null);
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.ChatMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WorkspaceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.HasIndex("WorkspaceId");
+
+                    b.ToTable("ChatMessages");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.Friendship", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AddresseeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RequestTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RequesterId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ResponseTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddresseeId");
+
+                    b.HasIndex("RequesterId");
+
+                    b.ToTable("Friendships");
                 });
 
             modelBuilder.Entity("SmartNote.Domain.Entities.Note", b =>
@@ -382,6 +455,50 @@ namespace SmartNote.DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("SmartNote.Domain.Entities.ChatMessage", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.User", "Receiver")
+                        .WithMany("ReceivedMessages")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartNote.Domain.Entities.User", "Sender")
+                        .WithMany("SentMessages")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartNote.Domain.Entities.Workspace", "Workspace")
+                        .WithMany("ChatMessages")
+                        .HasForeignKey("WorkspaceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+
+                    b.Navigation("Workspace");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.Friendship", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.User", "Addressee")
+                        .WithMany("ReceivedFriendRequests")
+                        .HasForeignKey("AddresseeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartNote.Domain.Entities.User", "Requester")
+                        .WithMany("SentFriendRequests")
+                        .HasForeignKey("RequesterId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Addressee");
+
+                    b.Navigation("Requester");
+                });
+
             modelBuilder.Entity("SmartNote.Domain.Entities.Note", b =>
                 {
                     b.HasOne("SmartNote.Domain.Entities.Category", "Category")
@@ -536,6 +653,14 @@ namespace SmartNote.DAL.Migrations
 
                     b.Navigation("Profile");
 
+                    b.Navigation("ReceivedFriendRequests");
+
+                    b.Navigation("ReceivedMessages");
+
+                    b.Navigation("SentFriendRequests");
+
+                    b.Navigation("SentMessages");
+
                     b.Navigation("Tags");
 
                     b.Navigation("WorkspaceMemberships");
@@ -543,6 +668,8 @@ namespace SmartNote.DAL.Migrations
 
             modelBuilder.Entity("SmartNote.Domain.Entities.Workspace", b =>
                 {
+                    b.Navigation("ChatMessages");
+
                     b.Navigation("Members");
 
                     b.Navigation("Notes");

@@ -19,21 +19,14 @@ namespace SmartNote.DAL
         public DbSet<NoteTag> NoteTags { get; set; } = null!;
 
         public DbSet<NoteActivityLog> NoteActivityLogs => Set<NoteActivityLog>();
+        public DbSet<Friendship> Friendships => Set<Friendship>();
+        public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // 应用所有配置类
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new WorkspaceConfiguration());
-            modelBuilder.ApplyConfiguration(new WorkspaceMemberConfiguration());
-            modelBuilder.ApplyConfiguration(new NoteConfiguration());
-            modelBuilder.ApplyConfiguration(new WorkspaceInvitationConfiguration());
-            modelBuilder.ApplyConfiguration(new UserProfileConfiguration());
-            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new NoteTagConfiguration());
-            modelBuilder.ApplyConfiguration(new TagConfiguration());
-            modelBuilder.ApplyConfiguration(new NoteActivityLogConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
     }

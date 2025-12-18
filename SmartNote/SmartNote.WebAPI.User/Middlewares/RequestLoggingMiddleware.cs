@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
@@ -12,6 +13,10 @@ namespace SmartNote.WebAPI.User.Middlewares
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<RequestLoggingMiddleware> _logger;
+        private static readonly HashSet<string> SensitiveQueryKeys = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "access_token"
+        };
 
         public RequestLoggingMiddleware(RequestDelegate next, ILogger<RequestLoggingMiddleware> logger)
         {
@@ -27,7 +32,7 @@ namespace SmartNote.WebAPI.User.Middlewares
 
             requestInfo.AppendLine("=== 🌐 Incoming Request ===");
             requestInfo.AppendLine($"➡️ Path: {request.Method} {request.Path}");
-            requestInfo.AppendLine($"🔹 Query: {request.QueryString}");
+            requestInfo.AppendLine($"🔹 Query: {FormatQueryForLog(request.Query)}");
             requestInfo.AppendLine($"🔹 IP: {context.Connection.RemoteIpAddress}");
             requestInfo.AppendLine($"🔹 Time: {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss}");
 
@@ -57,6 +62,21 @@ namespace SmartNote.WebAPI.User.Middlewares
 
                 throw; // 保留异常交由 GlobalExceptionFilter 处理
             }
+        }
+
+        private static string FormatQueryForLog(IQueryCollection query)
+        {
+            if (query.Count == 0)
+                return string.Empty;
+
+            var parts = new List<string>(query.Count);
+            foreach (var (key, value) in query)
+            {
+                var displayValue = SensitiveQueryKeys.Contains(key) ? "[REDACTED]" : value.ToString();
+                parts.Add($"{key}={displayValue}");
+            }
+
+            return "?" + string.Join("&", parts);
         }
     }
 

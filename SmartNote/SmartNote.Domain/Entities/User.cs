@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,11 @@ namespace SmartNote.Domain.Entities
         public ICollection<Category> Categories { get; set; } = new List<Category>();
         public ICollection<Tag> Tags { get; set; } = new List<Tag>();
         public ICollection<NoteActivityLog> NoteActivityLogs { get; set; } = new List<NoteActivityLog>();
-
+        
+        // 聊天与好友相关导航属性
+        public ICollection<Friendship> SentFriendRequests { get; set; } = new List<Friendship>();
+        public ICollection<Friendship> ReceivedFriendRequests { get; set; } = new List<Friendship>();
+        public ICollection<ChatMessage> SentMessages { get; set; } = new List<ChatMessage>();
+        public ICollection<ChatMessage> ReceivedMessages { get; set; } = new List<ChatMessage>();
     }
 }

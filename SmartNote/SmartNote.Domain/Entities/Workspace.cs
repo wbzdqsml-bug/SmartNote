@@ -1,4 +1,4 @@
-﻿using SmartNote.Domain.Entities.Enums;
+﻿﻿using SmartNote.Domain.Entities.Enums;
 
 namespace SmartNote.Domain.Entities
 {
@@ -11,6 +11,6 @@ namespace SmartNote.Domain.Entities
         public DateTime CreateTime { get; set; } = DateTime.UtcNow;
         public ICollection<Note> Notes { get; set; } = new List<Note>();
         public ICollection<WorkspaceMember> Members { get; set; } = new List<WorkspaceMember>();
-
+        public ICollection<ChatMessage> ChatMessages { get; set; } = new List<ChatMessage>();
     }
 }
