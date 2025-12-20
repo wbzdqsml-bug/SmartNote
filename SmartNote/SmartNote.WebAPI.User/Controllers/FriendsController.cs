@@ -59,12 +59,12 @@ namespace SmartNote.WebAPI.User.Controllers
         /// <summary>
         /// 处理好友申请（接受/拒绝）
         /// </summary>
-        [HttpPost("requests/{requestId:int}/{action}")]
-        public async Task<IActionResult> HandleRequest(int requestId, string action)
+        [HttpPost("requests/{requestId:int}/{decision}")]
+        public async Task<IActionResult> HandleRequest(int requestId, string decision)
         {
             var userId = GetUserId();
-            await _service.HandleRequestAsync(userId, requestId, action);
-            return Ok(ApiResponse.Success($"已{action}好友申请"));
+            await _service.HandleRequestAsync(userId, requestId, decision);
+            return Ok(ApiResponse.Success($"已{decision}好友申请"));
         }
     }
 }

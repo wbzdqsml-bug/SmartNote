@@ -70,19 +70,19 @@ namespace SmartNote.BLL.Services
                 .ToListAsync();
         }
 
-        public async Task HandleRequestAsync(int userId, int requestId, string action)
+        public async Task HandleRequestAsync(int userId, int requestId, string decision)
         {
             var friendship = await _db.Friendships.FindAsync(requestId);
 
             if (friendship == null) throw new BusinessException("申请不存在");
             if (friendship.AddresseeId != userId) throw new BusinessException("无权处理此申请");
 
-            if (action.ToLower() == "accept")
+            if (decision.ToLower() == "accept")
             {
                 friendship.Status = FriendshipStatus.Accepted;
                 friendship.ResponseTime = DateTime.UtcNow;
             }
-            else if (action.ToLower() == "reject")
+            else if (decision.ToLower() == "reject")
             {
                 friendship.Status = FriendshipStatus.Rejected;
                 friendship.ResponseTime = DateTime.UtcNow;
