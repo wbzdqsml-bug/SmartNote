@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -38,6 +39,13 @@ var swaggerConfig = builder.Configuration.GetSection(Settings.SwaggerSection).Ge
 var aiOptions = builder.Configuration.GetSection(Settings.AiSection).Get<AiOptions>() ?? new AiOptions();
 builder.Services.AddSingleton(aiOptions);
 
+var storageOptions = builder.Configuration.GetSection(Settings.StorageSection).Get<StorageOptions>() ?? new StorageOptions();
+if (storageOptions.MaxAvatarSizeBytes <= 0)
+    storageOptions.MaxAvatarSizeBytes = 2 * 1024 * 1024;
+if (storageOptions.MaxAttachmentSizeBytes <= 0)
+    storageOptions.MaxAttachmentSizeBytes = 20 * 1024 * 1024;
+builder.Services.AddSingleton(storageOptions);
+
 // OpenAI 客户端（仅在需要时调用，Enabled=false 时也可注册但会在调用时拦截）
 builder.Services.AddHttpClient<OpenAiClient>(client =>
 {
@@ -73,6 +81,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = redisConfig.Configuration;
+});
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    var limit = Math.Max(storageOptions.MaxAvatarSizeBytes, storageOptions.MaxAttachmentSizeBytes);
+    options.MultipartBodyLengthLimit = limit;
 });
 
 /* -----------------------------------------------
@@ -282,6 +296,7 @@ if (swaggerConfig.Enabled)
 app.UseCors("default");
 app.UseHttpsRedirection();
 app.UseRequestLogging();
+app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();

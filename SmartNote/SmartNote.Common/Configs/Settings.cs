@@ -10,5 +10,6 @@
         public const string CorsSection = "Cors";
         public const string SwaggerSection = "Swagger";
         public const string AiSection = "Ai";
+        public const string StorageSection = "Storage";
     }
 }

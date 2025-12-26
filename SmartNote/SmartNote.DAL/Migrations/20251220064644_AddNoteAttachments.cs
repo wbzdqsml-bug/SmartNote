@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmartNote.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class AddNoteAttachments : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -312,6 +312,37 @@ namespace SmartNote.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NoteAttachments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NoteId = table.Column<int>(type: "int", nullable: false),
+                    UploaderUserId = table.Column<int>(type: "int", nullable: false),
+                    OriginalFileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Size = table.Column<long>(type: "bigint", nullable: false),
+                    StoragePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NoteAttachments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NoteAttachments_Notes_NoteId",
+                        column: x => x.NoteId,
+                        principalTable: "Notes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NoteAttachments_Users_UploaderUserId",
+                        column: x => x.UploaderUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NoteTags",
                 columns: table => new
                 {
@@ -375,6 +406,16 @@ namespace SmartNote.DAL.Migrations
                 name: "IX_NoteActivityLogs_UserId",
                 table: "NoteActivityLogs",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NoteAttachments_NoteId",
+                table: "NoteAttachments",
+                column: "NoteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NoteAttachments_UploaderUserId",
+                table: "NoteAttachments",
+                column: "UploaderUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notes_CategoryId",
@@ -446,6 +487,9 @@ namespace SmartNote.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "NoteActivityLogs");
+
+            migrationBuilder.DropTable(
+                name: "NoteAttachments");
 
             migrationBuilder.DropTable(
                 name: "NoteTags");

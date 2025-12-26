@@ -21,6 +21,7 @@ namespace SmartNote.DAL
         public DbSet<NoteActivityLog> NoteActivityLogs => Set<NoteActivityLog>();
         public DbSet<Friendship> Friendships => Set<Friendship>();
         public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
+        public DbSet<NoteAttachment> NoteAttachments => Set<NoteAttachment>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

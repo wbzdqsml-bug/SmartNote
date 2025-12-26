@@ -11,5 +11,6 @@ namespace SmartNote.BLL.Abstractions
     {
         Task<UserProfileDto> GetProfileAsync(int userId);
         Task UpdateProfileAsync(int userId, UpdateUserProfileRequest req);
+        Task UpdateAvatarAsync(int userId, string avatarUrl);
     }
 }

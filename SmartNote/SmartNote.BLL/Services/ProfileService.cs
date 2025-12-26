@@ -56,11 +56,58 @@ namespace SmartNote.BLL.Services
 
             user.Profile.Email = req.Email;
             user.Profile.Phone = req.Phone;
-            user.Profile.AvatarUrl = req.AvatarUrl;
+            if (req.AvatarUrl != null)
+            {
+                if (string.IsNullOrWhiteSpace(req.AvatarUrl))
+                {
+                    user.Profile.AvatarUrl = null;
+                }
+                else if (IsLocalAvatarPath(req.AvatarUrl))
+                {
+                    user.Profile.AvatarUrl = req.AvatarUrl;
+                }
+                else
+                {
+                    throw new BusinessException("头像请使用上传接口");
+                }
+            }
             user.Profile.Bio = req.Bio;
             user.Profile.UpdateTime = DateTime.UtcNow;
 
             await _db.SaveChangesAsync();
+        }
+
+        public async Task UpdateAvatarAsync(int userId, string avatarUrl)
+        {
+            var user = await _db.Users
+                .Include(u => u.Profile)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+                throw new BusinessException("用户不存在");
+
+            if (user.Profile == null)
+            {
+                user.Profile = new UserProfile { UserId = userId };
+                _db.UserProfiles.Add(user.Profile);
+            }
+
+            user.Profile.AvatarUrl = avatarUrl;
+            user.Profile.UpdateTime = DateTime.UtcNow;
+
+            await _db.SaveChangesAsync();
+        }
+
+        private static bool IsLocalAvatarPath(string avatarUrl)
+        {
+            if (!avatarUrl.StartsWith("/avatars/", StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            if (avatarUrl.Contains("..", StringComparison.Ordinal) ||
+                avatarUrl.Contains('\\', StringComparison.Ordinal))
+                return false;
+
+            return true;
         }
     }
 }
