@@ -119,16 +119,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             // SignalR（浏览器 WebSocket 握手）无法自定义 Header，需要允许从 QueryString 读取 access_token
             OnMessageReceived = context =>
             {
-                // Header 优先：只有当没有 Authorization header 时才从 QueryString 取
+                // 1. 尝试从 Header 获取
                 var authHeader = context.Request.Headers.Authorization.ToString();
                 if (!string.IsNullOrWhiteSpace(authHeader))
                     return Task.CompletedTask;
 
+                // 2. 尝试从 QueryString 获取 (用于 SignalR 和 附件下载)
                 var accessToken = context.Request.Query["access_token"].ToString();
                 var path = context.HttpContext.Request.Path;
 
-                if (!string.IsNullOrWhiteSpace(accessToken) && path.StartsWithSegments("/hubs"))
+                // [修改点] 允许 SignalR Hubs 和 附件下载接口 从 URL 参数中读取 Token
+                if (!string.IsNullOrWhiteSpace(accessToken) &&
+                    (path.StartsWithSegments("/hubs") || path.StartsWithSegments("/api/notes/attachments")))
+                {
                     context.Token = accessToken;
+                }
 
                 return Task.CompletedTask;
             },
