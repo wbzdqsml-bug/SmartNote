@@ -17,6 +17,8 @@ using SmartNote.WebAPI.User.Hubs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -297,6 +299,17 @@ app.UseCors("default");
 app.UseHttpsRedirection();
 app.UseRequestLogging();
 app.UseStaticFiles();
+
+var avatarsPath = Path.Combine(builder.Environment.WebRootPath ?? Path.Combine(builder.Environment.ContentRootPath, "wwwroot"), "avatars");
+if (!Directory.Exists(avatarsPath))
+{
+    Directory.CreateDirectory(avatarsPath);
+}
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(avatarsPath),
+    RequestPath = "/api/avatars"
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
