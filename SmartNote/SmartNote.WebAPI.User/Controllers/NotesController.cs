@@ -1,6 +1,7 @@
 ﻿﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
+using SmartNote.Domain.Exceptions;
 using SmartNote.Shared.Dtos;
 using SmartNote.Shared.Results;
 using System.Security.Claims;
@@ -127,6 +128,30 @@ namespace SmartNote.WebAPI.User.Controllers
         {
             var count = await _service.SoftDeleteAsync(ids, GetUserId());
             return Ok(ApiResponse.Success($"{count} 条笔记已移动到回收站"));
+        }
+
+        /// <summary>
+        /// 导入文件生成笔记 (支持 .md, .json, .txt, .html)
+        /// </summary>
+        [HttpPost("import")]
+        public async Task<IActionResult> Import([FromForm] IFormFile file, [FromQuery] int workspaceId)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest(ApiResponse.Fail("请上传有效文件"));
+
+            if (file.Length > 10 * 1024 * 1024)
+                return BadRequest(ApiResponse.Fail("文件大小不能超过 10MB"));
+
+            try
+            {
+                using var stream = file.OpenReadStream();
+                var id = await _service.ImportNoteAsync(GetUserId(), workspaceId, file.FileName, stream);
+                return Ok(ApiResponse.Success(new { id }, "导入成功"));
+            }
+            catch (BusinessException ex)
+            {
+                return BadRequest(ApiResponse.Fail(ex.Message));
+            }
         }
     }
 }
