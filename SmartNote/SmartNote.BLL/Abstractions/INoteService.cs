@@ -1,4 +1,5 @@
 ﻿using SmartNote.Shared.Dtos;
+using System.IO;
 
 namespace SmartNote.BLL.Abstractions
 {
@@ -29,6 +30,11 @@ namespace SmartNote.BLL.Abstractions
         /// 创建新笔记（可带初始分类和标签）
         /// </summary>
         Task<int> CreateNoteAsync(int userId, NoteCreateDto dto);
+
+        /// <summary>
+        /// 从文件导入笔记
+        /// </summary>
+        Task<int> ImportNoteAsync(int userId, int workspaceId, string fileName, Stream fileStream);
 
         /// <summary>
         /// 更新笔记内容 / 标题 / 分类（不负责标签）

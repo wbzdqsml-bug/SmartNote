@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.IO;
 using System.Text.Json;
 using SmartNote.BLL.Abstractions;
 using SmartNote.Common.Helpers;
@@ -280,6 +281,68 @@ namespace SmartNote.BLL.Services
             }
 
             // 记录日志：创建
+            await LogActivityAsync(userId, note, NoteActivityType.Created);
+
+            return note.Id;
+        }
+
+        /// <summary>
+        /// 从文件导入笔记
+        /// </summary>
+        public async Task<int> ImportNoteAsync(int userId, int workspaceId, string fileName, Stream fileStream)
+        {
+            bool canCreate = await _db.Workspaces.AnyAsync(w => w.Id == workspaceId && w.OwnerUserId == userId)
+                || await _db.WorkspaceMembers.AnyAsync(m => m.WorkspaceId == workspaceId &&
+                                                            m.UserId == userId &&
+                                                            m.CanEdit);
+
+            if (!canCreate)
+                throw new BusinessException("无权在该工作区创建笔记。");
+
+            using var reader = new StreamReader(fileStream);
+            var content = await reader.ReadToEndAsync();
+
+            var ext = Path.GetExtension(fileName).ToLower();
+            NoteType type;
+            string contentJson;
+
+            switch (ext)
+            {
+                case ".md":
+                    type = NoteType.Markdown;
+                    contentJson = JsonSerializer.Serialize(new { md = content, html = string.Empty });
+                    break;
+                case ".json":
+                    if (content.Contains("nodes") && content.Contains("edges"))
+                        type = NoteType.MindMap;
+                    else
+                        type = NoteType.Canvas;
+                    contentJson = content;
+                    break;
+                case ".txt":
+                case ".html":
+                    type = NoteType.RichText;
+                    contentJson = JsonSerializer.Serialize(new { content });
+                    break;
+                default:
+                    throw new BusinessException($"不支持的文件类型: {ext}");
+            }
+
+            var note = new Note
+            {
+                WorkspaceId = workspaceId,
+                Title = Path.GetFileNameWithoutExtension(fileName),
+                Type = type,
+                ContentJson = contentJson,
+                CategoryId = null,
+                CreateTime = DateTime.UtcNow,
+                LastUpdateTime = DateTime.UtcNow,
+                IsDeleted = false
+            };
+
+            _db.Notes.Add(note);
+            await _db.SaveChangesAsync();
+
             await LogActivityAsync(userId, note, NoteActivityType.Created);
 
             return note.Id;
