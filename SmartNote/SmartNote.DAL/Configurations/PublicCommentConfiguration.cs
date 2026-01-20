@@ -20,7 +20,7 @@ namespace SmartNote.DAL.Configurations
             builder.HasOne(pc => pc.AuthorUser)
                 .WithMany(u => u.PublicComments)
                 .HasForeignKey(pc => pc.AuthorUserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(pc => pc.Parent)
                 .WithMany(parent => parent.Replies)
