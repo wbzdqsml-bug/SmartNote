@@ -12,8 +12,8 @@ namespace SmartNote.Domain.Entities
         public int ActorUserId { get; set; }
         public User ActorUser { get; set; } = null!;
 
-        public TaskStatus FromStatus { get; set; }
-        public TaskStatus ToStatus { get; set; }
+        public TaskItemStatus FromStatus { get; set; }
+        public TaskItemStatus ToStatus { get; set; }
 
         public int? FromSortOrder { get; set; }
         public int? ToSortOrder { get; set; }

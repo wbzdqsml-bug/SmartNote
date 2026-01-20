@@ -18,7 +18,7 @@ namespace SmartNote.Domain.Entities
         public string Title { get; set; } = string.Empty;
         public string? Description { get; set; }
 
-        public TaskStatus Status { get; set; } = TaskStatus.Todo;
+        public TaskItemStatus Status { get; set; } = TaskItemStatus.Todo;
         public int SortOrder { get; set; }
 
         public DateTime? StartAt { get; set; }
