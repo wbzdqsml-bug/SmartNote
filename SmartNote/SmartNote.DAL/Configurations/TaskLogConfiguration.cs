@@ -18,7 +18,7 @@ namespace SmartNote.DAL.Configurations
             builder.HasOne(log => log.ActorUser)
                 .WithMany(user => user.TaskLogs)
                 .HasForeignKey(log => log.ActorUserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
