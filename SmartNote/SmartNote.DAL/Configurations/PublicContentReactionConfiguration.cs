@@ -20,7 +20,7 @@ namespace SmartNote.DAL.Configurations
             builder.HasOne(reaction => reaction.User)
                 .WithMany(user => user.PublicContentReactions)
                 .HasForeignKey(reaction => reaction.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
