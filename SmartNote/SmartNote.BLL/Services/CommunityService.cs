@@ -476,8 +476,7 @@ namespace SmartNote.BLL.Services
 
         private static HashSet<int> CollectCommentSubtreeIds(int rootId, List<PublicComment> comments)
         {
-            var lookup = comments.GroupBy(c => c.ParentId)
-                .ToDictionary(g => g.Key, g => g.Select(c => c.Id).ToList());
+            var lookup = comments.ToLookup(c => c.ParentId, c => c.Id);
             var result = new HashSet<int> { rootId };
             var queue = new Queue<int>();
             queue.Enqueue(rootId);
@@ -485,10 +484,7 @@ namespace SmartNote.BLL.Services
             while (queue.Count > 0)
             {
                 var current = queue.Dequeue();
-                if (!lookup.TryGetValue(current, out var children))
-                    continue;
-
-                foreach (var childId in children)
+                foreach (var childId in lookup[current])
                 {
                     if (result.Add(childId))
                         queue.Enqueue(childId);
