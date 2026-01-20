@@ -1,3 +1,4 @@
+using SmartNote.Domain.Entities.Enums;
 using SmartNote.Shared.Dtos;
 
 namespace SmartNote.BLL.Abstractions
