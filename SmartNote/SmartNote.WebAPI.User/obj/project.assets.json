@@ -5071,6 +5071,7 @@
       "Microsoft.Extensions.Caching.StackExchangeRedis >= 9.0.10",
       "SmartNote.BLL >= 1.0.0",
       "SmartNote.Common >= 1.0.0",
+      "SmartNote.Domain >= 1.0.0",
       "SmartNote.Shared >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.6.2"
     ]
@@ -5113,6 +5114,9 @@
             },
             "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Common\\SmartNote.Common.csproj": {
               "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Common\\SmartNote.Common.csproj"
+            },
+            "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Domain\\SmartNote.Domain.csproj": {
+              "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Domain\\SmartNote.Domain.csproj"
             },
             "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Shared\\SmartNote.Shared.csproj": {
               "projectPath": "C:\\Users\\wbzdqsml\\source\\repos\\SmartNote\\SmartNote\\SmartNote.Shared\\SmartNote.Shared.csproj"
@@ -5182,7 +5186,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

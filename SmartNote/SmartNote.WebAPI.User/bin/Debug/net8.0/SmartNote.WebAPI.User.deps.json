@@ -15,6 +15,7 @@
           "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.10",
           "SmartNote.BLL": "1.0.0",
           "SmartNote.Common": "1.0.0",
+          "SmartNote.Domain": "1.0.0",
           "SmartNote.Shared": "1.0.0",
           "Swashbuckle.AspNetCore": "6.6.2"
         },
