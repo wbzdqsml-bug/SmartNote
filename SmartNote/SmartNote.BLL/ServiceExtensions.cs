@@ -39,6 +39,8 @@ namespace SmartNote.BLL
 
             // AI
             services.AddScoped<IAiNoteService, AiNoteService>();
+            services.AddScoped<ICommunityService, CommunityService>();
+            services.AddScoped<ITaskService, TaskService>();
 
             return services;
         }
