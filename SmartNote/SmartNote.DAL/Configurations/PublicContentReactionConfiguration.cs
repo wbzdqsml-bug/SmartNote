@@ -10,6 +10,7 @@ namespace SmartNote.DAL.Configurations
         {
             builder.ToTable("PublicContentReactions");
             builder.HasKey(reaction => new { reaction.PublicContentId, reaction.UserId });
+            builder.HasQueryFilter(reaction => !reaction.PublicContent.Note.IsDeleted);
 
             builder.HasOne(reaction => reaction.PublicContent)
                 .WithMany(content => content.Reactions)

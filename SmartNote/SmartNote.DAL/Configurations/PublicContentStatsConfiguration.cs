@@ -10,6 +10,7 @@ namespace SmartNote.DAL.Configurations
         {
             builder.ToTable("PublicContentStats");
             builder.HasKey(stats => stats.PublicContentId);
+            builder.HasQueryFilter(stats => !stats.PublicContent.Note.IsDeleted);
         }
     }
 }
