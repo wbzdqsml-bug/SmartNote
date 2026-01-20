@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartNote.WebAPI.User")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d0556bb9606092ef698524625f8bfaaf8eb6925")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27da5966134b9c4246343592cb04700933ccfaa4")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartNote.WebAPI.User")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartNote.WebAPI.User")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
