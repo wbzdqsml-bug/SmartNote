@@ -178,7 +178,14 @@ namespace SmartNote.BLL.Services
             if (comment.AuthorUserId != userId)
                 throw new BusinessException("无权删除该评论。");
 
-            _db.PublicComments.Remove(comment);
+            var allComments = await _db.PublicComments
+                .Where(c => c.PublicContentId == comment.PublicContentId)
+                .ToListAsync();
+
+            var toDeleteIds = CollectCommentSubtreeIds(comment.Id, allComments);
+            var toDelete = allComments.Where(c => toDeleteIds.Contains(c.Id)).ToList();
+
+            _db.PublicComments.RemoveRange(toDelete);
             await _db.SaveChangesAsync();
         }
 
@@ -303,12 +310,23 @@ namespace SmartNote.BLL.Services
                 };
                 _db.PublicContents.Add(content);
             }
+            else if (content.Status == PublicContentStatus.Banned)
+            {
+                throw new BusinessException("内容已被封禁，无法发布。");
+            }
 
             content.ContentType = request.ContentType;
             content.Status = PublicContentStatus.Published;
             content.PublishedAt ??= DateTime.UtcNow;
-            content.TitleSnapshot = string.IsNullOrWhiteSpace(request.TitleSnapshot) ? note.Title : request.TitleSnapshot;
-            content.ContentSnapshotJson = string.IsNullOrWhiteSpace(request.ContentSnapshotJson) ? note.ContentJson : request.ContentSnapshotJson;
+            if (!string.IsNullOrWhiteSpace(request.TitleSnapshot))
+                content.TitleSnapshot = request.TitleSnapshot;
+            else if (string.IsNullOrWhiteSpace(content.TitleSnapshot))
+                content.TitleSnapshot = note.Title;
+
+            if (!string.IsNullOrWhiteSpace(request.ContentSnapshotJson))
+                content.ContentSnapshotJson = request.ContentSnapshotJson;
+            else if (string.IsNullOrWhiteSpace(content.ContentSnapshotJson))
+                content.ContentSnapshotJson = note.ContentJson;
             content.LastUpdateTime = DateTime.UtcNow;
 
             await _db.SaveChangesAsync();
@@ -454,6 +472,30 @@ namespace SmartNote.BLL.Services
             }
 
             return roots;
+        }
+
+        private static HashSet<int> CollectCommentSubtreeIds(int rootId, List<PublicComment> comments)
+        {
+            var lookup = comments.GroupBy(c => c.ParentId)
+                .ToDictionary(g => g.Key, g => g.Select(c => c.Id).ToList());
+            var result = new HashSet<int> { rootId };
+            var queue = new Queue<int>();
+            queue.Enqueue(rootId);
+
+            while (queue.Count > 0)
+            {
+                var current = queue.Dequeue();
+                if (!lookup.TryGetValue(current, out var children))
+                    continue;
+
+                foreach (var childId in children)
+                {
+                    if (result.Add(childId))
+                        queue.Enqueue(childId);
+                }
+            }
+
+            return result;
         }
     }
 }
