@@ -12,7 +12,7 @@ using SmartNote.DAL;
 namespace SmartNote.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260120050011_AddCommunityAndTasks")]
+    [Migration("20260120053938_AddCommunityAndTasks")]
     partial class AddCommunityAndTasks
     {
         /// <inheritdoc />

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartNote.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2b32feba63bb153f4a8e56117df5e0079d017f8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9cfe5b7f746de084c1c3dc64fb203a81a6173d2f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartNote.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartNote.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
