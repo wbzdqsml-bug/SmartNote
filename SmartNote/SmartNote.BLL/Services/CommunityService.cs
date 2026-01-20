@@ -37,9 +37,7 @@ namespace SmartNote.BLL.Services
 
             if (!string.IsNullOrWhiteSpace(keyword))
             {
-                query = query.Where(pc =>
-                    (pc.TitleSnapshot ?? pc.Note.Title).Contains(keyword) ||
-                    pc.Note.ContentJson.Contains(keyword));
+                query = query.Where(pc => (pc.TitleSnapshot ?? pc.Note.Title).Contains(keyword));
             }
 
             var total = await query.CountAsync();
@@ -79,17 +77,35 @@ namespace SmartNote.BLL.Services
             return MapToDetail(content);
         }
 
-        public async Task<IEnumerable<PublicContentListItemDto>> GetMyPublicContentsAsync(int userId)
+        public async Task<PublicContentPageDto> GetMyPublicContentsAsync(int userId, PublicContentStatus? status, int page, int pageSize)
         {
-            var contents = await _db.PublicContents
+            page = page < 1 ? 1 : page;
+            pageSize = pageSize <= 0 ? 20 : Math.Min(pageSize, 100);
+
+            var query = _db.PublicContents
                 .Include(pc => pc.Note)
                 .Include(pc => pc.Stats)
                 .Include(pc => pc.AuthorUser)
                 .Where(pc => pc.AuthorUserId == userId)
+                .AsQueryable();
+
+            if (status.HasValue)
+            {
+                query = query.Where(pc => pc.Status == status.Value);
+            }
+
+            var total = await query.CountAsync();
+            var contents = await query
                 .OrderByDescending(pc => pc.LastUpdateTime)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
-            return contents.Select(MapToListItem);
+            return new PublicContentPageDto
+            {
+                TotalCount = total,
+                Items = contents.Select(MapToListItem).ToList()
+            };
         }
 
         public async Task<IEnumerable<PublicCommentDto>> GetCommentsAsync(int publicContentId)
@@ -100,7 +116,7 @@ namespace SmartNote.BLL.Services
                 .OrderBy(c => c.CreateTime)
                 .ToListAsync();
 
-            return comments.Select(c => new PublicCommentDto
+            var commentDtos = comments.Select(c => new PublicCommentDto
             {
                 Id = c.Id,
                 PublicContentId = c.PublicContentId,
@@ -109,7 +125,9 @@ namespace SmartNote.BLL.Services
                 ParentId = c.ParentId,
                 Content = c.Content,
                 CreateTime = c.CreateTime
-            });
+            }).ToList();
+
+            return BuildCommentTree(commentDtos);
         }
 
         public async Task<PublicCommentDto> AddCommentAsync(int userId, PublicCommentCreateDto dto)
@@ -121,7 +139,8 @@ namespace SmartNote.BLL.Services
 
             if (dto.ParentId.HasValue)
             {
-                var parentExists = await _db.PublicComments.AnyAsync(c => c.Id == dto.ParentId.Value);
+                var parentExists = await _db.PublicComments
+                    .AnyAsync(c => c.Id == dto.ParentId.Value && c.PublicContentId == dto.PublicContentId);
                 if (!parentExists)
                     throw new BusinessException("父评论不存在。");
             }
@@ -263,6 +282,60 @@ namespace SmartNote.BLL.Services
             await _db.SaveChangesAsync();
         }
 
+        public async Task<int> PublishAsync(int userId, PublicContentPublishRequest request)
+        {
+            var note = await _db.Notes.FirstOrDefaultAsync(n => n.Id == request.NoteId);
+            if (note == null)
+                throw new BusinessException("笔记不存在。");
+
+            await EnsureWorkspaceShareAccessAsync(userId, note.WorkspaceId);
+
+            var content = await _db.PublicContents
+                .Include(pc => pc.Stats)
+                .FirstOrDefaultAsync(pc => pc.NoteId == request.NoteId && pc.AuthorUserId == userId);
+
+            if (content == null)
+            {
+                content = new PublicContent
+                {
+                    NoteId = request.NoteId,
+                    AuthorUserId = userId
+                };
+                _db.PublicContents.Add(content);
+            }
+
+            content.ContentType = request.ContentType;
+            content.Status = PublicContentStatus.Published;
+            content.PublishedAt ??= DateTime.UtcNow;
+            content.TitleSnapshot = string.IsNullOrWhiteSpace(request.TitleSnapshot) ? note.Title : request.TitleSnapshot;
+            content.ContentSnapshotJson = string.IsNullOrWhiteSpace(request.ContentSnapshotJson) ? note.ContentJson : request.ContentSnapshotJson;
+            content.LastUpdateTime = DateTime.UtcNow;
+
+            await _db.SaveChangesAsync();
+            await EnsureStatsAsync(content);
+
+            return content.Id;
+        }
+
+        public async Task UpdateStatusAsync(int userId, PublicContentStatusUpdateRequest request)
+        {
+            var content = await _db.PublicContents.FirstOrDefaultAsync(pc => pc.Id == request.PublicContentId);
+            if (content == null)
+                throw new BusinessException("内容不存在。");
+
+            if (content.AuthorUserId != userId)
+                throw new BusinessException("无权修改该内容。");
+
+            content.Status = request.Status;
+            if (content.Status == PublicContentStatus.Published && content.PublishedAt == null)
+            {
+                content.PublishedAt = DateTime.UtcNow;
+            }
+            content.LastUpdateTime = DateTime.UtcNow;
+
+            await _db.SaveChangesAsync();
+        }
+
         private static int CalculateDelta(bool previous, bool current)
         {
             if (previous == current)
@@ -332,7 +405,7 @@ namespace SmartNote.BLL.Services
 
         private static string BuildSummary(PublicContent content)
         {
-            var source = content.ContentSnapshotJson ?? content.Note.ContentJson;
+            var source = content.ContentSnapshotJson;
             if (string.IsNullOrWhiteSpace(source))
                 return string.Empty;
             return MarkdownHelper.BuildSummary(source, 100);
@@ -350,6 +423,37 @@ namespace SmartNote.BLL.Services
                 )
                 .Distinct()
                 .ToListAsync();
+        }
+
+        private async Task EnsureWorkspaceShareAccessAsync(int userId, int workspaceId)
+        {
+            var ownerAccess = await _db.Workspaces.AnyAsync(w => w.Id == workspaceId && w.OwnerUserId == userId);
+            if (ownerAccess)
+                return;
+
+            var member = await _db.WorkspaceMembers.FirstOrDefaultAsync(m => m.WorkspaceId == workspaceId && m.UserId == userId);
+            if (member == null || !member.CanShare)
+                throw new BusinessException("无权限发布该笔记。");
+        }
+
+        private static IEnumerable<PublicCommentDto> BuildCommentTree(List<PublicCommentDto> flat)
+        {
+            var lookup = flat.ToDictionary(c => c.Id, c => c);
+            var roots = new List<PublicCommentDto>();
+
+            foreach (var comment in flat)
+            {
+                if (comment.ParentId.HasValue && lookup.TryGetValue(comment.ParentId.Value, out var parent))
+                {
+                    parent.Replies.Add(comment);
+                }
+                else
+                {
+                    roots.Add(comment);
+                }
+            }
+
+            return roots;
         }
     }
 }

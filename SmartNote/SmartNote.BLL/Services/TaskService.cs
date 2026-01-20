@@ -43,6 +43,7 @@ namespace SmartNote.BLL.Services
             var workspaceIds = await GetAccessibleWorkspaceIdsAsync(userId);
             var tasks = await _db.TaskItems
                 .Where(t => workspaceIds.Contains(t.WorkspaceId) &&
+                            (t.StartAt.HasValue || t.DueAt.HasValue) &&
                             (t.StartAt == null || t.StartAt <= end) &&
                             (t.DueAt == null || t.DueAt >= start))
                 .OrderBy(t => t.DueAt)
@@ -53,7 +54,7 @@ namespace SmartNote.BLL.Services
 
         public async Task<int> CreateTaskAsync(int userId, TaskCreateDto dto)
         {
-            await EnsureWorkspaceAccessAsync(userId, dto.WorkspaceId);
+            await EnsureWorkspaceAccessAsync(userId, dto.WorkspaceId, true);
 
             var task = new TaskItem
             {
@@ -79,7 +80,7 @@ namespace SmartNote.BLL.Services
             if (task == null)
                 throw new BusinessException("任务不存在。");
 
-            await EnsureWorkspaceAccessAsync(userId, task.WorkspaceId);
+            await EnsureWorkspaceAccessAsync(userId, task.WorkspaceId, true);
 
             var fromStatus = task.Status;
             var fromSortOrder = task.SortOrder;
@@ -101,7 +102,8 @@ namespace SmartNote.BLL.Services
 
             task.LastUpdateTime = DateTime.UtcNow;
 
-            if (fromStatus != task.Status || fromSortOrder != task.SortOrder)
+            var changePayload = BuildTaskChangePayload(dto, fromStatus, task.Status, fromSortOrder, task.SortOrder);
+            if (changePayload != null)
             {
                 _db.TaskLogs.Add(new TaskLog
                 {
@@ -110,7 +112,9 @@ namespace SmartNote.BLL.Services
                     FromStatus = fromStatus,
                     ToStatus = task.Status,
                     FromSortOrder = fromSortOrder,
-                    ToSortOrder = task.SortOrder
+                    ToSortOrder = task.SortOrder,
+                    Action = "Update",
+                    PayloadJson = changePayload
                 });
             }
 
@@ -127,7 +131,7 @@ namespace SmartNote.BLL.Services
 
             foreach (var task in tasks)
             {
-                await EnsureWorkspaceAccessAsync(userId, task.WorkspaceId);
+                await EnsureWorkspaceAccessAsync(userId, task.WorkspaceId, true);
                 var update = request.Items.First(i => i.TaskId == task.Id);
 
                 var fromStatus = task.Status;
@@ -144,7 +148,8 @@ namespace SmartNote.BLL.Services
                     FromStatus = fromStatus,
                     ToStatus = task.Status,
                     FromSortOrder = fromSortOrder,
-                    ToSortOrder = task.SortOrder
+                    ToSortOrder = task.SortOrder,
+                    Action = "Sort"
                 });
             }
 
@@ -157,7 +162,7 @@ namespace SmartNote.BLL.Services
             if (task == null)
                 return;
 
-            await EnsureWorkspaceAccessAsync(userId, task.WorkspaceId);
+            await EnsureWorkspaceAccessAsync(userId, task.WorkspaceId, true);
 
             _db.TaskItems.Remove(task);
             await _db.SaveChangesAsync();
@@ -182,13 +187,37 @@ namespace SmartNote.BLL.Services
             };
         }
 
-        private async Task EnsureWorkspaceAccessAsync(int userId, int workspaceId)
+        private async Task EnsureWorkspaceAccessAsync(int userId, int workspaceId, bool requireEdit = false)
         {
-            var access = await _db.WorkspaceMembers.AnyAsync(m => m.UserId == userId && m.WorkspaceId == workspaceId)
-                || await _db.Workspaces.AnyAsync(w => w.Id == workspaceId && w.OwnerUserId == userId);
+            var ownerAccess = await _db.Workspaces.AnyAsync(w => w.Id == workspaceId && w.OwnerUserId == userId);
+            if (ownerAccess)
+                return;
 
-            if (!access)
+            var member = await _db.WorkspaceMembers.FirstOrDefaultAsync(m => m.UserId == userId && m.WorkspaceId == workspaceId);
+            if (member == null)
                 throw new BusinessException("无权限访问该工作区。");
+
+            if (requireEdit && !member.CanEdit)
+                throw new BusinessException("无编辑权限。");
+        }
+
+        private static string? BuildTaskChangePayload(TaskUpdateDto dto, TaskItemStatus fromStatus, TaskItemStatus toStatus, int fromSortOrder, int toSortOrder)
+        {
+            var changes = new Dictionary<string, object?>
+            {
+                ["noteId"] = dto.NoteId,
+                ["title"] = dto.Title,
+                ["description"] = dto.Description,
+                ["status"] = dto.Status.HasValue && dto.Status.Value != fromStatus ? dto.Status.Value : null,
+                ["sortOrder"] = dto.SortOrder.HasValue && dto.SortOrder.Value != fromSortOrder ? dto.SortOrder.Value : null,
+                ["startAt"] = dto.StartAt,
+                ["dueAt"] = dto.DueAt
+            };
+
+            if (changes.Values.All(value => value == null))
+                return null;
+
+            return System.Text.Json.JsonSerializer.Serialize(changes);
         }
 
         private async Task<List<int>> GetAccessibleWorkspaceIdsAsync(int userId)

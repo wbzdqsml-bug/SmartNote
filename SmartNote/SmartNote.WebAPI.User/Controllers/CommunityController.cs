@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
+using SmartNote.Domain.Entities.Enums;
 using SmartNote.Domain.Exceptions;
 using SmartNote.Shared.Dtos;
 using SmartNote.Shared.Results;
@@ -59,9 +60,9 @@ namespace SmartNote.WebAPI.User.Controllers
         }
 
         [HttpGet("mine")]
-        public async Task<IActionResult> GetMine()
+        public async Task<IActionResult> GetMine([FromQuery] PublicContentStatus? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
-            var data = await _service.GetMyPublicContentsAsync(GetUserId());
+            var data = await _service.GetMyPublicContentsAsync(GetUserId(), status, page, pageSize);
             return Ok(ApiResponse.Success(data));
         }
 
@@ -114,6 +115,34 @@ namespace SmartNote.WebAPI.User.Controllers
             {
                 await _service.ToggleReactionAsync(GetUserId(), request);
                 return Ok(ApiResponse.Success("操作成功"));
+            }
+            catch (BusinessException ex)
+            {
+                return BadRequest(ApiResponse.Fail(ex.Message));
+            }
+        }
+
+        [HttpPost("publish")]
+        public async Task<IActionResult> Publish([FromBody] PublicContentPublishRequest request)
+        {
+            try
+            {
+                var id = await _service.PublishAsync(GetUserId(), request);
+                return Ok(ApiResponse.Success(new { id }, "发布成功"));
+            }
+            catch (BusinessException ex)
+            {
+                return BadRequest(ApiResponse.Fail(ex.Message));
+            }
+        }
+
+        [HttpPut("status")]
+        public async Task<IActionResult> UpdateStatus([FromBody] PublicContentStatusUpdateRequest request)
+        {
+            try
+            {
+                await _service.UpdateStatusAsync(GetUserId(), request);
+                return Ok(ApiResponse.Success("状态更新成功"));
             }
             catch (BusinessException ex)
             {

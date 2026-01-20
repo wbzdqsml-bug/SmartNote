@@ -51,6 +51,7 @@ namespace SmartNote.Shared.Dtos
         public int? ParentId { get; set; }
         public string Content { get; set; } = string.Empty;
         public DateTime CreateTime { get; set; }
+        public List<PublicCommentDto> Replies { get; set; } = new();
     }
 
     public class PublicCommentCreateDto
@@ -72,5 +73,19 @@ namespace SmartNote.Shared.Dtos
         public int PublicContentId { get; set; }
         public bool IsLiked { get; set; }
         public bool IsFavorite { get; set; }
+    }
+
+    public class PublicContentPublishRequest
+    {
+        public int NoteId { get; set; }
+        public PublicContentType ContentType { get; set; } = PublicContentType.Note;
+        public string? TitleSnapshot { get; set; }
+        public string? ContentSnapshotJson { get; set; }
+    }
+
+    public class PublicContentStatusUpdateRequest
+    {
+        public int PublicContentId { get; set; }
+        public PublicContentStatus Status { get; set; }
     }
 }
