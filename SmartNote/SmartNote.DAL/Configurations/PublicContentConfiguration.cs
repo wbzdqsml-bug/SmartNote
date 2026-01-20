@@ -10,6 +10,8 @@ namespace SmartNote.DAL.Configurations
         {
             builder.ToTable("PublicContents");
 
+            builder.HasQueryFilter(pc => !pc.Note.IsDeleted);
+
             builder.HasOne(pc => pc.Note)
                 .WithMany()
                 .HasForeignKey(pc => pc.NoteId)
