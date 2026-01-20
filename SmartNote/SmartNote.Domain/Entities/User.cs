@@ -23,5 +23,10 @@ namespace SmartNote.Domain.Entities
         public ICollection<Friendship> ReceivedFriendRequests { get; set; } = new List<Friendship>();
         public ICollection<ChatMessage> SentMessages { get; set; } = new List<ChatMessage>();
         public ICollection<ChatMessage> ReceivedMessages { get; set; } = new List<ChatMessage>();
+        public ICollection<PublicContent> PublicContents { get; set; } = new List<PublicContent>();
+        public ICollection<PublicComment> PublicComments { get; set; } = new List<PublicComment>();
+        public ICollection<PublicContentReaction> PublicContentReactions { get; set; } = new List<PublicContentReaction>();
+        public ICollection<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
+        public ICollection<TaskLog> TaskLogs { get; set; } = new List<TaskLog>();
     }
 }

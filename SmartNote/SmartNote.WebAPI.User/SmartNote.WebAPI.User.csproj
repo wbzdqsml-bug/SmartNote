@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SmartNote.BLL\SmartNote.BLL.csproj" />
     <ProjectReference Include="..\SmartNote.Common\SmartNote.Common.csproj" />
+    <ProjectReference Include="..\SmartNote.Domain\SmartNote.Domain.csproj" />
     <ProjectReference Include="..\SmartNote.Shared\SmartNote.Shared.csproj" />
   </ItemGroup>
 
