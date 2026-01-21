@@ -4,8 +4,14 @@ using SmartNote.BLL.Services;
 
 namespace SmartNote.BLL
 {
+    /// <summary>
+    /// 业务层依赖注入扩展。
+    /// </summary>
     public static class ServiceExtensions
     {
+        /// <summary>
+        /// 注册业务层服务依赖。
+        /// </summary>
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
             // ✅ 注册 AuthService
@@ -39,6 +45,8 @@ namespace SmartNote.BLL
 
             // AI
             services.AddScoped<IAiNoteService, AiNoteService>();
+            services.AddScoped<ICommunityService, CommunityService>();
+            services.AddScoped<ITaskService, TaskService>();
 
             return services;
         }
