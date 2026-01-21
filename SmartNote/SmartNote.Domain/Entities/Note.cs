@@ -35,5 +35,10 @@ namespace SmartNote.Domain.Entities
         /// 标签多对多关系
         /// </summary>
         public ICollection<NoteTag> NoteTags { get; set; } = new List<NoteTag>();
+
+        /// <summary>
+        /// 附件集合
+        /// </summary>
+        public ICollection<NoteAttachment> NoteAttachments { get; set; } = new List<NoteAttachment>();
     }
 }
