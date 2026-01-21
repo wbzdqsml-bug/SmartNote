@@ -9,7 +9,7 @@ namespace SmartNote.DAL.Configurations
         public void Configure(EntityTypeBuilder<NoteAttachment> builder)
         {
             builder.HasOne(a => a.Note)
-                .WithMany()
+                .WithMany(n => n.NoteAttachments)
                 .HasForeignKey(a => a.NoteId)
                 .OnDelete(DeleteBehavior.Cascade);
 
