@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartNote.BLL.Abstractions;
 using SmartNote.DAL;
 using SmartNote.Domain.Entities;
+using SmartNote.Domain.Entities.Enums;
 using SmartNote.Domain.Exceptions;
 using SmartNote.Shared.Dtos;
 using System;
@@ -85,6 +86,27 @@ namespace SmartNote.BLL.Services
 
             var canAccess = await CanAccessNoteAsync(userId, attachment.NoteId);
             if (!canAccess)
+                throw new PermissionDeniedException("无权访问该附件。");
+
+            return attachment;
+        }
+
+        /// <summary>
+        /// 获取已发布内容的附件（允许匿名访问）。
+        /// </summary>
+        public async Task<NoteAttachment> GetForPublicDownloadAsync(int attachmentId)
+        {
+            var attachment = await _db.NoteAttachments
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.Id == attachmentId);
+
+            if (attachment == null)
+                throw new KeyNotFoundException("附件不存在。");
+
+            var isPublished = await _db.PublicContents
+                .AnyAsync(pc => pc.NoteId == attachment.NoteId && pc.Status == PublicContentStatus.Published);
+
+            if (!isPublished)
                 throw new PermissionDeniedException("无权访问该附件。");
 
             return attachment;
