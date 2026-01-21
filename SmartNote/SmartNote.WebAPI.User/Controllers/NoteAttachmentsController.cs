@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
 using SmartNote.Common.Configs;
+using SmartNote.Domain.Exceptions;
 using SmartNote.Shared.Results;
 using System;
 using System.IO;
@@ -81,10 +82,26 @@ namespace SmartNote.WebAPI.User.Controllers
         }
 
         [HttpGet("attachments/{attachmentId:int}")]
+        [AllowAnonymous]
         public async Task<IActionResult> DownloadAttachment(int attachmentId)
         {
-            var userId = GetUserId();
-            var attachment = await _service.GetForDownloadAsync(userId, attachmentId);
+            NoteAttachment attachment;
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                var userId = GetUserId();
+                try
+                {
+                    attachment = await _service.GetForDownloadAsync(userId, attachmentId);
+                }
+                catch (PermissionDeniedException)
+                {
+                    attachment = await _service.GetForPublicDownloadAsync(attachmentId);
+                }
+            }
+            else
+            {
+                attachment = await _service.GetForPublicDownloadAsync(attachmentId);
+            }
 
             var storageRoot = Path.Combine(_env.ContentRootPath, "storage");
             var relativePath = attachment.StoragePath.Replace('/', Path.DirectorySeparatorChar);

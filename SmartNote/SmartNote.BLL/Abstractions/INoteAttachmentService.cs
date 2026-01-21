@@ -8,6 +8,10 @@ namespace SmartNote.BLL.Abstractions
         Task<NoteAttachmentDto> CreateAsync(int userId, int noteId, string originalFileName, string contentType, long size, string storagePath);
         Task<IReadOnlyList<NoteAttachmentDto>> GetByNoteAsync(int userId, int noteId);
         Task<NoteAttachment> GetForDownloadAsync(int userId, int attachmentId);
+        /// <summary>
+        /// 获取已发布内容的附件（允许匿名访问）。
+        /// </summary>
+        Task<NoteAttachment> GetForPublicDownloadAsync(int attachmentId);
         Task EnsureCanAccessNoteAsync(int userId, int noteId);
         Task EnsureCanEditNoteAsync(int userId, int noteId);
         Task<NoteAttachment> DeleteAsync(int userId, int attachmentId);
