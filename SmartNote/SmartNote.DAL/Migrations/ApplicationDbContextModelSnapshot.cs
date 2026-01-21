@@ -269,6 +269,131 @@ namespace SmartNote.DAL.Migrations
                     b.ToTable("NoteTags", (string)null);
                 });
 
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuthorUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PublicContentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorUserId");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("PublicContentId");
+
+                    b.ToTable("PublicComments", (string)null);
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicContent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuthorUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentSnapshotJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ContentType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NoteId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("PublishedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TitleSnapshot")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorUserId");
+
+                    b.HasIndex("NoteId");
+
+                    b.ToTable("PublicContents", (string)null);
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicContentReaction", b =>
+                {
+                    b.Property<int>("PublicContentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsFavorite")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsLiked")
+                        .HasColumnType("bit");
+
+                    b.HasKey("PublicContentId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PublicContentReactions", (string)null);
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicContentStats", b =>
+                {
+                    b.Property<int>("PublicContentId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("CloneCount")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("FavoriteCount")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("LikeCount")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ViewCount")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("PublicContentId");
+
+                    b.ToTable("PublicContentStats", (string)null);
+                });
+
             modelBuilder.Entity("SmartNote.Domain.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -298,6 +423,104 @@ namespace SmartNote.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Tags", (string)null);
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.TaskItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DueAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("NoteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OwnerUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("StartAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WorkspaceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NoteId");
+
+                    b.HasIndex("OwnerUserId");
+
+                    b.HasIndex("WorkspaceId");
+
+                    b.ToTable("TaskItems", (string)null);
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.TaskLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ActorUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("FromSortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FromStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PayloadJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TaskItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ToSortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActorUserId");
+
+                    b.HasIndex("TaskItemId");
+
+                    b.ToTable("TaskLogs", (string)null);
                 });
 
             modelBuilder.Entity("SmartNote.Domain.Entities.User", b =>
@@ -576,7 +799,7 @@ namespace SmartNote.DAL.Migrations
             modelBuilder.Entity("SmartNote.Domain.Entities.NoteAttachment", b =>
                 {
                     b.HasOne("SmartNote.Domain.Entities.Note", "Note")
-                        .WithMany()
+                        .WithMany("NoteAttachments")
                         .HasForeignKey("NoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -610,6 +833,81 @@ namespace SmartNote.DAL.Migrations
                     b.Navigation("Tag");
                 });
 
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicComment", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.User", "AuthorUser")
+                        .WithMany("PublicComments")
+                        .HasForeignKey("AuthorUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("SmartNote.Domain.Entities.PublicComment", "Parent")
+                        .WithMany("Replies")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartNote.Domain.Entities.PublicContent", "PublicContent")
+                        .WithMany("Comments")
+                        .HasForeignKey("PublicContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuthorUser");
+
+                    b.Navigation("Parent");
+
+                    b.Navigation("PublicContent");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicContent", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.User", "AuthorUser")
+                        .WithMany("PublicContents")
+                        .HasForeignKey("AuthorUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartNote.Domain.Entities.Note", "Note")
+                        .WithMany()
+                        .HasForeignKey("NoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuthorUser");
+
+                    b.Navigation("Note");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicContentReaction", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.PublicContent", "PublicContent")
+                        .WithMany("Reactions")
+                        .HasForeignKey("PublicContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartNote.Domain.Entities.User", "User")
+                        .WithMany("PublicContentReactions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("PublicContent");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicContentStats", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.PublicContent", "PublicContent")
+                        .WithOne("Stats")
+                        .HasForeignKey("SmartNote.Domain.Entities.PublicContentStats", "PublicContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PublicContent");
+                });
+
             modelBuilder.Entity("SmartNote.Domain.Entities.Tag", b =>
                 {
                     b.HasOne("SmartNote.Domain.Entities.User", "User")
@@ -619,6 +917,51 @@ namespace SmartNote.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.TaskItem", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.Note", "Note")
+                        .WithMany()
+                        .HasForeignKey("NoteId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("SmartNote.Domain.Entities.User", "OwnerUser")
+                        .WithMany("TaskItems")
+                        .HasForeignKey("OwnerUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartNote.Domain.Entities.Workspace", "Workspace")
+                        .WithMany()
+                        .HasForeignKey("WorkspaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Note");
+
+                    b.Navigation("OwnerUser");
+
+                    b.Navigation("Workspace");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.TaskLog", b =>
+                {
+                    b.HasOne("SmartNote.Domain.Entities.User", "ActorUser")
+                        .WithMany("TaskLogs")
+                        .HasForeignKey("ActorUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("SmartNote.Domain.Entities.TaskItem", "TaskItem")
+                        .WithMany("Logs")
+                        .HasForeignKey("TaskItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActorUser");
+
+                    b.Navigation("TaskItem");
                 });
 
             modelBuilder.Entity("SmartNote.Domain.Entities.UserProfile", b =>
@@ -694,12 +1037,34 @@ namespace SmartNote.DAL.Migrations
 
             modelBuilder.Entity("SmartNote.Domain.Entities.Note", b =>
                 {
+                    b.Navigation("NoteAttachments");
+
                     b.Navigation("NoteTags");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicComment", b =>
+                {
+                    b.Navigation("Replies");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.PublicContent", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Reactions");
+
+                    b.Navigation("Stats")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SmartNote.Domain.Entities.Tag", b =>
                 {
                     b.Navigation("NoteTags");
+                });
+
+            modelBuilder.Entity("SmartNote.Domain.Entities.TaskItem", b =>
+                {
+                    b.Navigation("Logs");
                 });
 
             modelBuilder.Entity("SmartNote.Domain.Entities.User", b =>
@@ -710,6 +1075,12 @@ namespace SmartNote.DAL.Migrations
 
                     b.Navigation("Profile");
 
+                    b.Navigation("PublicComments");
+
+                    b.Navigation("PublicContentReactions");
+
+                    b.Navigation("PublicContents");
+
                     b.Navigation("ReceivedFriendRequests");
 
                     b.Navigation("ReceivedMessages");
@@ -719,6 +1090,10 @@ namespace SmartNote.DAL.Migrations
                     b.Navigation("SentMessages");
 
                     b.Navigation("Tags");
+
+                    b.Navigation("TaskItems");
+
+                    b.Navigation("TaskLogs");
 
                     b.Navigation("WorkspaceMemberships");
                 });
