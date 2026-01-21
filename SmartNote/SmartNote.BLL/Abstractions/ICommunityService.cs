@@ -13,9 +13,9 @@ namespace SmartNote.BLL.Abstractions
         /// </summary>
         Task<PublicContentPageDto> GetPublishedPageAsync(string? keyword, int? contentType, int page, int pageSize);
         /// <summary>
-        /// 获取指定社区内容详情，并可选择增加浏览数。
+        /// 获取指定社区内容详情，并可选择增加浏览数（可传入浏览者 Id 以过滤作者浏览）。
         /// </summary>
-        Task<PublicContentDetailDto?> GetPublicContentDetailAsync(int publicContentId, bool increaseView);
+        Task<PublicContentDetailDto?> GetPublicContentDetailAsync(int publicContentId, bool increaseView, int? viewerUserId);
         /// <summary>
         /// 获取当前用户发布的内容列表，可按状态筛选。
         /// </summary>

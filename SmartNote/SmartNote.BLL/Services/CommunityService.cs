@@ -66,7 +66,7 @@ namespace SmartNote.BLL.Services
         /// <summary>
         /// 获取已发布内容详情，可选择累加浏览数。
         /// </summary>
-        public async Task<PublicContentDetailDto?> GetPublicContentDetailAsync(int publicContentId, bool increaseView)
+        public async Task<PublicContentDetailDto?> GetPublicContentDetailAsync(int publicContentId, bool increaseView, int? viewerUserId)
         {
             var content = await _db.PublicContents
                 .Include(pc => pc.Note)
@@ -80,7 +80,7 @@ namespace SmartNote.BLL.Services
 
             await EnsureStatsAsync(content);
 
-            if (increaseView)
+            if (increaseView && (!viewerUserId.HasValue || viewerUserId.Value != content.AuthorUserId))
             {
                 content.Stats.ViewCount += 1;
                 await _db.SaveChangesAsync();

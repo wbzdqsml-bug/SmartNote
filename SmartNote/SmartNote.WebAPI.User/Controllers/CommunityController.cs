@@ -60,7 +60,8 @@ namespace SmartNote.WebAPI.User.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetDetail(int id)
         {
-            var data = await _service.GetPublicContentDetailAsync(id, true);
+            var viewerUserId = User.Identity?.IsAuthenticated == true ? GetUserId() : (int?)null;
+            var data = await _service.GetPublicContentDetailAsync(id, true, viewerUserId);
             return data == null
                 ? NotFound(ApiResponse.Fail("未找到内容"))
                 : Ok(ApiResponse.Success(data));
