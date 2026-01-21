@@ -9,6 +9,9 @@ using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 社区内容相关接口。
+    /// </summary>
     [ApiController]
     [Authorize]
     [Route("api/community")]
@@ -16,11 +19,17 @@ namespace SmartNote.WebAPI.User.Controllers
     {
         private readonly ICommunityService _service;
 
+        /// <summary>
+        /// 初始化社区控制器。
+        /// </summary>
         public CommunityController(ICommunityService service)
         {
             _service = service;
         }
 
+        /// <summary>
+        /// 获取当前登录用户 Id。
+        /// </summary>
         private int GetUserId()
         {
             var idStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -29,6 +38,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return id;
         }
 
+        /// <summary>
+        /// 获取已发布内容分页列表。
+        /// </summary>
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetPublished(
@@ -41,6 +53,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(data));
         }
 
+        /// <summary>
+        /// 获取已发布内容详情。
+        /// </summary>
         [AllowAnonymous]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetDetail(int id)
@@ -51,6 +66,9 @@ namespace SmartNote.WebAPI.User.Controllers
                 : Ok(ApiResponse.Success(data));
         }
 
+        /// <summary>
+        /// 获取内容评论树。
+        /// </summary>
         [AllowAnonymous]
         [HttpGet("{id:int}/comments")]
         public async Task<IActionResult> GetComments(int id)
@@ -59,6 +77,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(data));
         }
 
+        /// <summary>
+        /// 获取我发布的内容（支持状态筛选）。
+        /// </summary>
         [HttpGet("mine")]
         public async Task<IActionResult> GetMine([FromQuery] PublicContentStatus? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
@@ -66,6 +87,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return Ok(ApiResponse.Success(data));
         }
 
+        /// <summary>
+        /// 新增评论。
+        /// </summary>
         [HttpPost("comments")]
         public async Task<IActionResult> AddComment([FromBody] PublicCommentCreateDto dto)
         {
@@ -80,6 +104,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 删除评论。
+        /// </summary>
         [HttpDelete("comments/{id:int}")]
         public async Task<IActionResult> DeleteComment(int id)
         {
@@ -94,6 +121,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 克隆内容到指定工作区。
+        /// </summary>
         [HttpPost("clone")]
         public async Task<IActionResult> Clone([FromBody] PublicContentCloneRequest request)
         {
@@ -108,6 +138,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 点赞/收藏切换。
+        /// </summary>
         [HttpPost("reaction")]
         public async Task<IActionResult> ToggleReaction([FromBody] PublicContentReactionRequest request)
         {
@@ -122,6 +155,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 发布内容。
+        /// </summary>
         [HttpPost("publish")]
         public async Task<IActionResult> Publish([FromBody] PublicContentPublishRequest request)
         {
@@ -136,6 +172,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 更新内容状态。
+        /// </summary>
         [HttpPut("status")]
         public async Task<IActionResult> UpdateStatus([FromBody] PublicContentStatusUpdateRequest request)
         {

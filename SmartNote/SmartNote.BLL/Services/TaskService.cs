@@ -8,15 +8,24 @@ using SmartNote.Shared.Dtos;
 
 namespace SmartNote.BLL.Services
 {
+    /// <summary>
+    /// 任务管理业务逻辑服务。
+    /// </summary>
     public class TaskService : ITaskService
     {
         private readonly ApplicationDbContext _db;
 
+        /// <summary>
+        /// 初始化任务服务。
+        /// </summary>
         public TaskService(ApplicationDbContext db)
         {
             _db = db;
         }
 
+        /// <summary>
+        /// 获取工作区任务列表，可按状态筛选。
+        /// </summary>
         public async Task<IEnumerable<TaskViewDto>> GetTasksAsync(int userId, int workspaceId, TaskItemStatus? status)
         {
             await EnsureWorkspaceAccessAsync(userId, workspaceId);
@@ -38,6 +47,9 @@ namespace SmartNote.BLL.Services
             return tasks.Select(MapToDto);
         }
 
+        /// <summary>
+        /// 获取指定时间范围内的任务列表。
+        /// </summary>
         public async Task<IEnumerable<TaskViewDto>> GetTasksByRangeAsync(int userId, DateTime start, DateTime end)
         {
             var workspaceIds = await GetAccessibleWorkspaceIdsAsync(userId);
@@ -52,6 +64,9 @@ namespace SmartNote.BLL.Services
             return tasks.Select(MapToDto);
         }
 
+        /// <summary>
+        /// 创建任务。
+        /// </summary>
         public async Task<int> CreateTaskAsync(int userId, TaskCreateDto dto)
         {
             await EnsureWorkspaceAccessAsync(userId, dto.WorkspaceId, true);
@@ -74,6 +89,9 @@ namespace SmartNote.BLL.Services
             return task.Id;
         }
 
+        /// <summary>
+        /// 更新任务内容与状态。
+        /// </summary>
         public async Task UpdateTaskAsync(int userId, int taskId, TaskUpdateDto dto)
         {
             var task = await _db.TaskItems.FirstOrDefaultAsync(t => t.Id == taskId);
@@ -121,6 +139,9 @@ namespace SmartNote.BLL.Services
             await _db.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// 批量更新任务排序与状态。
+        /// </summary>
         public async Task UpdateSortAsync(int userId, TaskSortUpdateRequest request)
         {
             if (request.Items.Count == 0)
@@ -156,6 +177,9 @@ namespace SmartNote.BLL.Services
             await _db.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// 删除任务。
+        /// </summary>
         public async Task DeleteTaskAsync(int userId, int taskId)
         {
             var task = await _db.TaskItems.FirstOrDefaultAsync(t => t.Id == taskId);
@@ -168,6 +192,9 @@ namespace SmartNote.BLL.Services
             await _db.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// 将任务实体映射为视图 DTO。
+        /// </summary>
         private static TaskViewDto MapToDto(TaskItem task)
         {
             return new TaskViewDto
@@ -187,6 +214,9 @@ namespace SmartNote.BLL.Services
             };
         }
 
+        /// <summary>
+        /// 校验用户是否有工作区访问权限。
+        /// </summary>
         private async Task EnsureWorkspaceAccessAsync(int userId, int workspaceId, bool requireEdit = false)
         {
             var ownerAccess = await _db.Workspaces.AnyAsync(w => w.Id == workspaceId && w.OwnerUserId == userId);
@@ -201,6 +231,9 @@ namespace SmartNote.BLL.Services
                 throw new BusinessException("无编辑权限。");
         }
 
+        /// <summary>
+        /// 构建任务变更记录的 JSON 载荷。
+        /// </summary>
         private static string? BuildTaskChangePayload(TaskUpdateDto dto, TaskItemStatus fromStatus, TaskItemStatus toStatus, int fromSortOrder, int toSortOrder)
         {
             var changes = new Dictionary<string, object?>
@@ -220,6 +253,9 @@ namespace SmartNote.BLL.Services
             return System.Text.Json.JsonSerializer.Serialize(changes);
         }
 
+        /// <summary>
+        /// 获取用户可访问的工作区列表。
+        /// </summary>
         private async Task<List<int>> GetAccessibleWorkspaceIdsAsync(int userId)
         {
             return await _db.WorkspaceMembers

@@ -9,15 +9,24 @@ using SmartNote.Shared.Dtos;
 
 namespace SmartNote.BLL.Services
 {
+    /// <summary>
+    /// 社区内容业务逻辑服务。
+    /// </summary>
     public class CommunityService : ICommunityService
     {
         private readonly ApplicationDbContext _db;
 
+        /// <summary>
+        /// 初始化社区服务。
+        /// </summary>
         public CommunityService(ApplicationDbContext db)
         {
             _db = db;
         }
 
+        /// <summary>
+        /// 获取已发布内容分页数据。
+        /// </summary>
         public async Task<PublicContentPageDto> GetPublishedPageAsync(string? keyword, int? contentType, int page, int pageSize)
         {
             page = page < 1 ? 1 : page;
@@ -54,6 +63,9 @@ namespace SmartNote.BLL.Services
             };
         }
 
+        /// <summary>
+        /// 获取已发布内容详情，可选择累加浏览数。
+        /// </summary>
         public async Task<PublicContentDetailDto?> GetPublicContentDetailAsync(int publicContentId, bool increaseView)
         {
             var content = await _db.PublicContents
@@ -77,6 +89,9 @@ namespace SmartNote.BLL.Services
             return MapToDetail(content);
         }
 
+        /// <summary>
+        /// 获取用户发布的内容列表，可按状态筛选。
+        /// </summary>
         public async Task<PublicContentPageDto> GetMyPublicContentsAsync(int userId, PublicContentStatus? status, int page, int pageSize)
         {
             page = page < 1 ? 1 : page;
@@ -108,6 +123,9 @@ namespace SmartNote.BLL.Services
             };
         }
 
+        /// <summary>
+        /// 获取指定内容的评论树。
+        /// </summary>
         public async Task<IEnumerable<PublicCommentDto>> GetCommentsAsync(int publicContentId)
         {
             var comments = await _db.PublicComments
@@ -130,6 +148,9 @@ namespace SmartNote.BLL.Services
             return BuildCommentTree(commentDtos);
         }
 
+        /// <summary>
+        /// 新增评论。
+        /// </summary>
         public async Task<PublicCommentDto> AddCommentAsync(int userId, PublicCommentCreateDto dto)
         {
             var contentExists = await _db.PublicContents
@@ -169,6 +190,9 @@ namespace SmartNote.BLL.Services
             };
         }
 
+        /// <summary>
+        /// 删除评论及其子评论。
+        /// </summary>
         public async Task DeleteCommentAsync(int userId, int commentId)
         {
             var comment = await _db.PublicComments.FirstOrDefaultAsync(c => c.Id == commentId);
@@ -189,6 +213,9 @@ namespace SmartNote.BLL.Services
             await _db.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// 克隆社区内容到指定工作区。
+        /// </summary>
         public async Task<int> CloneAsync(int userId, PublicContentCloneRequest request)
         {
             var content = await _db.PublicContents
@@ -250,6 +277,9 @@ namespace SmartNote.BLL.Services
             return cloneNote.Id;
         }
 
+        /// <summary>
+        /// 点赞/收藏切换并更新统计。
+        /// </summary>
         public async Task ToggleReactionAsync(int userId, PublicContentReactionRequest request)
         {
             var content = await _db.PublicContents
@@ -289,6 +319,9 @@ namespace SmartNote.BLL.Services
             await _db.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// 发布笔记到社区。
+        /// </summary>
         public async Task<int> PublishAsync(int userId, PublicContentPublishRequest request)
         {
             var note = await _db.Notes.FirstOrDefaultAsync(n => n.Id == request.NoteId);
@@ -335,6 +368,9 @@ namespace SmartNote.BLL.Services
             return content.Id;
         }
 
+        /// <summary>
+        /// 更新社区内容状态。
+        /// </summary>
         public async Task UpdateStatusAsync(int userId, PublicContentStatusUpdateRequest request)
         {
             var content = await _db.PublicContents.FirstOrDefaultAsync(pc => pc.Id == request.PublicContentId);
@@ -354,6 +390,9 @@ namespace SmartNote.BLL.Services
             await _db.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// 计算点赞/收藏的计数变化值。
+        /// </summary>
         private static int CalculateDelta(bool previous, bool current)
         {
             if (previous == current)
@@ -361,6 +400,9 @@ namespace SmartNote.BLL.Services
             return current ? 1 : -1;
         }
 
+        /// <summary>
+        /// 确保内容统计记录存在。
+        /// </summary>
         private async Task EnsureStatsAsync(PublicContent content)
         {
             if (content.Stats != null)
@@ -381,6 +423,9 @@ namespace SmartNote.BLL.Services
             content.Stats = stats;
         }
 
+        /// <summary>
+        /// 将内容实体映射为列表项 DTO。
+        /// </summary>
         private static PublicContentListItemDto MapToListItem(PublicContent content)
         {
             return new PublicContentListItemDto
@@ -401,6 +446,9 @@ namespace SmartNote.BLL.Services
             };
         }
 
+        /// <summary>
+        /// 将内容实体映射为详情 DTO。
+        /// </summary>
         private static PublicContentDetailDto MapToDetail(PublicContent content)
         {
             return new PublicContentDetailDto
@@ -421,6 +469,9 @@ namespace SmartNote.BLL.Services
             };
         }
 
+        /// <summary>
+        /// 生成内容摘要文本。
+        /// </summary>
         private static string BuildSummary(PublicContent content)
         {
             var source = content.ContentSnapshotJson;
@@ -429,6 +480,9 @@ namespace SmartNote.BLL.Services
             return MarkdownHelper.BuildSummary(source, 100);
         }
 
+        /// <summary>
+        /// 获取用户可访问的工作区列表。
+        /// </summary>
         private async Task<List<int>> GetAccessibleWorkspaceIdsAsync(int userId)
         {
             return await _db.WorkspaceMembers
@@ -443,6 +497,9 @@ namespace SmartNote.BLL.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// 校验用户是否拥有工作区共享权限。
+        /// </summary>
         private async Task EnsureWorkspaceShareAccessAsync(int userId, int workspaceId)
         {
             var ownerAccess = await _db.Workspaces.AnyAsync(w => w.Id == workspaceId && w.OwnerUserId == userId);
@@ -454,6 +511,9 @@ namespace SmartNote.BLL.Services
                 throw new BusinessException("无权限发布该笔记。");
         }
 
+        /// <summary>
+        /// 根据扁平评论列表构建评论树。
+        /// </summary>
         private static IEnumerable<PublicCommentDto> BuildCommentTree(List<PublicCommentDto> flat)
         {
             var lookup = flat.ToDictionary(c => c.Id, c => c);
@@ -474,6 +534,9 @@ namespace SmartNote.BLL.Services
             return roots;
         }
 
+        /// <summary>
+        /// 收集指定评论的子树评论 Id 集合。
+        /// </summary>
         private static HashSet<int> CollectCommentSubtreeIds(int rootId, List<PublicComment> comments)
         {
             var lookup = comments.ToLookup(c => c.ParentId, c => c.Id);

@@ -9,6 +9,9 @@ using System.Security.Claims;
 
 namespace SmartNote.WebAPI.User.Controllers
 {
+    /// <summary>
+    /// 任务看板与日程相关接口。
+    /// </summary>
     [ApiController]
     [Authorize]
     [Route("api/tasks")]
@@ -16,11 +19,17 @@ namespace SmartNote.WebAPI.User.Controllers
     {
         private readonly ITaskService _service;
 
+        /// <summary>
+        /// 初始化任务控制器。
+        /// </summary>
         public TasksController(ITaskService service)
         {
             _service = service;
         }
 
+        /// <summary>
+        /// 获取当前登录用户 Id。
+        /// </summary>
         private int GetUserId()
         {
             var idStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -29,6 +38,9 @@ namespace SmartNote.WebAPI.User.Controllers
             return id;
         }
 
+        /// <summary>
+        /// 获取工作区任务列表，可按状态过滤。
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetByWorkspace([FromQuery] int workspaceId, [FromQuery] TaskItemStatus? status)
         {
@@ -43,6 +55,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 获取指定时间范围内的任务列表。
+        /// </summary>
         [HttpGet("range")]
         public async Task<IActionResult> GetByRange([FromQuery] DateTime start, [FromQuery] DateTime end)
         {
@@ -57,6 +72,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 创建任务。
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TaskCreateDto dto)
         {
@@ -71,6 +89,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 更新任务。
+        /// </summary>
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] TaskUpdateDto dto)
         {
@@ -85,6 +106,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 批量更新任务排序和状态。
+        /// </summary>
         [HttpPut("sort")]
         public async Task<IActionResult> UpdateSort([FromBody] TaskSortUpdateRequest request)
         {
@@ -99,6 +123,9 @@ namespace SmartNote.WebAPI.User.Controllers
             }
         }
 
+        /// <summary>
+        /// 删除任务。
+        /// </summary>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
