@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmartNote.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddNoteAttachments : Migration
+    public partial class AddCommunityAndTasks : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -366,6 +366,193 @@ namespace SmartNote.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PublicContents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NoteId = table.Column<int>(type: "int", nullable: false),
+                    AuthorUserId = table.Column<int>(type: "int", nullable: false),
+                    ContentType = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    TitleSnapshot = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentSnapshotJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublishedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PublicContents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PublicContents_Notes_NoteId",
+                        column: x => x.NoteId,
+                        principalTable: "Notes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PublicContents_Users_AuthorUserId",
+                        column: x => x.AuthorUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TaskItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WorkspaceId = table.Column<int>(type: "int", nullable: false),
+                    NoteId = table.Column<int>(type: "int", nullable: true),
+                    OwnerUserId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    StartAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DueAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TaskItems_Notes_NoteId",
+                        column: x => x.NoteId,
+                        principalTable: "Notes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_TaskItems_Users_OwnerUserId",
+                        column: x => x.OwnerUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TaskItems_Workspaces_WorkspaceId",
+                        column: x => x.WorkspaceId,
+                        principalTable: "Workspaces",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PublicComments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PublicContentId = table.Column<int>(type: "int", nullable: false),
+                    AuthorUserId = table.Column<int>(type: "int", nullable: false),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PublicComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PublicComments_PublicComments_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "PublicComments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PublicComments_PublicContents_PublicContentId",
+                        column: x => x.PublicContentId,
+                        principalTable: "PublicContents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PublicComments_Users_AuthorUserId",
+                        column: x => x.AuthorUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PublicContentReactions",
+                columns: table => new
+                {
+                    PublicContentId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    IsFavorite = table.Column<bool>(type: "bit", nullable: false),
+                    IsLiked = table.Column<bool>(type: "bit", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PublicContentReactions", x => new { x.PublicContentId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_PublicContentReactions_PublicContents_PublicContentId",
+                        column: x => x.PublicContentId,
+                        principalTable: "PublicContents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PublicContentReactions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PublicContentStats",
+                columns: table => new
+                {
+                    PublicContentId = table.Column<int>(type: "int", nullable: false),
+                    ViewCount = table.Column<long>(type: "bigint", nullable: false),
+                    LikeCount = table.Column<long>(type: "bigint", nullable: false),
+                    FavoriteCount = table.Column<long>(type: "bigint", nullable: false),
+                    CloneCount = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PublicContentStats", x => x.PublicContentId);
+                    table.ForeignKey(
+                        name: "FK_PublicContentStats_PublicContents_PublicContentId",
+                        column: x => x.PublicContentId,
+                        principalTable: "PublicContents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TaskLogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TaskItemId = table.Column<int>(type: "int", nullable: false),
+                    ActorUserId = table.Column<int>(type: "int", nullable: false),
+                    FromStatus = table.Column<int>(type: "int", nullable: false),
+                    ToStatus = table.Column<int>(type: "int", nullable: false),
+                    FromSortOrder = table.Column<int>(type: "int", nullable: true),
+                    ToSortOrder = table.Column<int>(type: "int", nullable: true),
+                    Action = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PayloadJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskLogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TaskLogs_TaskItems_TaskItemId",
+                        column: x => x.TaskItemId,
+                        principalTable: "TaskItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TaskLogs_Users_ActorUserId",
+                        column: x => x.ActorUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_UserId_Name",
                 table: "Categories",
@@ -433,10 +620,65 @@ namespace SmartNote.DAL.Migrations
                 column: "TagId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PublicComments_AuthorUserId",
+                table: "PublicComments",
+                column: "AuthorUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PublicComments_ParentId",
+                table: "PublicComments",
+                column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PublicComments_PublicContentId",
+                table: "PublicComments",
+                column: "PublicContentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PublicContentReactions_UserId",
+                table: "PublicContentReactions",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PublicContents_AuthorUserId",
+                table: "PublicContents",
+                column: "AuthorUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PublicContents_NoteId",
+                table: "PublicContents",
+                column: "NoteId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tags_UserId_Name",
                 table: "Tags",
                 columns: new[] { "UserId", "Name" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskItems_NoteId",
+                table: "TaskItems",
+                column: "NoteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskItems_OwnerUserId",
+                table: "TaskItems",
+                column: "OwnerUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskItems_WorkspaceId",
+                table: "TaskItems",
+                column: "WorkspaceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskLogs_ActorUserId",
+                table: "TaskLogs",
+                column: "ActorUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskLogs_TaskItemId",
+                table: "TaskLogs",
+                column: "TaskItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_UserId",
@@ -495,6 +737,18 @@ namespace SmartNote.DAL.Migrations
                 name: "NoteTags");
 
             migrationBuilder.DropTable(
+                name: "PublicComments");
+
+            migrationBuilder.DropTable(
+                name: "PublicContentReactions");
+
+            migrationBuilder.DropTable(
+                name: "PublicContentStats");
+
+            migrationBuilder.DropTable(
+                name: "TaskLogs");
+
+            migrationBuilder.DropTable(
                 name: "UserProfiles");
 
             migrationBuilder.DropTable(
@@ -504,10 +758,16 @@ namespace SmartNote.DAL.Migrations
                 name: "WorkspaceMembers");
 
             migrationBuilder.DropTable(
-                name: "Notes");
+                name: "Tags");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                name: "PublicContents");
+
+            migrationBuilder.DropTable(
+                name: "TaskItems");
+
+            migrationBuilder.DropTable(
+                name: "Notes");
 
             migrationBuilder.DropTable(
                 name: "Categories");
