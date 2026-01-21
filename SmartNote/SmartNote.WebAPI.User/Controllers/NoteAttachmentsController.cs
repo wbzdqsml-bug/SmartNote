@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SmartNote.BLL.Abstractions;
 using SmartNote.Common.Configs;
+using SmartNote.Domain.Entities;
 using SmartNote.Domain.Exceptions;
 using SmartNote.Shared.Results;
 using System;
